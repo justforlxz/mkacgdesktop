@@ -1,0 +1,27 @@
+﻿<Window x:Class="萌控二次元.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:萌控二次元"
+        mc:Ignorable="d"
+        Title="MainWindow" Loaded="Window_Loaded" Height="350" Width="525" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Image x:Name="image" MouseLeftButtonDown="image_MouseLeftButtonDown" Source="Images/Main.png" HorizontalAlignment="Left" Height="192" Margin="281,117,-85,0" VerticalAlignment="Top" Width="321">
+            <Image.ContextMenu>
+                <ContextMenu x:Name="right_bg_click">
+                    <MenuItem Header="每日一句" Click="MenuItem_Click" />
+                    <MenuItem Header="对话机器人" Click="MenuItem_Click_1" />
+                    <MenuItem Header="退出" Click="MenuItem_Click_2"/>
+                </ContextMenu>
+            </Image.ContextMenu>
+        </Image>
+        <Rectangle x:Name="bg" Fill="#FFF4F4F5" Margin="125.11,86.554,205.224,150.001" Stroke="Black" />
+        <Label x:Name="bg_label" HorizontalAlignment="Left" Height="89" Margin="133,92,0,0" VerticalAlignment="Top" Width="174" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True">
+            <TextBlock x:Name="bg_text" TextWrapping="Wrap" Text="欢迎来到萌控二次元"/>
+
+        </Label>
+        <Label x:Name="bg_source" Content="" HorizontalAlignment="Left" Height="26" Margin="188,170,0,0" VerticalAlignment="Top" Width="127" FontSize="10.667"/>
+
+    </Grid>
+</Window>
