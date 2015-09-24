@@ -16,12 +16,12 @@
                 </ContextMenu>
             </Image.ContextMenu>
         </Image>
-        <Rectangle x:Name="bg" Fill="#FFF4F4F5" Margin="125.11,86.554,205.224,150.001" Stroke="Black" />
-        <Label x:Name="bg_label" HorizontalAlignment="Left" Height="89" Margin="133,92,0,0" VerticalAlignment="Top" Width="174" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True">
-            <TextBlock x:Name="bg_text" TextWrapping="Wrap" Text="欢迎来到萌控二次元"/>
+        <Rectangle x:Name="bg" Fill="#FFF4F4F5" Margin="125.11,86.554,205.224,150.001" Stroke="Black"  />
+        <Label x:Name="bg_label" HorizontalAlignment="Left" Height="89" Margin="133,92,0,0" VerticalAlignment="Top" Width="174" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" >
+            <TextBlock x:Name="bg_text" TextWrapping="Wrap" Text="欢迎来到萌控二次元" />
 
         </Label>
-        <Label x:Name="bg_source" Content="" HorizontalAlignment="Left" Height="26" Margin="188,170,0,0" VerticalAlignment="Top" Width="127" FontSize="10.667"/>
+        <Label x:Name="bg_source" Content="" HorizontalAlignment="Left" Height="26" Margin="188,170,0,0" VerticalAlignment="Top" Width="127" FontSize="10.667" />
 
     </Grid>
 </Window>

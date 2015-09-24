@@ -41,7 +41,7 @@
       <HintPath>..\mkacg_talk\bin\Debug\mkacg_talk.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\对话机器人\bin\Debug\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\mkacg_talk\bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -111,6 +111,9 @@
     <Resource Include="rand.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="开发日志.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
