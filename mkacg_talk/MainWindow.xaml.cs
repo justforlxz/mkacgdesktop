@@ -124,5 +124,7 @@ namespace mkacg_talk
         {
             rtb_mess.Text = "欢迎使用萌控二次元对话机器人 \r \n";
         }
+
+        
     }
 }
