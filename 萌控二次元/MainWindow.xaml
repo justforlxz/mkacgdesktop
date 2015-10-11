@@ -7,10 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Loaded="Window_Loaded" Height="350" Width="525" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Image x:Name="image" MouseLeftButtonDown="image_MouseLeftButtonDown" Source="Images/Main.png" HorizontalAlignment="Left" Height="192" Margin="281,117,-85,0" VerticalAlignment="Top" Width="321">
+        <Image x:Name="image" MouseLeftButtonDown="image_MouseLeftButtonDown" Source="Images/Main.png" HorizontalAlignment="Left" Height="172" Margin="292,175,0,0" VerticalAlignment="Top" Width="175">
             <Image.ContextMenu>
                 <ContextMenu x:Name="right_bg_click">
                     <MenuItem Header="每日一句" Click="MenuItem_Click" />
+                    <MenuItem Header="换皮肤" Click="MenuItem_Click_3" />
                     <MenuItem Header="对话机器人" Click="MenuItem_Click_1" />
                     <MenuItem Header="退出" Click="MenuItem_Click_2"/>
                 </ContextMenu>
