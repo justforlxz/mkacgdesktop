@@ -17,14 +17,13 @@ namespace 萌控二次元
         {
             InitializeComponent();
         }
-        static int themes = 0, bg_showorhide = 0;
+        static int themes = 0;
         DispatcherTimer timer = new DispatcherTimer();
-        DispatcherTimer timer_noew = new DispatcherTimer();
         private void MenuItem_Click (object sender , RoutedEventArgs e)
         {
             //显示一句话
             timer.Stop();
-            bg.Visibility = bg_label.Visibility = bg_source.Visibility = bg_text.Visibility = Visibility.Visible;
+            bg.Visibility= bg_label.Visibility = bg_source.Visibility = bg_text.Visibility = Visibility.Visible;
             mkacg_showhitokoto.Class1 mkacgclass = new mkacg_showhitokoto.Class1();
             String[] list = mkacgclass.hitokoto();
             bg_text.Text = "";
@@ -32,7 +31,6 @@ namespace 萌控二次元
             bg_source.Content = list[1] + "\n";
             timer.Start();
         }
-       
         private void showorhide (object sender , EventArgs e)
         {
             //bg.Visibility = bg_label.Visibility = bg_source.Visibility = bg_text.Visibility = Visibility.Visible;
@@ -60,7 +58,6 @@ namespace 萌控二次元
             }
             timer.Interval = new TimeSpan(0 , 0 , 4);
             timer.Tick += new EventHandler(showorhide);
-           
         }
 
         private void image_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)

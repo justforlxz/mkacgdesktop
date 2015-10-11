@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:萌控二次元"
         mc:Ignorable="d"
-        Title="MainWindow" Loaded="Window_Loaded" Height="350" Width="525" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+        Title="萌控二次元" Loaded="Window_Loaded" Height="289" Width="344" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" Topmost="True" ResizeMode="NoResize">
     <Grid>
-        <Image x:Name="image" MouseLeftButtonDown="image_MouseLeftButtonDown" Source="Images/Main.png" HorizontalAlignment="Left" Height="172" Margin="292,175,0,0" VerticalAlignment="Top" Width="175">
+        <Label x:Name="bg"  HorizontalAlignment="Left" Height="112" Margin="10,10,0,0" VerticalAlignment="Top" Width="194" Background="White"/>
+        <Image x:Name="image" MouseLeftButtonDown="image_MouseLeftButtonDown" Source="Images/Main.png" HorizontalAlignment="Left" Height="172" Margin="176,97,0,0" VerticalAlignment="Top" Width="175">
             <Image.ContextMenu>
                 <ContextMenu x:Name="right_bg_click">
                     <MenuItem Header="每日一句" Click="MenuItem_Click" />
@@ -17,12 +18,9 @@
                 </ContextMenu>
             </Image.ContextMenu>
         </Image>
-        <Rectangle x:Name="bg" Fill="#FFF4F4F5" Margin="125.11,86.554,205.224,150.001" Stroke="Black"  />
-        <Label x:Name="bg_label" HorizontalAlignment="Left" Height="89" Margin="133,92,0,0" VerticalAlignment="Top" Width="174" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" >
+        <Label x:Name="bg_label" HorizontalAlignment="Left" Height="89" Margin="17,14,0,0" VerticalAlignment="Top" Width="174" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" >
             <TextBlock x:Name="bg_text" TextWrapping="Wrap" Text="欢迎来到萌控二次元" />
-
         </Label>
-        <Label x:Name="bg_source" Content="" HorizontalAlignment="Left" Height="26" Margin="188,170,0,0" VerticalAlignment="Top" Width="127" FontSize="10.667" />
-
+        <Label x:Name="bg_source" Content="" HorizontalAlignment="Left" Height="26" Margin="72,92,0,0" VerticalAlignment="Top" Width="127" FontSize="10.667" />
     </Grid>
 </Window>
