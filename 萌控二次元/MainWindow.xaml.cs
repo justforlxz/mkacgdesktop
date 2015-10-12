@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Microsoft.Win32;
+
 namespace 萌控二次元
 {
     /// <summary>
@@ -13,11 +15,11 @@ namespace 萌控二次元
     {
         public MainWindow ()
         {
-          
+
             InitializeComponent();
             bgmusicplayer.Play();
-        }
 
+        }
         static int themes = 0;
         DispatcherTimer timer = new DispatcherTimer();
         DispatcherTimer timerToSendMessages = new DispatcherTimer();
@@ -58,6 +60,18 @@ namespace 萌控二次元
                 image.Source = new BitmapImage(new Uri("Images/Main.png" , UriKind.Relative));
                 themes = 1;
             }
+            RegistryKey HKCU = Registry.CurrentUser;
+            RegistryKey Run = HKCU.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run" , true);
+            try
+            {
+                Run.SetValue("MKACG" , AppDomain.CurrentDomain.BaseDirectory + "萌控二次元.exe");
+
+            }
+            catch
+            {
+
+            }
+            HKCU.Close();
             sendbox.Visibility = Visibility.Hidden;
             timer.Interval = new TimeSpan(0 , 0 , 4);
             timer.Tick += new EventHandler(showorhide);
@@ -125,6 +139,30 @@ namespace 萌控二次元
         private void bgmusicplayer_MediaEnded (object sender , RoutedEventArgs e)
         {
             bgmusicplayer.Stop();
+        }
+
+        private void MenuItem_Click_1 (object sender , RoutedEventArgs e)
+        {
+            RegistryKey HKCU = Registry.CurrentUser;
+            RegistryKey Run = HKCU.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run" , true);
+            try
+            {
+                Run.DeleteValue("MKACG");
+                timer.Stop();
+                showorhidetrue();
+                sendbox.Visibility = Visibility.Hidden;
+                bg_text.Text = "已删除开机项";
+                timer.Start();
+               
+            }
+            catch
+            {
+                timer.Stop();
+                showorhidetrue();
+                sendbox.Visibility = Visibility.Hidden;
+                bg_text.Text = "已删除开机项";
+                timer.Start();
+            }
         }
     }
 }
