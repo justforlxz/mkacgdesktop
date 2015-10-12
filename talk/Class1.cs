@@ -44,7 +44,7 @@ namespace talk
             string result = null;
             try
             {
-                String APIKEY = "c32ccaa805b6441be76bc18074f12e51";
+                String APIKEY = "7319f41ea831612d94fb05c9de2cdaa3";
                 String _strMessage = p_strMessage;
                 String INFO = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(_strMessage));
                 String getURL = "http://www.tuling123.com/openapi/api?key=" + APIKEY + "&info=" + INFO;

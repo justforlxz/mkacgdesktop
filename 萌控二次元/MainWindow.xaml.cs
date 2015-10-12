@@ -13,10 +13,11 @@ namespace 萌控二次元
     {
         public MainWindow ()
         {
+          
             InitializeComponent();
-
+            bgmusicplayer.Play();
         }
-        
+
         static int themes = 0;
         DispatcherTimer timer = new DispatcherTimer();
         DispatcherTimer timerToSendMessages = new DispatcherTimer();
@@ -64,10 +65,6 @@ namespace 萌控二次元
             timerToSendMessages.Interval = new TimeSpan(0 , 0 , 10);
             timerToSendMessages.Tick += new EventHandler(showorhide);
             timerToSendMessages.Start();
-          //  bgmusicplayer.Source = new Uri(AppDomain.CurrentDomain.BaseDirectory + "Music\\bg.mp3" , UriKind.Relative);
-            bgmusicplayer.Play();
-           MessageBox.Show( bgmusicplayer.Source.ToString());
-
         }
         private void image_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
         {
@@ -90,7 +87,6 @@ namespace 萌控二次元
             }
         }
         talk.Class1 _talk = new talk.Class1();
-
         private void sendbox_KeyDown (object sender , KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -100,6 +96,7 @@ namespace 萌控二次元
                 showorhidetrue();
                 bg_text.Text = _talk.main(sendbox.Text);
                 sendbox.Text = "";
+                bg_source.Content = "";
                 timerToSendMessages.Start();
             }
         }
@@ -118,15 +115,16 @@ namespace 萌控二次元
                 timerToSendMessages.Stop();
                 showorhidetrue();
                 timerToSendMessages.Start();
-                bgmusicplayer.Play();
             }
-           
         }
-
         private void sendbox_TextChanged (object sender , System.Windows.Controls.TextChangedEventArgs e)
         {
             timer.Stop();
             timerToSendMessages.Stop();
+        }
+        private void bgmusicplayer_MediaEnded (object sender , RoutedEventArgs e)
+        {
+            bgmusicplayer.Stop();
         }
     }
 }
