@@ -58,9 +58,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="mkacg_talk">
-      <HintPath>..\mkacg_talk\bin\Debug\mkacg_talk.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\mkacg_talk\bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -147,6 +144,10 @@
     <ProjectReference Include="..\mkacg_showhitokoto\mkacg_showhitokoto.csproj">
       <Project>{9a176432-66e3-4e76-9f56-bec08a6944e3}</Project>
       <Name>mkacg_showhitokoto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\talk\talk.csproj">
+      <Project>{5a231d02-7064-4b65-b20d-5aa3dbfb1df6}</Project>
+      <Name>talk</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

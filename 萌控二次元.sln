@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mkacg_talk", "mkacg_talk\mk
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mkacg_showhitokoto", "mkacg_showhitokoto\mkacg_showhitokoto.csproj", "{9A176432-66E3-4E76-9F56-BEC08A6944E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "talk", "talk\talk.csproj", "{5A231D02-7064-4B65-B20D-5AA3DBFB1DF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,14 @@ Global
 		{9A176432-66E3-4E76-9F56-BEC08A6944E3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9A176432-66E3-4E76-9F56-BEC08A6944E3}.Release|x86.ActiveCfg = Release|x86
 		{9A176432-66E3-4E76-9F56-BEC08A6944E3}.Release|x86.Build.0 = Release|x86
+		{5A231D02-7064-4B65-B20D-5AA3DBFB1DF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A231D02-7064-4B65-B20D-5AA3DBFB1DF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A231D02-7064-4B65-B20D-5AA3DBFB1DF6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5A231D02-7064-4B65-B20D-5AA3DBFB1DF6}.Debug|x86.Build.0 = Debug|Any CPU
+		{5A231D02-7064-4B65-B20D-5AA3DBFB1DF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A231D02-7064-4B65-B20D-5AA3DBFB1DF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A231D02-7064-4B65-B20D-5AA3DBFB1DF6}.Release|x86.ActiveCfg = Release|Any CPU
+		{5A231D02-7064-4B65-B20D-5AA3DBFB1DF6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

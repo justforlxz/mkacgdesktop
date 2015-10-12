@@ -5,22 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:萌控二次元"
         mc:Ignorable="d"
-        Title="萌控二次元" Loaded="Window_Loaded" Height="289" Width="344" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" Topmost="True" ResizeMode="NoResize">
+        Title="萌控二次元" Loaded="Window_Loaded" Height="347" Width="344" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" Topmost="True" ResizeMode="NoResize">
     <Grid>
-        <Label x:Name="bg"  HorizontalAlignment="Left" Height="112" Margin="10,10,0,0" VerticalAlignment="Top" Width="194" Background="White"/>
-        <Image x:Name="image" MouseLeftButtonDown="image_MouseLeftButtonDown" Source="Images/Main.png" HorizontalAlignment="Left" Height="172" Margin="176,97,0,0" VerticalAlignment="Top" Width="175">
+        <Label x:Name="bg_white"  HorizontalAlignment="Left" Height="112" Margin="5,65,0,0" VerticalAlignment="Top" Width="194" Background="#D8E2E2E2" BorderThickness="0,0,1,1"/>
+        <Image x:Name="image" MouseLeftButtonDown="image_MouseLeftButtonDown" Source="Images/Main.png" HorizontalAlignment="Left" Height="172" Margin="171,152,-2,0" VerticalAlignment="Top" Width="175">
             <Image.ContextMenu>
                 <ContextMenu x:Name="right_bg_click">
                     <MenuItem Header="每日一句" Click="MenuItem_Click" />
                     <MenuItem Header="换皮肤" Click="MenuItem_Click_3" />
-                    <MenuItem Header="对话机器人" Click="MenuItem_Click_1" />
                     <MenuItem Header="退出" Click="MenuItem_Click_2"/>
                 </ContextMenu>
             </Image.ContextMenu>
         </Image>
-        <Label x:Name="bg_label" HorizontalAlignment="Left" Height="89" Margin="17,14,0,0" VerticalAlignment="Top" Width="174" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" >
+        <Label x:Name="bg_label" HorizontalAlignment="Left" Height="89" Margin="12,69,0,0" VerticalAlignment="Top" Width="174" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" >
             <TextBlock x:Name="bg_text" TextWrapping="Wrap" Text="欢迎来到萌控二次元" />
         </Label>
-        <Label x:Name="bg_source" Content="" HorizontalAlignment="Left" Height="26" Margin="72,92,0,0" VerticalAlignment="Top" Width="127" FontSize="10.667" />
+        <Label x:Name="bg_source" Content="" HorizontalAlignment="Left" Height="26" Margin="67,147,0,0" VerticalAlignment="Top" Width="127" FontSize="10.667" />
+        <TextBox x:Name="sendbox" HorizontalAlignment="Right"  Height="25" Margin="0,182,145,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+        <Button x:Name="button" Content="send" Click="button_Click" HorizontalAlignment="Left" Height="22" Margin="138,212,0,0" VerticalAlignment="Top" Width="61"/>
     </Grid>
 </Window>
