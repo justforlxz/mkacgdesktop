@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -13,7 +14,9 @@ namespace 萌控二次元
         public MainWindow ()
         {
             InitializeComponent();
+
         }
+        
         static int themes = 0;
         DispatcherTimer timer = new DispatcherTimer();
         DispatcherTimer timerToSendMessages = new DispatcherTimer();
@@ -58,9 +61,13 @@ namespace 萌控二次元
             timer.Interval = new TimeSpan(0 , 0 , 4);
             timer.Tick += new EventHandler(showorhide);
             timer.Start();
-            timerToSendMessages.Interval = new TimeSpan(0,0,10);
+            timerToSendMessages.Interval = new TimeSpan(0 , 0 , 10);
             timerToSendMessages.Tick += new EventHandler(showorhide);
             timerToSendMessages.Start();
+          //  bgmusicplayer.Source = new Uri(AppDomain.CurrentDomain.BaseDirectory + "Music\\bg.mp3" , UriKind.Relative);
+            bgmusicplayer.Play();
+           MessageBox.Show( bgmusicplayer.Source.ToString());
+
         }
         private void image_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
         {
@@ -88,7 +95,6 @@ namespace 萌控二次元
         {
             if (e.Key == Key.Enter)
             {
-
                 timer.Stop();
                 timerToSendMessages.Stop();
                 showorhidetrue();
@@ -96,7 +102,6 @@ namespace 萌控二次元
                 sendbox.Text = "";
                 timerToSendMessages.Start();
             }
-
         }
         int count = 0;
         private void image_MouseDown (object sender , MouseButtonEventArgs e)
@@ -109,18 +114,19 @@ namespace 萌控二次元
             if (count % 2 == 0)
             {
                 timer.IsEnabled = false;
-                /*
-                count = 0;
-
-                this.WindowState = this.WindowState == WindowState.Maximized ?
-
-                              WindowState.Normal : WindowState.Maximized;
-                              */
                 count = 0;
                 timerToSendMessages.Stop();
                 showorhidetrue();
                 timerToSendMessages.Start();
+                bgmusicplayer.Play();
             }
+           
+        }
+
+        private void sendbox_TextChanged (object sender , System.Windows.Controls.TextChangedEventArgs e)
+        {
+            timer.Stop();
+            timerToSendMessages.Stop();
         }
     }
 }

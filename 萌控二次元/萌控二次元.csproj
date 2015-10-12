@@ -83,6 +83,10 @@
     <Compile Include="settings.xaml.cs">
       <DependentUpon>settings.xaml</DependentUpon>
     </Compile>
+    <Page Include="Dictionary1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -154,9 +158,15 @@
     <Resource Include="Images\Main1.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Music\bg.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Newtonsoft.Json.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Plugln\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
