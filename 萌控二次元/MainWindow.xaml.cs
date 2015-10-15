@@ -17,12 +17,14 @@ namespace 萌控二次元
         {
 
             InitializeComponent();
+            
             bgmusicplayer.Play();
 
         }
         static int themes = 0;
         DispatcherTimer timer = new DispatcherTimer();
         DispatcherTimer timerToSendMessages = new DispatcherTimer();
+        redio.redio redio_r = new redio.redio();
         private void MenuItem_Click (object sender , RoutedEventArgs e)
         {
             //显示一句话
@@ -72,6 +74,11 @@ namespace 萌控二次元
 
             }
             HKCU.Close();
+            double workHeight = SystemParameters.WorkArea.Height;
+            double workWidth = SystemParameters.WorkArea.Width;
+            this.Top = (workHeight - this.Height) / 1.1;
+            this.Left = (workWidth - this.Width) / 1;
+            
             sendbox.Visibility = Visibility.Hidden;
             timer.Interval = new TimeSpan(0 , 0 , 4);
             timer.Tick += new EventHandler(showorhide);
@@ -124,6 +131,8 @@ namespace 萌控二次元
             timer.IsEnabled = true;
             if (count % 2 == 0)
             {
+                bg_text.Text = "你好啊";
+                bg_source.Content = "";
                 timer.IsEnabled = false;
                 count = 0;
                 timerToSendMessages.Stop();
@@ -163,6 +172,205 @@ namespace 萌控二次元
                 bg_text.Text = "已删除开机项";
                 timer.Start();
             }
+        }
+
+        private void redioplayer_Click (object sender , RoutedEventArgs e)
+        {
+            Random num = new Random(); int a = num.Next(1,10);
+            String[] list = redio_r.redio_(a);
+            bgmusicplayer.Source =(new Uri(list[0]));
+            bg_text.Text = "";
+            timer.Stop();
+            showorhidetrue();
+            sendbox.Visibility = Visibility.Hidden;
+            bg_text.Text = "正在播放:"+list[1];
+            timer.Start();
+            bgmusicplayer.Play();
+        }
+        public void timetotalk ()
+        {
+            DateTime dt = DateTime.Now ;
+            String hour = dt.Hour.ToString();
+            switch (hour)
+            {
+                case "1":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是"+hour+"点了";
+                    timer.Start();
+                    break;
+                case "2":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "3":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "4":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "5":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "6":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "7":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "8":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "9":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "10":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "11":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "12":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "13":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "14":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "15":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "16":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "17":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "18":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "19":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "20":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "21":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "22":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "23":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+                case "24":
+                    bg_text.Text = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    bg_text.Text = "现在是" + hour + "点了";
+                    timer.Start(); break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void MenuItem_Click_4 (object sender , RoutedEventArgs e)
+        {
+            timetotalk();
         }
     }
 }

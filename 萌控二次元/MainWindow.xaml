@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:萌控二次元"
         mc:Ignorable="d"
-        Title="萌控二次元" Loaded="Window_Loaded" Height="347" Width="344" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" Topmost="True" ResizeMode="NoResize">
+        Title="萌控二次元" Loaded="Window_Loaded" Height="347" Width="344"  Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="Manual" Topmost="True" ResizeMode="NoResize" ShowInTaskbar="False">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="300"/>
@@ -18,6 +18,8 @@
                     <MenuItem Header="每日一句" Click="MenuItem_Click" />
                     <MenuItem Header="换皮肤" Click="MenuItem_Click_3" />
                     <MenuItem Header="关闭开启启动" Click="MenuItem_Click_1" />
+                    <MenuItem x:Name="redioplayer" Header="电台模式"  Click="redioplayer_Click"/>
+                    <MenuItem Header="报时" Click="MenuItem_Click_4"/>
                     <MenuItem Header="退出" Click="MenuItem_Click_2"/>
                 </ContextMenu>
             </Image.ContextMenu>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<result>
+  <music1>
+   <name>阿桑 - 一直很安静</name>
+  <url>http://192.168.0.15/music/阿桑_-_一直很安静.mp3</url>
+  </music1>
+  <music2>
+   <name>乐正绫 - Scarlet Drop</name>
+  <url>http://192.168.0.15/music/乐正绫_-_Scarlet_Drop.mp3</url>
+  </music2>
+  <music3>
+   <name>朴树 - 平凡之路</name>
+  <url>http://192.168.0.15/music/朴树_-_平凡之路.mp3</url>
+  </music3>
+  <music4>
+    <name>梦璟SAYA - 左墙听雨</name>
+    <url>http://192.168.0.15/music/梦璟SAYA_-_左墙听雨.mp3</url>
+  </music4>
+  <music5>
+    <name>michiyo - 东方萃梦想 (hatsunetsu mix.) - remix</name>
+    <url>http://192.168.0.15/music/michiyo_-_东方萃梦想_(hatsunetsu_mix.)_-_remix.mp3</url>
+  </music5>
+  <music6>
+    <name>発热巫女~ず - 东方萃梦想 (hatsunetsu mix.)　 - remix</name>
+    <url>http://192.168.0.15/music/発热巫女~ず_-_东方萃梦想_(hatsunetsu_mix.)　_-_remix.mp3</url>
+  </music6>
+  <music7>
+    <name>春奈るな - 空は高く風は歌う</name>
+    <url>http://192.168.0.15/music/春奈るな_-_空は高く風は歌う.mp3</url>
+  </music7>
+  <music8>
+    <name>BoA - MASAYUME CHASING</name>
+    <url>http://192.168.0.15/music/BoA_-_MASAYUME_CHASING.mp3</url>
+  </music8>
+  <music9>
+    <name>上海アリス幻樂団 - Bad Apple!!</name>
+    <url>http://192.168.0.15/music/上海アリス幻樂団_-_Bad_Apple!!.mp3</url>
+  </music9>
+  <music10>
+    <name>胡歌 - 六月的雨</name>
+    <url>http://192.168.0.15/music/胡歌_-_六月的雨.mp3</url>
+  </music10>
+</result>

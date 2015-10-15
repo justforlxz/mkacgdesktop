@@ -145,6 +145,10 @@
       <Project>{9a176432-66e3-4e76-9f56-bec08a6944e3}</Project>
       <Name>mkacg_showhitokoto</Name>
     </ProjectReference>
+    <ProjectReference Include="..\redio\redio.csproj">
+      <Project>{b2949b35-4cac-47ea-86db-dbe310245c34}</Project>
+      <Name>redio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\talk\talk.csproj">
       <Project>{5a231d02-7064-4b65-b20d-5aa3dbfb1df6}</Project>
       <Name>talk</Name>
@@ -154,6 +158,7 @@
     <Resource Include="Images\Main1.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="node.xml" />
     <None Include="Resources\TextFile1.txt" />
     <EmbeddedResource Include="Music\bg.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
