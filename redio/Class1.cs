@@ -16,14 +16,14 @@ namespace redio
             String[] source = new String[2];
             if (InternetGetConnectedState(out i , 0))
             {
-                String url = "http://192.168.0.15/node.xml";
-              //  String url = "C:/Users/zhuzi/Documents/GitHubVisualStudio/mkacgdesktop/萌控二次元/node.xml";
-                XmlElement root = null;
-                XmlDocument xmldoc = new XmlDocument();
+                
                 try
                 {
-                 
-                        xmldoc.Load(url);
+                    String url = "http://192.168.0.15/node.xml";
+                    //  String url = "C:/Users/zhuzi/Documents/GitHubVisualStudio/mkacgdesktop/萌控二次元/node.xml";
+                    XmlElement root = null;
+                    XmlDocument xmldoc = new XmlDocument();
+                    xmldoc.Load(url);
                         root = xmldoc.DocumentElement;
                         XmlNodeList listNodes = null, listsource = null;
                         string listxml_url = "/result/music" + list + "/url";

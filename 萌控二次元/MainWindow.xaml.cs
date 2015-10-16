@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -17,7 +18,7 @@ namespace 萌控二次元
         {
 
             InitializeComponent();
-            
+
             bgmusicplayer.Play();
 
         }
@@ -78,7 +79,7 @@ namespace 萌控二次元
             double workWidth = SystemParameters.WorkArea.Width;
             this.Top = (workHeight - this.Height) / 1.1;
             this.Left = (workWidth - this.Width) / 1;
-            
+
             sendbox.Visibility = Visibility.Hidden;
             timer.Interval = new TimeSpan(0 , 0 , 4);
             timer.Tick += new EventHandler(showorhide);
@@ -87,12 +88,19 @@ namespace 萌控二次元
             timerToSendMessages.Tick += new EventHandler(showorhide);
             timerToSendMessages.Start();
         }
+
         private void image_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.DragMove();
             }
+
+
+        }
+        public void playplay (object obj)
+        {
+
         }
         private void MenuItem_Click_3 (object sender , RoutedEventArgs e)
         {
@@ -122,24 +130,8 @@ namespace 萌控二次元
             }
         }
         int count = 0;
-        private void image_MouseDown (object sender , MouseButtonEventArgs e)
-        {
-            count += 1;
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0 , 0 , 0 , 0 , 300);
-            timer.Tick += (s , e1) => { timer.IsEnabled = false; count = 0; };
-            timer.IsEnabled = true;
-            if (count % 2 == 0)
-            {
-                bg_text.Text = "你好啊";
-                bg_source.Content = "";
-                timer.IsEnabled = false;
-                count = 0;
-                timerToSendMessages.Stop();
-                showorhidetrue();
-                timerToSendMessages.Start();
-            }
-        }
+        int playstate = 0;
+
         private void sendbox_TextChanged (object sender , System.Windows.Controls.TextChangedEventArgs e)
         {
             timer.Stop();
@@ -162,7 +154,6 @@ namespace 萌控二次元
                 sendbox.Visibility = Visibility.Hidden;
                 bg_text.Text = "已删除开机项";
                 timer.Start();
-               
             }
             catch
             {
@@ -176,20 +167,55 @@ namespace 萌控二次元
 
         private void redioplayer_Click (object sender , RoutedEventArgs e)
         {
-            Random num = new Random(); int a = num.Next(1,10);
-            String[] list = redio_r.redio_(a);
-            bgmusicplayer.Source =(new Uri(list[0]));
-            bg_text.Text = "";
-            timer.Stop();
-            showorhidetrue();
-            sendbox.Visibility = Visibility.Hidden;
-            bg_text.Text = "正在播放:"+list[1];
-            timer.Start();
-            bgmusicplayer.Play();
+            bgmusicplayer.Stop();
+            Random num = new Random(); int a = num.Next(1 , 10);
+            if (redioplayer.Header.ToString() == "电台模式")
+            {
+                try
+                {
+                    String[] list = redio_r.redio_(a);
+                    bgmusicplayer.Source = (new Uri(list[0]));
+                    bg_text.Text = "";
+                    bg_source.Content = "";
+                    timer.Stop();
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    timer.Start();
+                    bgmusicplayer.Play();
+                    bg_text.Text = "正在播放:" + list[1];
+                    play_next.Visibility = Visibility.Visible;
+                    redioplayer.Header = "关闭电台模式";
+                }
+                catch (Exception)
+                {
+                    timer.Stop();
+                    bg_text.Text = "对不起，播放失败";
+                    showorhidetrue();
+                    sendbox.Visibility = Visibility.Hidden;
+                    timer.Start();
+                    bgmusicplayer.Stop();
+                }
+            }
+            else if (redioplayer.Header.ToString() == "关闭电台模式")
+            {
+                timer.Stop();
+                bg_text.Text = "";
+                bg_text.Text = "已关闭电台模式";
+                bg_source.Content = "";
+                redioplayer.Header = "电台模式";
+                showorhidetrue();
+                sendbox.Visibility = Visibility.Hidden;
+                play_next.Visibility = Visibility.Collapsed;
+                play_name.Visibility = Visibility.Collapsed;
+                timer.Start();
+                bgmusicplayer.Stop();
+            }
+
+
         }
         public void timetotalk ()
         {
-            DateTime dt = DateTime.Now ;
+            DateTime dt = DateTime.Now;
             String hour = dt.Hour.ToString();
             switch (hour)
             {
@@ -198,7 +224,7 @@ namespace 萌控二次元
                     timer.Stop();
                     showorhidetrue();
                     sendbox.Visibility = Visibility.Hidden;
-                    bg_text.Text = "现在是"+hour+"点了";
+                    bg_text.Text = "现在是" + hour + "点了";
                     timer.Start();
                     break;
                 case "2":
@@ -371,6 +397,73 @@ namespace 萌控二次元
         private void MenuItem_Click_4 (object sender , RoutedEventArgs e)
         {
             timetotalk();
+        }
+
+        private void image_MouseDown (object sender , MouseButtonEventArgs e)
+        {
+            count += 1;
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0 , 0 , 0 , 0 , 100);
+            timer.Tick += (s , e1) => { timer.IsEnabled = false; count = 0; };
+            timer.IsEnabled = true;
+            if (count % 2 == 0)
+            {
+                bg_text.Text = "你好啊";
+                bg_source.Content = "";
+                timer.IsEnabled = false;
+                count = 0;
+                timerToSendMessages.Stop();
+                showorhidetrue();
+                timerToSendMessages.Start();
+            }
+        }
+        String[] list;
+        private void play_next_Click (object sender , RoutedEventArgs e)
+        {
+            bgmusicplayer.Stop();
+            Random num = new Random(); int a = num.Next(1 , 10);
+            try
+            {
+                list = redio_r.redio_(a);
+                bgmusicplayer.Source = (new Uri(list[0]));
+                bg_text.Text = "";
+                bg_source.Content = "";
+                timer.Stop();
+                showorhidetrue();
+                sendbox.Visibility = Visibility.Hidden;
+                timer.Start();
+                bgmusicplayer.Play();
+                bg_text.Text = "正在播放:" + list[1];
+                play_next.Visibility = Visibility.Visible;
+                play_name.Visibility = Visibility.Visible;
+                redioplayer.Header = "关闭电台模式";
+            }
+            catch (Exception)
+            {
+                timer.Stop();
+                bg_text.Text = "";
+                bg_source.Content = "";
+                bg_text.Text = "对不起，播放失败";
+                showorhidetrue();
+                sendbox.Visibility = Visibility.Hidden;
+                timer.Start();
+                bgmusicplayer.Stop();
+            }
+
+        }
+
+        private void play_name_Click (object sender , RoutedEventArgs e)
+        {
+            bg_text.Text = "";
+            bg_source.Content = "";
+            timer.Stop();
+            showorhidetrue();
+            sendbox.Visibility = Visibility.Hidden;
+            timer.Start();
+            bgmusicplayer.Play();
+            bg_text.Text = "正在播放:" + list[1];
+            play_next.Visibility = Visibility.Visible;
+            play_name.Visibility = Visibility.Visible;
         }
     }
 }
