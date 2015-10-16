@@ -63,6 +63,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -80,9 +81,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="settings.xaml.cs">
-      <DependentUpon>settings.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -95,10 +93,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="settings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -133,11 +127,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="rand.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="开发日志.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -153,12 +142,15 @@
       <Project>{5a231d02-7064-4b65-b20d-5aa3dbfb1df6}</Project>
       <Name>talk</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Update\Update.csproj">
+      <Project>{3cc2d696-2243-4214-93cd-5dba4f2c4bcd}</Project>
+      <Name>Update</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Main1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="node.xml" />
     <None Include="Resources\TextFile1.txt" />
     <EmbeddedResource Include="Music\bg.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

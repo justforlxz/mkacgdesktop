@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Xml;
 namespace redio
 {
@@ -16,31 +13,26 @@ namespace redio
             String[] source = new String[2];
             if (InternetGetConnectedState(out i , 0))
             {
-                
                 try
                 {
                     String url = "http://www.m-acg.com/desktop/node.xml";
                     XmlElement root = null;
                     XmlDocument xmldoc = new XmlDocument();
                     xmldoc.Load(url);
-                        root = xmldoc.DocumentElement;
-                        XmlNodeList listNodes = null, listsource = null;
-                        string listxml_url = "/result/music" + list + "/url";
-                        string listxml_name = "/result/music"+list+"/name";
-                        listNodes = root.SelectNodes(listxml_url);
-                        listsource = root.SelectNodes(listxml_name);
-                        foreach (XmlNode node in listNodes)
-                        {
-
-                            // node.InnerText
-                            source[0] = node.InnerText;
-                        }
-                        foreach (XmlNode node in listsource)
-                        {
-                            //node.InnerText
-                            source[1] = "来自：" + node.InnerText;
-                        }
-               
+                    root = xmldoc.DocumentElement;
+                    XmlNodeList listNodes = null, listsource = null;
+                    string listxml_url = "/result/music" + list + "/url";
+                    string listxml_name = "/result/music" + list + "/name";
+                    listNodes = root.SelectNodes(listxml_url);
+                    listsource = root.SelectNodes(listxml_name);
+                    foreach (XmlNode node in listNodes)
+                    {
+                        source[0] = node.InnerText.ToString();
+                    }
+                    foreach (XmlNode node in listsource)
+                    {
+                        source[1] = "来自：" + node.InnerText;
+                    }
                 }
                 catch
                 {

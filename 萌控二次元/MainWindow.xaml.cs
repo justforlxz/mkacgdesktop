@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
-using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Microsoft.Win32;
-
 namespace 萌控二次元
 {
     /// <summary>
@@ -19,7 +16,6 @@ namespace 萌控二次元
         {
 
             InitializeComponent();
-
             bgmusicplayer.Play();
 
         }
@@ -80,7 +76,6 @@ namespace 萌控二次元
             double workWidth = SystemParameters.WorkArea.Width;
             this.Top = (workHeight - this.Height) / 1.1;
             this.Left = (workWidth - this.Width) / 1;
-
             sendbox.Visibility = Visibility.Hidden;
             timer.Interval = new TimeSpan(0 , 0 , 4);
             timer.Tick += new EventHandler(showorhide);
@@ -89,15 +84,12 @@ namespace 萌控二次元
             timerToSendMessages.Tick += new EventHandler(showorhide);
             timerToSendMessages.Start();
         }
-
         private void image_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.DragMove();
             }
-
-
         }
         public void playplay (object obj)
         {
@@ -121,9 +113,16 @@ namespace 萌控二次元
         {
             if (e.Key == Key.Enter)
             {
-                if (sendbox.Text=="升级")
+                switch (sendbox.Text)
                 {
-                    Process.Start("Update.exe");
+                    case "升级":
+                        Process.Start("Update.exe");
+                        break;
+                    case "关闭开机启动":
+                        delete_autorun();
+                        break;
+                    default:
+                        break;
                 }
                 timer.Stop();
                 timerToSendMessages.Stop();
@@ -135,7 +134,6 @@ namespace 萌控二次元
             }
         }
         int count = 0;
-
         private void sendbox_TextChanged (object sender , System.Windows.Controls.TextChangedEventArgs e)
         {
             timer.Stop();
@@ -145,8 +143,7 @@ namespace 萌控二次元
         {
             bgmusicplayer.Stop();
         }
-
-        private void MenuItem_Click_1 (object sender , RoutedEventArgs e)
+        private void delete_autorun ()
         {
             RegistryKey HKCU = Registry.CurrentUser;
             RegistryKey Run = HKCU.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run" , true);
@@ -168,17 +165,18 @@ namespace 萌控二次元
                 timer.Start();
             }
         }
-
         private void redioplayer_Click (object sender , RoutedEventArgs e)
         {
             bgmusicplayer.Stop();
             Random num = new Random(); int a = num.Next(1 , 10);
+
             if (redioplayer.Header.ToString() == "电台模式")
             {
                 try
                 {
                     String[] list = redio_r.redio_(a);
-                    bgmusicplayer.Source = (new Uri(list[0]));
+                    list[0]= System.Web.HttpUtility.UrlDecode(list[0], System.Text.Encoding.UTF8);
+                    bgmusicplayer.Source =(new Uri(list[0]));  //尼玛，到底你怎么了
                     bg_text.Text = "";
                     bg_source.Content = "";
                     timer.Stop();
