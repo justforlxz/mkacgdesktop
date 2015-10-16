@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Windows;
@@ -120,6 +121,10 @@ namespace 萌控二次元
         {
             if (e.Key == Key.Enter)
             {
+                if (sendbox.Text=="升级")
+                {
+                    Process.Start("Update.exe");
+                }
                 timer.Stop();
                 timerToSendMessages.Stop();
                 showorhidetrue();
@@ -130,7 +135,6 @@ namespace 萌控二次元
             }
         }
         int count = 0;
-        int playstate = 0;
 
         private void sendbox_TextChanged (object sender , System.Windows.Controls.TextChangedEventArgs e)
         {

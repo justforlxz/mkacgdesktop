@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "talk", "talk\talk.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "redio", "redio\redio.csproj", "{B2949B35-4CAC-47EA-86DB-DBE310245C34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Update", "Update\Update.csproj", "{3CC2D696-2243-4214-93CD-5DBA4F2C4BCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,14 @@ Global
 		{B2949B35-4CAC-47EA-86DB-DBE310245C34}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B2949B35-4CAC-47EA-86DB-DBE310245C34}.Release|x86.ActiveCfg = Release|Any CPU
 		{B2949B35-4CAC-47EA-86DB-DBE310245C34}.Release|x86.Build.0 = Release|Any CPU
+		{3CC2D696-2243-4214-93CD-5DBA4F2C4BCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CC2D696-2243-4214-93CD-5DBA4F2C4BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CC2D696-2243-4214-93CD-5DBA4F2C4BCD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3CC2D696-2243-4214-93CD-5DBA4F2C4BCD}.Debug|x86.Build.0 = Debug|Any CPU
+		{3CC2D696-2243-4214-93CD-5DBA4F2C4BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CC2D696-2243-4214-93CD-5DBA4F2C4BCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CC2D696-2243-4214-93CD-5DBA4F2C4BCD}.Release|x86.ActiveCfg = Release|Any CPU
+		{3CC2D696-2243-4214-93CD-5DBA4F2C4BCD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

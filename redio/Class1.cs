@@ -19,8 +19,7 @@ namespace redio
                 
                 try
                 {
-                    String url = "http://192.168.0.15/node.xml";
-                    //  String url = "C:/Users/zhuzi/Documents/GitHubVisualStudio/mkacgdesktop/萌控二次元/node.xml";
+                    String url = "http://www.m-acg.com/desktop/node.xml";
                     XmlElement root = null;
                     XmlDocument xmldoc = new XmlDocument();
                     xmldoc.Load(url);
