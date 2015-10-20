@@ -176,7 +176,8 @@ namespace 萌控二次元
                 {
                     String[] list = redio_r.redio_(a);
                     list[0]= System.Web.HttpUtility.UrlDecode(list[0], System.Text.Encoding.UTF8);
-                    bgmusicplayer.Source =(new Uri(list[0]));  //尼玛，到底你怎么了
+                    Console.WriteLine(list[0]);
+                    bgmusicplayer.Source =new Uri(list[0]);  //尼玛，到底你怎么了
                     bg_text.Text = "";
                     bg_source.Content = "";
                     timer.Stop();
