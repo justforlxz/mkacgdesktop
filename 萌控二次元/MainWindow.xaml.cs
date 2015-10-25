@@ -121,6 +121,9 @@ namespace 萌控二次元
                     case "关闭开机启动":
                         delete_autorun();
                         break;
+                    case "开启开机启动":
+                        open_autorun();
+                        break;
                     default:
                         break;
                 }
@@ -132,6 +135,21 @@ namespace 萌控二次元
                 bg_source.Content = "";
                 timerToSendMessages.Start();
             }
+        }
+        private void open_autorun()
+        {
+            RegistryKey HKCU = Registry.CurrentUser;
+            RegistryKey Run = HKCU.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+            try
+            {
+                Run.SetValue("MKACG", AppDomain.CurrentDomain.BaseDirectory + "萌控二次元.exe");
+
+            }
+            catch
+            {
+
+            }
+            HKCU.Close();
         }
         int count = 0;
         private void sendbox_TextChanged (object sender , System.Windows.Controls.TextChangedEventArgs e)
