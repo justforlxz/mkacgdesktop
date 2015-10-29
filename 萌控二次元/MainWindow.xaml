@@ -17,7 +17,7 @@
                 <ContextMenu x:Name="right_bg_click">
                     <MenuItem Header="每日一句" Click="MenuItem_Click" />
                     <MenuItem Header="换皮肤" Click="MenuItem_Click_3" />
-                    <MenuItem x:Name="redioplayer" Header="电台模式"  Click="redioplayer_Click"/>
+                    <MenuItem x:Name="redioplayer" Header="电台模式"  Click="redioplayer_Click" IsEnabled="False"/>
                     <MenuItem x:Name="play_name" Header="歌曲信息" Click="play_name_Click" Visibility="Collapsed" />
                     <MenuItem x:Name="play_next" Header="下一曲" Click="play_next_Click" Visibility="Collapsed" />
                     <MenuItem Header="报时" Click="MenuItem_Click_4"/>

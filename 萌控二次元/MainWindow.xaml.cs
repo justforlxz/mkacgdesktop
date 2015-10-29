@@ -22,7 +22,9 @@ namespace 萌控二次元
         static int themes = 0;
         DispatcherTimer timer = new DispatcherTimer();
         DispatcherTimer timerToSendMessages = new DispatcherTimer();
+        DispatcherTimer someTime_timer = new DispatcherTimer();
         redio.redio redio_r = new redio.redio();
+        Random someTime_random = new Random();
         private void MenuItem_Click (object sender , RoutedEventArgs e)
         {
             //显示一句话
@@ -54,24 +56,13 @@ namespace 萌控二次元
         }
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
+            //开机启动
             this.Topmost = true;
             if (themes == 0)
             {
                 image.Source = new BitmapImage(new Uri("Images/Main.png" , UriKind.Relative));
                 themes = 1;
             }
-            RegistryKey HKCU = Registry.CurrentUser;
-            RegistryKey Run = HKCU.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run" , true);
-            try
-            {
-                Run.SetValue("MKACG" , AppDomain.CurrentDomain.BaseDirectory + "萌控二次元.exe");
-
-            }
-            catch
-            {
-
-            }
-            HKCU.Close();
             double workHeight = SystemParameters.WorkArea.Height;
             double workWidth = SystemParameters.WorkArea.Width;
             this.Top = (workHeight - this.Height) / 1.1;
@@ -83,6 +74,9 @@ namespace 萌控二次元
             timerToSendMessages.Interval = new TimeSpan(0 , 0 , 10);
             timerToSendMessages.Tick += new EventHandler(showorhide);
             timerToSendMessages.Start();
+            someTime_timer.Interval = new TimeSpan(0,0, someTime_random.Next(1,1800));  //随机事件进行消息提醒
+            someTime_timer.Tick += new EventHandler(someTime);
+            someTime_timer.Start();
         }
         private void image_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
         {
@@ -195,7 +189,7 @@ namespace 萌控二次元
                     String[] list = redio_r.redio_(a);
                     list[0]= System.Web.HttpUtility.UrlDecode(list[0], System.Text.Encoding.UTF8);
                     Console.WriteLine(list[0]);
-                    bgmusicplayer.Source =new Uri(list[0]);  //尼玛，到底你怎么了
+                    bgmusicplayer.Source =new Uri(list[0]);  //服务器方面文件404，转码问题导致未找到，正在准备改成使用其他电台的数据。
                     bg_text.Text = "";
                     bg_source.Content = "";
                     timer.Stop();
@@ -485,6 +479,24 @@ namespace 萌控二次元
             bg_text.Text = "正在播放:" + list[1];
             play_next.Visibility = Visibility.Visible;
             play_name.Visibility = Visibility.Visible;
+        }
+        private void someTime (object sender , EventArgs e)
+        {
+            someTime_timer.Stop();
+
+            //显示一句话
+            timer.Stop();
+            showorhidetrue();
+            sendbox.Visibility = Visibility.Hidden;
+            mkacg_showhitokoto.Class1 mkacgclass = new mkacg_showhitokoto.Class1();
+            String[] list = mkacgclass.hitokoto();
+            bg_text.Text = "";
+            bg_text.Text = list[0] + "\n";
+            bg_source.Content = list[1] + "\n";
+            timer.Start();
+            someTime_timer.Interval = new TimeSpan(0 , 0 , someTime_random.Next(1 , 1800));  //随机事件进行消息提醒
+            someTime_timer.Tick += new EventHandler(someTime);
+            someTime_timer.Start();
         }
     }
 }
