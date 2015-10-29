@@ -498,5 +498,6 @@ namespace 萌控二次元
             someTime_timer.Tick += new EventHandler(someTime);
             someTime_timer.Start();
         }
+
     }
 }
