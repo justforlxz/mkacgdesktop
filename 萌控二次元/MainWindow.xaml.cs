@@ -5,6 +5,9 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Microsoft.Win32;
+using System.IO;
+using System.Xml;
+
 namespace 萌控二次元
 {
     /// <summary>
@@ -57,6 +60,16 @@ namespace 萌控二次元
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
             //开机启动
+            //配置文件
+            if (File.Exists(@"config.xml"))
+            {
+                //read
+            }
+            else
+            {
+                create_config_file();
+            }
+            /*************************************/
             this.Topmost = true;
             if (themes == 0)
             {
@@ -77,6 +90,38 @@ namespace 萌控二次元
             someTime_timer.Interval = new TimeSpan(0,0, someTime_random.Next(1,1800));  //随机事件进行消息提醒
             someTime_timer.Tick += new EventHandler(someTime);
             someTime_timer.Start();
+        }
+        private void create_config_file ()
+        {
+            var xmlDoc = new XmlDocument();
+            //Create the xml declaration first 
+            xmlDoc.AppendChild(xmlDoc.CreateXmlDeclaration("1.0" , "utf-8" , null));
+            //Create the root node and append into doc 
+            var el = xmlDoc.CreateElement("Contacts");
+            xmlDoc.AppendChild(el);
+            /*
+
+            XmlElement elementName = xmlDoc.CreateElement("Name");   //子节点
+            elementName.InnerText = "Daisy Abbey"; //子节点值
+            elementContact.AppendChild(elementName);  
+
+
+    */
+            // Contact 
+            XmlElement elementContact = xmlDoc.CreateElement("Contact");
+            XmlAttribute attrID = xmlDoc.CreateAttribute("id");
+            attrID.Value = "01";
+            elementContact.Attributes.Append(attrID);
+            el.AppendChild(elementContact);
+            // Contact Name 
+            XmlElement elementName = xmlDoc.CreateElement("Name");
+            elementName.InnerText = "Daisy Abbey";
+            elementContact.AppendChild(elementName);
+            // Contact Gender 
+            XmlElement elementGender = xmlDoc.CreateElement("Gender");
+            elementGender.InnerText = "female";
+            elementContact.AppendChild(elementGender);
+            xmlDoc.Save("config.xml");
         }
         private void image_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
         {
