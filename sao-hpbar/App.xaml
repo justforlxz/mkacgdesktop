@@ -1,7 +1,7 @@
-﻿<Application x:Class="hp_bar.App"
+﻿<Application x:Class="sao_hpbar.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:hp_bar"
+             xmlns:local="clr-namespace:sao_hpbar"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

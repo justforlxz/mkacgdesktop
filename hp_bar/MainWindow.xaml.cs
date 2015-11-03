@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
-using System.Threading;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Xml;
 
 namespace hp_bar
@@ -18,14 +15,17 @@ namespace hp_bar
         public MainWindow ()
         {
             InitializeComponent();
+
         }
-
-
+        
         private void images_hp_bar_png_MouseDown (object sender , MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.DragMove();
+                double workHeight = SystemParameters.WorkArea.Height;
+                double workWidth = SystemParameters.WorkArea.Width;
+                create_config(workHeight - this.Height , workHeight - this.Width);
             }
         }
         public void open_config ()
@@ -33,7 +33,7 @@ namespace hp_bar
             try
             {
                 XmlDocument xmldoc = new XmlDocument();
-                xmldoc.Load("config.xml");
+                xmldoc.Load("hp_config.xml");
                 XmlNode rootnode = xmldoc.SelectSingleNode("result");
                 string innerXmlInnfo = rootnode.InnerXml.ToString();
                 string outerxmlinfo = rootnode.OuterXml.ToString();
@@ -46,12 +46,23 @@ namespace hp_bar
                         string name = attri.Name;
                         string value = attri.Value;
                         Console.WriteLine("{0}={1}" , name , value);
-                        if (name!="lv")
+                        if (name=="name")
                         {
                             hp_name.Content = value;
                         }
+                        else if (name=="lv")
+                        {
+                            hp_level.Content = value;
+                        }
+                        else if (name=="x")
+                        {
+                            this.Top =double.Parse( value);
+                        }
+                        else if (name=="y")
+                        {
+                            this.Top = double.Parse(value);
+                        }
                         
-                        hp_level.Content = value;
                     }
                 }
             }
@@ -60,30 +71,37 @@ namespace hp_bar
                 Console.WriteLine(ex.ToString());
             }
         }
-        public void create_config ()
+        public void create_config (double x , double y)
         {
             XmlDocument doc = new XmlDocument();
             XmlDeclaration dec = doc.CreateXmlDeclaration("1.0","UTF-8",null);
             doc.AppendChild(dec);
             XmlElement root = doc.CreateElement("result");  //一级
             doc.AppendChild(root);
-
             XmlElement element1 = doc.CreateElement("hp_bar"); 
             element1.SetAttribute("name","kirito");
             element1.SetAttribute("lv","Lv.1");
+            element1.SetAttribute("x",x.ToString());
+            element1.SetAttribute("y",y.ToString());
+
             root.AppendChild(element1);
             doc.AppendChild(root);
-            doc.Save("config.xml");
+            doc.Save("hp_config.xml");
         }
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
-            if (File.Exists(@"config.xml"))
+
+            if (File.Exists(@"hp_config.xml"))
             {
                 open_config();
             }
             else
             {
-                create_config();
+                double workHeight = SystemParameters.WorkArea.Height;
+                double workWidth = SystemParameters.WorkArea.Width;
+                double top = (workHeight - this.Height) / 15;
+                double left = (workWidth - this.Width) / 13;
+                create_config(Top,Left);
             }
 
         }

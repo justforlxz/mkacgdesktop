@@ -90,39 +90,40 @@ namespace 萌控二次元
             someTime_timer.Interval = new TimeSpan(0,0, someTime_random.Next(1,1800));  //随机事件进行消息提醒
             someTime_timer.Tick += new EventHandler(someTime);
             someTime_timer.Start();
+        
         }
-        private void create_config_file ()
+
+        public void create_config_file ()
         {
-            var xmlDoc = new XmlDocument();
-            //Create the xml declaration first 
-            xmlDoc.AppendChild(xmlDoc.CreateXmlDeclaration("1.0" , "utf-8" , null));
-            //Create the root node and append into doc 
-            var el = xmlDoc.CreateElement("Contacts");
-            xmlDoc.AppendChild(el);
-            /*
+            XmlDocument doc = new XmlDocument();
+            XmlDeclaration dec = doc.CreateXmlDeclaration("1.0" , "UTF-8" , null);
+            doc.AppendChild(dec);
+            XmlElement root = doc.CreateElement("result");  //一级
+            doc.AppendChild(root);
 
-            XmlElement elementName = xmlDoc.CreateElement("Name");   //子节点
-            elementName.InnerText = "Daisy Abbey"; //子节点值
-            elementContact.AppendChild(elementName);  
+            XmlElement element1 = doc.CreateElement("config");
+            /* element1.SetAttribute("name" , "kirito");
+             root.AppendChild(element1);
+             doc.AppendChild(root);
+               */
+            /*  
+           double workHeight = SystemParameters.WorkArea.Height;
+         double workWidth = SystemParameters.WorkArea.Width;
+         this.Top = (workHeight - this.Height) / 1.1;
+         this.Left = (workWidth - this.Width) / 1;   
 
-
-    */
-            // Contact 
-            XmlElement elementContact = xmlDoc.CreateElement("Contact");
-            XmlAttribute attrID = xmlDoc.CreateAttribute("id");
-            attrID.Value = "01";
-            elementContact.Attributes.Append(attrID);
-            el.AppendChild(elementContact);
-            // Contact Name 
-            XmlElement elementName = xmlDoc.CreateElement("Name");
-            elementName.InnerText = "Daisy Abbey";
-            elementContact.AppendChild(elementName);
-            // Contact Gender 
-            XmlElement elementGender = xmlDoc.CreateElement("Gender");
-            elementGender.InnerText = "female";
-            elementContact.AppendChild(elementGender);
-            xmlDoc.Save("config.xml");
+         */
+            double workHeight = SystemParameters.WorkArea.Height;
+            double workWidth = SystemParameters.WorkArea.Width;
+           double top = (workHeight - this.Height) ;
+           double left = (workWidth - this.Width) ;
+            element1.SetAttribute("top",top.ToString());
+            element1.SetAttribute("left",left.ToString());
+            root.AppendChild(element1);
+            doc.AppendChild(root);
+            doc.Save("config.xml");
         }
+   
         private void image_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -148,6 +149,7 @@ namespace 萌控二次元
             }
         }
         talk.Class1 _talk = new talk.Class1();
+        hp_bar.MainWindow hp = new hp_bar.MainWindow();
         private void sendbox_KeyDown (object sender , KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -543,6 +545,20 @@ namespace 萌控二次元
             someTime_timer.Tick += new EventHandler(someTime);
             someTime_timer.Start();
         }
+        int hp_bar_show = 0;
 
+        private void MenuItem_Click_1 (object sender , RoutedEventArgs e)
+        {
+            if (hp_bar_show==0)
+            {
+                hp.Visibility = Visibility.Visible;
+                hp_bar_show = 1;
+            }
+            else
+            {
+                hp.Visibility = Visibility.Hidden;
+                hp_bar_show = 0;
+            }
+        }
     }
 }
