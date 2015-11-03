@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:萌控二次元"
         mc:Ignorable="d"
-        Title="萌控二次元" Loaded="Window_Loaded" Height="347" Width="344"  Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="Manual" Topmost="True" ResizeMode="NoResize" ShowInTaskbar="False">
+        Title="萌控二次元" Loaded="Window_Loaded"  Height="347" Width="344"  Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="Manual" Topmost="True" ResizeMode="NoResize" ShowInTaskbar="False">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="300"/>

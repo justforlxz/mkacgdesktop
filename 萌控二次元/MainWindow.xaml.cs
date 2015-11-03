@@ -15,11 +15,13 @@ namespace 萌控二次元
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow ()
         {
 
             InitializeComponent();
             bgmusicplayer.Play();
+            
 
         }
         static int themes = 0;
@@ -55,7 +57,7 @@ namespace 萌控二次元
         }
         private void MenuItem_Click_2 (object sender , RoutedEventArgs e)
         {
-            this.Close();
+            Environment.Exit(0);
         }
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
@@ -90,7 +92,8 @@ namespace 萌控二次元
             someTime_timer.Interval = new TimeSpan(0,0, someTime_random.Next(1,1800));  //随机事件进行消息提醒
             someTime_timer.Tick += new EventHandler(someTime);
             someTime_timer.Start();
-        
+            hp.Visibility = Visibility.Visible;
+            hp_bar_show = 1;
         }
 
         public void create_config_file ()

@@ -23,9 +23,9 @@ namespace hp_bar
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.DragMove();
-                double workHeight = SystemParameters.WorkArea.Height;
-                double workWidth = SystemParameters.WorkArea.Width;
-                create_config(workHeight - this.Height , workHeight - this.Width);
+
+                create_config(this.Top,this.Left);
+                Console.WriteLine(this.Top+"            "+this.Left);
             }
         }
         public void open_config ()
@@ -60,7 +60,7 @@ namespace hp_bar
                         }
                         else if (name=="y")
                         {
-                            this.Top = double.Parse(value);
+                            this.Left = double.Parse(value);
                         }
                         
                     }
