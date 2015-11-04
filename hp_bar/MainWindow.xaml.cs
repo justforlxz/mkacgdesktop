@@ -17,15 +17,15 @@ namespace hp_bar
             InitializeComponent();
 
         }
-        
+
         private void images_hp_bar_png_MouseDown (object sender , MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.DragMove();
 
-                create_config(this.Top,this.Left);
-                Console.WriteLine(this.Top+"            "+this.Left);
+                create_config(this.Top , this.Left);
+                Console.WriteLine(this.Top + "            " + this.Left);
             }
         }
         public void open_config ()
@@ -38,7 +38,7 @@ namespace hp_bar
                 string innerXmlInnfo = rootnode.InnerXml.ToString();
                 string outerxmlinfo = rootnode.OuterXml.ToString();
                 XmlNodeList firstlevelnodelist = rootnode.ChildNodes;
-                foreach (XmlNode  node in firstlevelnodelist)
+                foreach (XmlNode node in firstlevelnodelist)
                 {
                     XmlAttributeCollection attributecol = node.Attributes;
                     foreach (XmlAttribute attri in attributecol)
@@ -46,23 +46,23 @@ namespace hp_bar
                         string name = attri.Name;
                         string value = attri.Value;
                         Console.WriteLine("{0}={1}" , name , value);
-                        if (name=="name")
+                        if (name == "name")
                         {
                             hp_name.Content = value;
                         }
-                        else if (name=="lv")
+                        else if (name == "lv")
                         {
                             hp_level.Content = value;
                         }
-                        else if (name=="x")
+                        else if (name == "x")
                         {
-                            this.Top =double.Parse( value);
+                            this.Top = double.Parse(value);
                         }
-                        else if (name=="y")
+                        else if (name == "y")
                         {
                             this.Left = double.Parse(value);
                         }
-                        
+
                     }
                 }
             }
@@ -74,15 +74,15 @@ namespace hp_bar
         public void create_config (double x , double y)
         {
             XmlDocument doc = new XmlDocument();
-            XmlDeclaration dec = doc.CreateXmlDeclaration("1.0","UTF-8",null);
+            XmlDeclaration dec = doc.CreateXmlDeclaration("1.0" , "UTF-8" , null);
             doc.AppendChild(dec);
             XmlElement root = doc.CreateElement("result");  //一级
             doc.AppendChild(root);
-            XmlElement element1 = doc.CreateElement("hp_bar"); 
-            element1.SetAttribute("name","kirito");
-            element1.SetAttribute("lv","Lv.1");
-            element1.SetAttribute("x",x.ToString());
-            element1.SetAttribute("y",y.ToString());
+            XmlElement element1 = doc.CreateElement("hp_bar");
+            element1.SetAttribute("name" , "kirito");
+            element1.SetAttribute("lv" , "Lv.1");
+            element1.SetAttribute("x" , x.ToString());
+            element1.SetAttribute("y" , y.ToString());
 
             root.AppendChild(element1);
             doc.AppendChild(root);
@@ -101,9 +101,10 @@ namespace hp_bar
                 double workWidth = SystemParameters.WorkArea.Width;
                 double top = (workHeight - this.Height) / 15;
                 double left = (workWidth - this.Width) / 13;
-                create_config(Top,Left);
+                create_config(Top , Left);
             }
 
         }
+
     }
 }

@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mailbox", "mailbox\mailbox.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hp_bar", "hp_bar\hp_bar.csproj", "{E570E2E7-52D0-4AD5-8184-5F547FF068A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "baidutalk", "baidutalk\baidutalk.csproj", "{EB59479E-D8F4-497C-916E-AA8D9658E157}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,14 @@ Global
 		{E570E2E7-52D0-4AD5-8184-5F547FF068A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E570E2E7-52D0-4AD5-8184-5F547FF068A2}.Release|x86.ActiveCfg = Release|Any CPU
 		{E570E2E7-52D0-4AD5-8184-5F547FF068A2}.Release|x86.Build.0 = Release|Any CPU
+		{EB59479E-D8F4-497C-916E-AA8D9658E157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB59479E-D8F4-497C-916E-AA8D9658E157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB59479E-D8F4-497C-916E-AA8D9658E157}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EB59479E-D8F4-497C-916E-AA8D9658E157}.Debug|x86.Build.0 = Debug|Any CPU
+		{EB59479E-D8F4-497C-916E-AA8D9658E157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB59479E-D8F4-497C-916E-AA8D9658E157}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB59479E-D8F4-497C-916E-AA8D9658E157}.Release|x86.ActiveCfg = Release|Any CPU
+		{EB59479E-D8F4-497C-916E-AA8D9658E157}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,23 +7,29 @@ using System.Windows.Threading;
 using Microsoft.Win32;
 using System.IO;
 using System.Xml;
+using System.Runtime.InteropServices;
+using System.Reflection;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace 萌控二次元
 {
+
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        
         public MainWindow ()
         {
-
-            InitializeComponent();
-            bgmusicplayer.Play();
-            
-
+         InitializeComponent();
+         
         }
+
+        /// <summary>
+        /// ////////////////////////
+        /// </summary>
         static int themes = 0;
         DispatcherTimer timer = new DispatcherTimer();
         DispatcherTimer timerToSendMessages = new DispatcherTimer();
@@ -59,11 +65,14 @@ namespace 萌控二次元
         {
             Environment.Exit(0);
         }
+        private System.Threading.Mutex myMutex = null;
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
-            //开机启动
-            //配置文件
-            if (File.Exists(@"config.xml"))
+
+        
+                //开机启动
+                //配置文件
+                if (File.Exists(@"config.xml"))
             {
                 //read
             }
