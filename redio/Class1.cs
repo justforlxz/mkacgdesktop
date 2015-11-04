@@ -1,52 +1,64 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Xml;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 namespace redio
 {
     public class redio
     {
-        [DllImport("wininet")]
-        private extern static bool InternetGetConnectedState (out int connectionDescription , int reservedValue);
-        public String[] redio_ (int list)
+        HttpWebResponse Response = null;
+        public string ConnectTuLing ()
         {
-            int i = 0;
-            String[] source = new String[2];
-            if (InternetGetConnectedState(out i , 0))
+            string result = null;
+            try
             {
-                try
+                string getURL = "D:\\Documents\\Untitled-1.json";
+                HttpWebRequest MyRequest = (HttpWebRequest)HttpWebRequest.Create(getURL);
+                HttpWebResponse MyResponse = (HttpWebResponse)MyRequest.GetResponse();
+                Response = MyResponse;
+                using (Stream MyStream = MyResponse.GetResponseStream())
                 {
-                    String url = "http://www.m-acg.com/desktop/node.xml";
-                    XmlElement root = null;
-                    XmlDocument xmldoc = new XmlDocument();
-                    xmldoc.Load(url);
-                    root = xmldoc.DocumentElement;
-                    XmlNodeList listNodes = null, listsource = null;
-                    string listxml_url = "/result/music" + list + "/url";
-                    string listxml_name = "/result/music" + list + "/name";
-                    listNodes = root.SelectNodes(listxml_url);
-                    listsource = root.SelectNodes(listxml_name);
-                    foreach (XmlNode node in listNodes)
+                    long ProgMaximum = MyResponse.ContentLength;
+                    long totalDownloadedByte = 0;
+                    byte[] by = new byte[1024];
+                    int osize = MyStream.Read(by , 0 , by.Length);
+                    Encoding encoding = Encoding.UTF8;
+                    while (osize > 0)
                     {
-                        source[0] = node.InnerText.ToString();
-                    }
-                    foreach (XmlNode node in listsource)
-                    {
-                        source[1] = "来自：" + node.InnerText;
+                        totalDownloadedByte = osize + totalDownloadedByte;
+                        result += encoding.GetString(by , 0 , osize);
+                        long ProgValue = totalDownloadedByte;
+                        osize = MyStream.Read(by , 0 , by.Length);
                     }
                 }
-                catch
+                //解析json
+                JsonReader reader = new JsonTextReader(new StringReader(result));
+                while (reader.Read())
                 {
-                    source[0] = "网络失败";
-                    source[1] = "";
+                    //text中的内容才是你需要的
+                    if (reader.Path == "mp3Url")
+                    {
+                        //结果赋值
+                        result = reader.Value.ToString();
+                        Console.WriteLine(result);
+                    }
+                    Console.WriteLine(reader.TokenType + "\t\t" + reader.ValueType + "\t\t" + reader.Value);
                 }
-                return source;
             }
-            else
+            catch (Exception ex)
             {
-                source[0] = "网络失败";
-                source[1] = "";
-                return source;
+                result=ex.ToString();
             }
+            return result;
         }
+
+
+
     }
 }
