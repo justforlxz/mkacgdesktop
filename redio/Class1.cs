@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -15,8 +16,11 @@ namespace redio
     public class redio
     {
         HttpWebResponse Response = null;
-        public string ConnectTuLing ()
+
+        public List<string>  ConnectTuLing ()
         {
+
+            List<string> list = new List<string>();
             string result = null;
             try
             {
@@ -40,24 +44,38 @@ namespace redio
                     }
                 }
                 JObject json = (JObject)JsonConvert.DeserializeObject(result);
-               
-                JArray tracks = (JArray)json["tracks"];
-                JArray mp3Url = (JArray)tracks["mp3Url"];
-                foreach (var jObject in mp3Url)
-                {
-                    Console.WriteLine(jObject);
-                }
+                var urlMp3 =
+             from p in json["result"]["tracks"]
+             select (string)p["mp3Url"];
 
+                foreach (var item in urlMp3)
+                {
+                  
+                    list.Add(item);
+               
+                }
+             
             }
             catch (Exception ex)
             {
-                result=ex.ToString();
+                List<string> error = new List<string>();
+                error.Add("网络失败");
+                return error;
             }
-           
-            return result;
+
+            return RandomSortList(list);
 
         }
-
+        public List<T> RandomSortList<T>(List<T> ListT)
+        {
+            Random random = new Random();
+            List<T> newList = new List<T>();
+            foreach (T item in ListT)
+            {
+                newList.Insert(random.Next(newList.Count + 1) , item);
+            }
+            return newList;
+        }
         private string ConvertJsonString (string str)
         {
             //格式化json字符串

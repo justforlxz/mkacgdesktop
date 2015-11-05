@@ -245,7 +245,7 @@ namespace 萌控二次元
             {
                 try
                 {
-                    String[] list = redio_r.redio_(a);
+                    List<string> list = redio_r.ConnectTuLing();
                     list[0]= System.Web.HttpUtility.UrlDecode(list[0], System.Text.Encoding.UTF8);
                     Console.WriteLine(list[0]);
                     bgmusicplayer.Source =new Uri(list[0]);  //服务器方面文件404，转码问题导致未找到，正在准备改成使用其他电台的数据。
@@ -498,7 +498,7 @@ namespace 萌控二次元
             Random num = new Random(); int a = num.Next(1 , 10);
             try
             {
-                list = redio_r.redio_(a);
+                List<string> list = redio_r.ConnectTuLing();
                 bgmusicplayer.Source = (new Uri(list[0]));
                 bg_text.Text = "";
                 bg_source.Content = "";
