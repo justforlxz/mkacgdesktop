@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -18,7 +20,7 @@ namespace redio
             string result = null;
             try
             {
-                string getURL = "D:\\Documents\\Untitled-1.json";
+                string getURL = "http://music.163.com/api/playlist/detail?id=23075108";
                 HttpWebRequest MyRequest = (HttpWebRequest)HttpWebRequest.Create(getURL);
                 HttpWebResponse MyResponse = (HttpWebResponse)MyRequest.GetResponse();
                 Response = MyResponse;
@@ -37,28 +39,49 @@ namespace redio
                         osize = MyStream.Read(by , 0 , by.Length);
                     }
                 }
-                //解析json
-                JsonReader reader = new JsonTextReader(new StringReader(result));
-                while (reader.Read())
+                JObject json = (JObject)JsonConvert.DeserializeObject(result);
+               
+                JArray tracks = (JArray)json["tracks"];
+                JArray mp3Url = (JArray)tracks["mp3Url"];
+                foreach (var jObject in mp3Url)
                 {
-                    //text中的内容才是你需要的
-                    if (reader.Path == "mp3Url")
-                    {
-                        //结果赋值
-                        result = reader.Value.ToString();
-                        Console.WriteLine(result);
-                    }
-                    Console.WriteLine(reader.TokenType + "\t\t" + reader.ValueType + "\t\t" + reader.Value);
+                    Console.WriteLine(jObject);
                 }
+
             }
             catch (Exception ex)
             {
                 result=ex.ToString();
             }
+           
             return result;
+
         }
 
-
+        private string ConvertJsonString (string str)
+        {
+            //格式化json字符串
+            JsonSerializer serializer = new JsonSerializer();
+            TextReader tr = new StringReader(str);
+            JsonTextReader jtr = new JsonTextReader(tr);
+            object obj = serializer.Deserialize(jtr);
+            if (obj != null)
+            {
+                StringWriter textWriter = new StringWriter();
+                JsonTextWriter jsonWriter = new JsonTextWriter(textWriter)
+                {
+                    Formatting = Newtonsoft.Json.Formatting.Indented ,
+                    Indentation = 4 ,
+                    IndentChar = ' '
+                };
+                serializer.Serialize(jsonWriter , obj);
+                return textWriter.ToString();
+            }
+            else
+            {
+                return str;
+            }
+        }
 
     }
 }

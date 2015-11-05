@@ -19,7 +19,8 @@ namespace WindowsFormsApplication1
         private void button1_Click (object sender , EventArgs e)
         {
             redio.redio r = new redio.redio();
-          label1.Text=  r.ConnectTuLing();
+            label1.Text = r.ConnectTuLing();
+            
         }
     }
 }
