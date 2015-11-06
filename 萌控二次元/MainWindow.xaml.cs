@@ -212,7 +212,7 @@ namespace 萌控二次元
         }
         private void bgmusicplayer_MediaEnded (object sender , RoutedEventArgs e)
         {
-            bgmusicplayer.Stop();
+            play();
         }
         private void delete_autorun ()
         {
@@ -236,29 +236,32 @@ namespace 萌控二次元
                 timer.Start();
             }
         }
+        public void play ()
+        {
+            List<string> list = redio_r.ConnectTuLing();
+            list[0] = System.Web.HttpUtility.UrlDecode(list[0] , System.Text.Encoding.UTF8);
+            Console.WriteLine(list[0]);
+            bgmusicplayer.Source = new Uri(list[0]); 
+            bg_text.Text = "";
+            bg_source.Content = "";
+            timer.Stop();
+            showorhidetrue();
+            sendbox.Visibility = Visibility.Hidden;
+            timer.Start();
+            bgmusicplayer.Play();
+            bg_text.Text = "正在播放:" + list[1];
+            play_next.Visibility = Visibility.Visible;
+            redioplayer.Header = "关闭电台模式";
+        }
         private void redioplayer_Click (object sender , RoutedEventArgs e)
         {
             bgmusicplayer.Stop();
-            Random num = new Random(); int a = num.Next(1 , 10);
 
             if (redioplayer.Header.ToString() == "电台模式")
             {
                 try
                 {
-                    List<string> list = redio_r.ConnectTuLing();
-                    list[0]= System.Web.HttpUtility.UrlDecode(list[0], System.Text.Encoding.UTF8);
-                    Console.WriteLine(list[0]);
-                    bgmusicplayer.Source =new Uri(list[0]);  //服务器方面文件404，转码问题导致未找到，正在准备改成使用其他电台的数据。
-                    bg_text.Text = "";
-                    bg_source.Content = "";
-                    timer.Stop();
-                    showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
-                    timer.Start();
-                    bgmusicplayer.Play();
-                    bg_text.Text = "正在播放:" + list[1];
-                    play_next.Visibility = Visibility.Visible;
-                    redioplayer.Header = "关闭电台模式";
+                    play();  
                 }
                 catch (Exception)
                 {

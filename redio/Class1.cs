@@ -16,12 +16,15 @@ namespace redio
     public class redio
     {
         HttpWebResponse Response = null;
-
-        public List<string>  ConnectTuLing ()
+        List<string> list = new List<string>();
+        List<string> name_msuic = new List<string>();
+        List<string> music = new List<string>();
+        public List<string> ConnectTuLing ()
         {
-
-            List<string> list = new List<string>();
+          
             string result = null;
+            int count = 0;
+            music.Clear();
             try
             {
                 string getURL = "http://music.163.com/api/playlist/detail?id=23075108";
@@ -45,26 +48,34 @@ namespace redio
                 }
                 JObject json = (JObject)JsonConvert.DeserializeObject(result);
                 var urlMp3 =
-             from p in json["result"]["tracks"]
-             select (string)p["mp3Url"];
-
+               from p in json["result"]["tracks"]
+               select (string)p["mp3Url"];
+                var name =
+              from p in json["result"]["tracks"]
+              select (string)p["name"];
                 foreach (var item in urlMp3)
                 {
-                  
                     list.Add(item);
-               
+                    count += 1;
                 }
-             
+                foreach (var item in name)
+                {
+                    name_msuic.Add(item);
+                }
+                Random random = new Random();
+                int n = random.Next(0 , count);
+                music.Add(list[n]);
+                music.Add(name_msuic[n]);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 List<string> error = new List<string>();
                 error.Add("网络失败");
                 return error;
             }
 
-            return RandomSortList(list);
-
+            //    return RandomSortList(list);
+            return music;
         }
         public List<T> RandomSortList<T>(List<T> ListT)
         {
