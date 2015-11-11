@@ -609,9 +609,8 @@ namespace 萌控二次元
         public void luyin_on ()
         {
             mciSendString("set wave bitpersample 8" , "" , 0 , 0);
-
-            mciSendString("set wave samplespersec 20000" , "" , 0 , 0);
-            mciSendString("set wave channels 2" , "" , 0 , 0);
+            mciSendString("set wave samplespersec 8000" , "" , 0 , 0);
+            mciSendString("set wave channels 1" , "" , 0 , 0);
             mciSendString("set wave format tag pcm" , "" , 0 , 0);
             mciSendString("open new type WAVEAudio alias movie" , "" , 0 , 0);
 
@@ -624,22 +623,25 @@ namespace 萌控二次元
             mciSendString("close movie" , "" , 0 , 0);
         }
 
-        private void sound_on_Click (object sender , RoutedEventArgs e)
-        {
-           luyin_on();
-        
-        }
+
 
         private void sound_save_Click (object sender , RoutedEventArgs e)
         {
-
-            // StreamReader sr = File.OpenText(openFile.FileName);
-            // luyin_save();
-
-            httpRequest hR = new httpRequest();
-            string token_Access = hR.getStrAccess(hR.API_key , hR.API_secret_key);
-            string token_Text = hR.getStrText(hR.API_id , token_Access , "zh" , "1.wav" , "pcm" , "8000");
-            MessageBox.Show(token_Text);
+            if (sound_save.Header.ToString()=="语音聊天")
+            {
+                luyin_on();
+                sound_save.Header = "语音识别";
+            }
+            else 
+            {
+                luyin_save();
+                httpRequest hR = new httpRequest();
+                string token_Access = hR.getStrAccess(hR.API_key , hR.API_secret_key);
+                string token_Text = hR.getStrText(hR.API_id , token_Access , "zh" , "1.wav" , "pcm" , "8000");
+                MessageBox.Show(token_Text);
+                sound_save.Header = "语音聊天";
+            }
+           
             
         }
 
