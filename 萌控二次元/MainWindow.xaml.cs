@@ -104,8 +104,8 @@ namespace 萌控二次元
             someTime_timer.Interval = new TimeSpan(0 , 0 , someTime_random.Next(1 , 1800));  //随机事件进行消息提醒
             someTime_timer.Tick += new EventHandler(someTime);
             someTime_timer.Start();
-            hp.Visibility = Visibility.Visible;
-            hp_bar_show = 1;
+          //  hp.Visibility = Visibility.Visible;
+           // hp_bar_show = 1;
         }
 
         public void create_config_file ()
@@ -608,40 +608,49 @@ namespace 萌控二次元
         );
         public void luyin_on ()
         {
+           
             mciSendString("set wave bitpersample 8" , "" , 0 , 0);
             mciSendString("set wave samplespersec 8000" , "" , 0 , 0);
-            mciSendString("set wave channels 1" , "" , 0 , 0);
+            mciSendString("set wave channels 2" , "" , 0 , 0);
             mciSendString("set wave format tag pcm" , "" , 0 , 0);
             mciSendString("open new type WAVEAudio alias movie" , "" , 0 , 0);
 
             mciSendString("record movie" , "" , 0 , 0);
         }
-        public void luyin_save ()
+        public bool luyin_save ()
         {
             mciSendString("stop movie" , "" , 0 , 0);
             mciSendString("save movie 1.wav" , "" , 0 , 0);
             mciSendString("close movie" , "" , 0 , 0);
+            return true;
         }
 
 
 
         private void sound_save_Click (object sender , RoutedEventArgs e)
         {
+            
             if (sound_save.Header.ToString()=="语音聊天")
             {
+               
                 luyin_on();
                 sound_save.Header = "语音识别";
             }
             else 
             {
-                luyin_save();
-                httpRequest hR = new httpRequest();
-                string token_Access = hR.getStrAccess(hR.API_key , hR.API_secret_key);
-                string token_Text = hR.getStrText(hR.API_id , token_Access , "zh" , "1.wav" , "pcm" , "8000");
-                MessageBox.Show(token_Text);
-                sound_save.Header = "语音聊天";
+                if (luyin_save())
+                {
+                    httpRequest hR = new httpRequest();
+                    string token_Access = hR.getStrAccess(hR.API_key , hR.API_secret_key);
+                    string token_Text = hR.getStrText(hR.API_id , token_Access , "zh" , "1.wav" , "pcm" , "8000");
+                    MessageBox.Show(token_Text);
+                    sound_save.Header = "语音聊天";
+                    File.Delete("1.wav");
+                } 
+               
+               
             }
-           
+      
             
         }
 
