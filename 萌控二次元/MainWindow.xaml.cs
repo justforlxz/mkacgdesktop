@@ -168,6 +168,16 @@ namespace 萌控二次元
             {
                 switch (sendbox.Text)
                 {
+                    case "你是谁的女朋友":
+                        timer.Stop();
+                        showorhidetrue();
+                        sendbox.Visibility = Visibility.Hidden;
+                        bg_text.Text = "我是小竹可爱的女朋友";
+                        sendbox.Text = "";
+                        bg_source.Content = "";
+                        timerToSendMessages.Start();
+                        timer.Start();
+                        break;
                     case "升级":
                         Process.Start("Update.exe");
                         break;
@@ -178,15 +188,17 @@ namespace 萌控二次元
                         open_autorun();
                         break;
                     default:
+                        timer.Stop();
+                        timerToSendMessages.Stop();
+                        showorhidetrue();
+                        bg_text.Text = "--->" + sendbox.Text + "\n" + _talk.main(sendbox.Text);
+                        sendbox.Text = "";
+                        bg_source.Content = "";
+                        timerToSendMessages.Start();
                         break;
                 }
-                timer.Stop();
-                timerToSendMessages.Stop();
-                showorhidetrue();
-                bg_text.Text = _talk.main(sendbox.Text);
-                sendbox.Text = "";
-                bg_source.Content = "";
-                timerToSendMessages.Start();
+                
+              
             }
         }
         private void open_autorun()
@@ -236,6 +248,7 @@ namespace 萌控二次元
                 timer.Start();
             }
         }
+        String play_name_get;
         public void play ()
         {
             List<string> list = redio_r.ConnectTuLing();
@@ -250,6 +263,7 @@ namespace 萌控二次元
             timer.Start();
             bgmusicplayer.Play();
             bg_text.Text = "正在播放:" + list[1];
+            play_name_get = list[1];
             play_next.Visibility = Visibility.Visible;
             play_name.Visibility = Visibility.Visible;
             redioplayer.Header = "关闭电台模式";
@@ -282,6 +296,7 @@ namespace 萌控二次元
                 bg_source.Content = "";
                 redioplayer.Header = "电台模式";
                 showorhidetrue();
+                play_name_get = null;
                 sendbox.Visibility = Visibility.Hidden;
                 play_next.Visibility = Visibility.Collapsed;
                 play_name.Visibility = Visibility.Collapsed;
@@ -306,6 +321,7 @@ namespace 萌控二次元
                 timer.Start();
                 bgmusicplayer.Play();
                 bg_text.Text = "正在播放:" + list[1];
+                play_name_get = list[1];
                 play_next.Visibility = Visibility.Visible;
                 play_name.Visibility = Visibility.Visible;
                 redioplayer.Header = "关闭电台模式";
@@ -323,10 +339,10 @@ namespace 萌控二次元
             }
 
         }
-
+        
         private void play_name_Click (object sender , RoutedEventArgs e)
         {
-            List<string> list = redio_r.ConnectTuLing();
+           
             bg_text.Text = "";
             bg_source.Content = "";
             timer.Stop();
@@ -334,7 +350,8 @@ namespace 萌控二次元
             sendbox.Visibility = Visibility.Hidden;
             timer.Start();
             bgmusicplayer.Play();
-            bg_text.Text = "正在播放:" + list[1];
+            bg_text.Text = "正在播放:" + play_name_get ;
+            Console.WriteLine(play_name_get);
             play_next.Visibility = Visibility.Visible;
             play_name.Visibility = Visibility.Visible;
         }
@@ -542,7 +559,7 @@ namespace 萌控二次元
                 timerToSendMessages.Start();
             }
         }
-        String[] list;
+
     
         private void someTime (object sender , EventArgs e)
         {
