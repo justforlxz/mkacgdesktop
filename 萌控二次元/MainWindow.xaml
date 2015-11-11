@@ -18,7 +18,9 @@
                     <MenuItem Header="每日一句" Click="MenuItem_Click" />
                     <MenuItem Header="换皮肤" Click="MenuItem_Click_3" />
                     <MenuItem Header="SAO 血量条" Click="MenuItem_Click_1" />
-                        <MenuItem x:Name="redioplayer" Header="电台模式"  Click="redioplayer_Click" />
+                    <MenuItem x:Name="sound_on" Header="开始录音" Click="sound_on_Click" />
+                    <MenuItem x:Name="sound_save" Header="保存录音" Click="sound_save_Click" />
+                    <MenuItem x:Name="redioplayer" Header="电台模式"  Click="redioplayer_Click" />
                     <MenuItem x:Name="play_name" Header="歌曲信息" Click="play_name_Click" Visibility="Collapsed" />
                     <MenuItem x:Name="play_next" Header="下一曲" Click="play_next_Click" Visibility="Collapsed" />
                     <MenuItem Header="报时" Click="MenuItem_Click_4"/>
