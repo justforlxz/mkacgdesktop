@@ -14,6 +14,7 @@
         <Grid x:Name="play_list" HorizontalAlignment="Left" Height="450" Margin="124,0,0,0" VerticalAlignment="Top" Width="626" Background="#FF59CBE4"/>
         <MediaElement x:Name="mediaElement" HorizontalAlignment="Left" Height="79" Margin="505,61,0,0" VerticalAlignment="Top" Width="169"/>
         <Button x:Name="button" Content="Button" Click="button_Click" HorizontalAlignment="Left" Height="34" Margin="0,61,0,0" VerticalAlignment="Top" Width="124"/>
+        <TreeView x:Name="treeView" HorizontalAlignment="Left" Height="407" Margin="124,43,0,0" VerticalAlignment="Top" Width="626"/>
 
     </Grid>
 </Window>

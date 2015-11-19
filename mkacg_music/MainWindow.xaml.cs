@@ -22,39 +22,6 @@ namespace mkacg_music
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    /// 
-    public class myListBox : System.Windows.Controls.ListBox
-    {
-        protected override DependencyObject GetContainerForItemOverride ()
-        {
-            return new myListBoxItem();
-        }
-
-    }
-    public class myListBoxItem : System.Windows.Controls.ListBoxItem
-    {
-        protected override void OnSelected (System.Windows.RoutedEventArgs e)
-        {
-            DependencyObject dep = (DependencyObject)e.OriginalSource;
-
-            while ((dep != null) && !(dep is ListBoxItem))
-            {
-                dep = VisualTreeHelper.GetParent(dep);
-            }
-
-            if (dep == null)
-                return;
-
-            ListBoxItem item = (ListBoxItem)dep;
-
-            if (item.IsSelected)
-            {
-                item.IsSelected = !item.IsSelected;
-                //e.Handled = true;
-            }
-            base.OnSelected(e);
-        }
-    }
     public partial class MainWindow : Window
     {
         public MainWindow ()
@@ -137,8 +104,12 @@ namespace mkacg_music
         private void button_Click (object sender , RoutedEventArgs e)
         {
             //ConnectTuLing ();
-
+            treeView.ItemsSource = ConnectTuLing();
         }
 
+        private void treeView_MouseDoubleClick (object sender , MouseButtonEventArgs e)
+        {
+            MessageBox.Show(sender.ToString());
+        }
     }
 }

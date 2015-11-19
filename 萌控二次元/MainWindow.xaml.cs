@@ -164,6 +164,7 @@ namespace 萌控二次元
             }
         }
         talk.Class1 _talk = new talk.Class1();
+        talk_control.MainWindow talk_cont = new talk_control.MainWindow();
         hp_bar.MainWindow hp = new hp_bar.MainWindow();
         private void sendbox_KeyDown (object sender , KeyEventArgs e)
         {
@@ -553,6 +554,7 @@ namespace 萌控二次元
             timer.IsEnabled = true;
             if (count % 2 == 0)
             {
+                /*
                 bg_text.Text = "你好啊";
                 bg_source.Content = "";
                 timer.IsEnabled = false;
@@ -560,6 +562,8 @@ namespace 萌控二次元
                 timerToSendMessages.Stop();
                 showorhidetrue();
                 timerToSendMessages.Start();
+                */
+                talk_cont.Show();
             }
         }
 
