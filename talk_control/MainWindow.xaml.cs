@@ -49,7 +49,8 @@ namespace talk_control
                         break;
                     case "关闭":
                         this.Hide();
-                        textBox.Text =source_text.Text= "";
+                        textBox.Text ="";
+                        source_text.Text = "";
                         break;
                     default:
                         source_text.Text = _talk.main(textBox.Text) + "\n\n我如此如此这般这般说道";
@@ -59,10 +60,11 @@ namespace talk_control
             }
         }
 
-        private void Window_LostFocus (object sender , RoutedEventArgs e)
-        {
-            MessageBox.Show(sender.ToString());
 
+
+        private void Window_Deactivated (object sender , EventArgs e)
+        {
+            this.Hide();
         }
     }
 }
