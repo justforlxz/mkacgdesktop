@@ -44,7 +44,6 @@ namespace 萌控二次元
             //显示一句话
             timer.Stop();
             showorhidetrue();
-            sendbox.Visibility = Visibility.Hidden;
             mkacg_showhitokoto.Class1 mkacgclass = new mkacg_showhitokoto.Class1();
             String[] list = mkacgclass.hitokoto();
             bg_text.Text = "";
@@ -55,12 +54,12 @@ namespace 萌控二次元
         public void showorhidetrue ()
         {
             bg_white.Visibility = bg_label.Visibility = bg_source.Visibility = bg_text.Visibility = Visibility.Visible;
-            sendbox.Visibility = Visibility.Visible;
+          
         }
         public void showorhide (object sender , EventArgs e)
         {
             bg_white.Visibility = bg_label.Visibility = bg_source.Visibility = bg_text.Visibility = Visibility.Hidden;
-            sendbox.Visibility = Visibility.Hidden;
+          
             timer.Stop();
             timerToSendMessages.Stop();
         }
@@ -87,14 +86,14 @@ namespace 萌控二次元
             this.Topmost = true;
             if (themes == 0)
             {
-                image.Source = new BitmapImage(new Uri("Images/3.png" , UriKind.Relative));
+                image.Source = new BitmapImage(new Uri("Images/1.png" , UriKind.Relative));
                 themes = 1;
             }
             double workHeight = SystemParameters.WorkArea.Height;
             double workWidth = SystemParameters.WorkArea.Width;
             this.Top = (workHeight - this.Height) / 1.1;
             this.Left = (workWidth - this.Width) / 1;
-            sendbox.Visibility = Visibility.Hidden;
+           
             timer.Interval = new TimeSpan(0 , 0 , 4);
             timer.Tick += new EventHandler(showorhide);
             timer.Start();
@@ -150,108 +149,44 @@ namespace 萌控二次元
         {
 
         }
+
         private void MenuItem_Click_3 (object sender , RoutedEventArgs e)
         {
-            if (themes == 1)
+            // image.Source = new BitmapImage(new Uri("Images/Main1.png" , UriKind.Relative));
+            Random random = new Random();
+            int i= random.Next(0,5);
+            Console.WriteLine(i);
+            switch (i)
             {
-                image.Source = new BitmapImage(new Uri("Images/Main1.png" , UriKind.Relative));
-                themes = 0;
-            }
-            else if (themes == 0)
-            {
-                image.Source = new BitmapImage(new Uri("Images/Main.png" , UriKind.Relative));
-                themes = 1;
+                case 1:
+                    image.Source = new BitmapImage(new Uri("Images/1.png" , UriKind.Relative));
+                    break;
+                case 2:
+                    image.Source = new BitmapImage(new Uri("Images/2.png" , UriKind.Relative));
+                    break;
+                case 3:
+                    image.Source = new BitmapImage(new Uri("Images/3.png" , UriKind.Relative));
+                    break;
+                case 4:
+                    image.Source = new BitmapImage(new Uri("Images/4.png" , UriKind.Relative));
+                    break;
+                default:
+                    image.Source = new BitmapImage(new Uri("Images/1.png" , UriKind.Relative));
+                    break;
             }
         }
         talk.Class1 _talk = new talk.Class1();
         talk_control.MainWindow talk_cont = new talk_control.MainWindow();
         hp_bar.MainWindow hp = new hp_bar.MainWindow();
-        private void sendbox_KeyDown (object sender , KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                switch (sendbox.Text)
-                {
-                    case "你是谁的女朋友":
-                        timer.Stop();
-                        showorhidetrue();
-                        sendbox.Visibility = Visibility.Hidden;
-                        bg_text.Text = "我是小竹可爱的女朋友";
-                        sendbox.Text = "";
-                        bg_source.Content = "";
-                        timerToSendMessages.Start();
-                        timer.Start();
-                        break;
-                    case "升级":
-                        Process.Start("Update.exe");
-                        break;
-                    case "关闭开机启动":
-                        delete_autorun();
-                        break;
-                    case "开启开机启动":
-                        open_autorun();
-                        break;
-                    default:
-                        timer.Stop();
-                        timerToSendMessages.Stop();
-                        showorhidetrue();
-                        bg_text.Text = "--->" + sendbox.Text + "\n" + _talk.main(sendbox.Text);
-                        sendbox.Text = "";
-                        bg_source.Content = "";
-                        timerToSendMessages.Start();
-                        break;
-                }
-
-
-            }
-        }
-        private void open_autorun ()
-        {
-            RegistryKey HKCU = Registry.CurrentUser;
-            RegistryKey Run = HKCU.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run" , true);
-            try
-            {
-                Run.SetValue("MKACG" , AppDomain.CurrentDomain.BaseDirectory + "萌控二次元.exe");
-
-            }
-            catch
-            {
-
-            }
-            HKCU.Close();
-        }
+       
+      
         int count = 0;
-        private void sendbox_TextChanged (object sender , System.Windows.Controls.TextChangedEventArgs e)
-        {
-            timer.Stop();
-            timerToSendMessages.Stop();
-        }
+
         private void bgmusicplayer_MediaEnded (object sender , RoutedEventArgs e)
         {
             play();
         }
-        private void delete_autorun ()
-        {
-            RegistryKey HKCU = Registry.CurrentUser;
-            RegistryKey Run = HKCU.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run" , true);
-            try
-            {
-                Run.DeleteValue("MKACG");
-                timer.Stop();
-                showorhidetrue();
-                sendbox.Visibility = Visibility.Hidden;
-                bg_text.Text = "已删除开机项";
-                timer.Start();
-            }
-            catch
-            {
-                timer.Stop();
-                showorhidetrue();
-                sendbox.Visibility = Visibility.Hidden;
-                bg_text.Text = "已删除开机项";
-                timer.Start();
-            }
-        }
+      
         String play_name_get;
         public void play ()
         {
@@ -263,7 +198,7 @@ namespace 萌控二次元
             bg_source.Content = "";
             timer.Stop();
             showorhidetrue();
-            sendbox.Visibility = Visibility.Hidden;
+         
             timer.Start();
             bgmusicplayer.Play();
             bg_text.Text = "正在播放:" + list[1];
@@ -287,7 +222,7 @@ namespace 萌控二次元
                     timer.Stop();
                     bg_text.Text = "对不起，播放失败";
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                
                     timer.Start();
                     bgmusicplayer.Stop();
                 }
@@ -301,7 +236,7 @@ namespace 萌控二次元
                 redioplayer.Header = "电台模式";
                 showorhidetrue();
                 play_name_get = null;
-                sendbox.Visibility = Visibility.Hidden;
+               
                 play_next.Visibility = Visibility.Collapsed;
                 play_name.Visibility = Visibility.Collapsed;
                 timer.Start();
@@ -321,7 +256,7 @@ namespace 萌控二次元
                 bg_source.Content = "";
                 timer.Stop();
                 showorhidetrue();
-                sendbox.Visibility = Visibility.Hidden;
+             
                 timer.Start();
                 bgmusicplayer.Play();
                 bg_text.Text = "正在播放:" + list[1];
@@ -337,7 +272,7 @@ namespace 萌控二次元
                 bg_source.Content = "";
                 bg_text.Text = "对不起，播放失败";
                 showorhidetrue();
-                sendbox.Visibility = Visibility.Hidden;
+              
                 timer.Start();
                 bgmusicplayer.Stop();
             }
@@ -351,7 +286,7 @@ namespace 萌控二次元
             bg_source.Content = "";
             timer.Stop();
             showorhidetrue();
-            sendbox.Visibility = Visibility.Hidden;
+          
             timer.Start();
             bgmusicplayer.Play();
             bg_text.Text = "正在播放:" + play_name_get;
@@ -369,7 +304,7 @@ namespace 萌控二次元
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                   
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start();
                     break;
@@ -377,161 +312,161 @@ namespace 萌控二次元
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                   
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "3":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                  
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "4":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                   
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "5":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                  
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "6":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                    
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "7":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                   
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "8":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                   
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "9":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                   
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "10":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                 
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "11":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                  
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "12":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                   
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "13":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                  
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "14":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                    
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "15":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                  
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "16":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                   
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "17":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                 
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "18":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                  
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "19":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                  
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "20":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                 
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "21":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                 
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "22":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                 
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "23":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                  
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
                 case "24":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    sendbox.Visibility = Visibility.Hidden;
+                   
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start(); break;
 
@@ -575,7 +510,7 @@ namespace 萌控二次元
             //显示一句话
             timer.Stop();
             showorhidetrue();
-            sendbox.Visibility = Visibility.Hidden;
+        
             mkacg_showhitokoto.Class1 mkacgclass = new mkacg_showhitokoto.Class1();
             String[] list = mkacgclass.hitokoto();
             bg_text.Text = "";
