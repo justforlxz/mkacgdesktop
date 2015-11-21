@@ -67,7 +67,8 @@ namespace 萌控二次元
         {
             Environment.Exit(0);
         }
-        private System.Threading.Mutex myMutex = null;
+        settings setting = new settings();
+        public String music_id;
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
 
@@ -76,11 +77,12 @@ namespace 萌控二次元
             //配置文件
             if (File.Exists(@"config.xml"))
             {
-                //read
+                open_config();
             }
             else
             {
-                create_config_file();
+               
+                setting.create_config("主人", "38688170");
             }
             /*************************************/
             this.Topmost = true;
@@ -106,37 +108,40 @@ namespace 萌控二次元
           //  hp.Visibility = Visibility.Visible;
            // hp_bar_show = 1;
         }
-
-        public void create_config_file ()
+        public void open_config ()
         {
-            XmlDocument doc = new XmlDocument();
-            XmlDeclaration dec = doc.CreateXmlDeclaration("1.0" , "UTF-8" , null);
-            doc.AppendChild(dec);
-            XmlElement root = doc.CreateElement("result");  //一级
-            doc.AppendChild(root);
+            try
+            {
+                music_id = null;
+                XmlDocument xmldoc = new XmlDocument();
+                xmldoc.Load("config.xml");
+                XmlNode rootnode = xmldoc.SelectSingleNode("result");
+                string innerXmlInnfo = rootnode.InnerXml.ToString();
+                string outerxmlinfo = rootnode.OuterXml.ToString();
+                XmlNodeList firstlevelnodelist = rootnode.ChildNodes;
+                foreach (XmlNode node in firstlevelnodelist)
+                {
+                    XmlAttributeCollection attributecol = node.Attributes;
+                    foreach (XmlAttribute attri in attributecol)
+                    {
+                        string name = attri.Name;
+                        string value = attri.Value;
+                        Console.WriteLine("{0}={1}" , name , value);
+                        if (name == "musicid")
+                        {
+                            music_id = value;
+                            Console.WriteLine(music_id);
+                        }
 
-            XmlElement element1 = doc.CreateElement("config");
-            /* element1.SetAttribute("name" , "kirito");
-             root.AppendChild(element1);
-             doc.AppendChild(root);
-               */
-            /*  
-           double workHeight = SystemParameters.WorkArea.Height;
-         double workWidth = SystemParameters.WorkArea.Width;
-         this.Top = (workHeight - this.Height) / 1.1;
-         this.Left = (workWidth - this.Width) / 1;   
-
-         */
-            double workHeight = SystemParameters.WorkArea.Height;
-            double workWidth = SystemParameters.WorkArea.Width;
-            double top = (workHeight - this.Height);
-            double left = (workWidth - this.Width);
-            element1.SetAttribute("top" , top.ToString());
-            element1.SetAttribute("left" , left.ToString());
-            root.AppendChild(element1);
-            doc.AppendChild(root);
-            doc.Save("config.xml");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
+
 
         private void image_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
         {
@@ -144,10 +149,6 @@ namespace 萌控二次元
             {
                 this.DragMove();
             }
-        }
-        public void playplay (object obj)
-        {
-
         }
 
         private void MenuItem_Click_3 (object sender , RoutedEventArgs e)
@@ -190,7 +191,9 @@ namespace 萌控二次元
         String play_name_get;
         public void play ()
         {
-            List<string> list = redio_r.ConnectTuLing();
+            open_config();
+            List<string> list = redio_r.ConnectTuLing(music_id);
+            Console.WriteLine(music_id);
             list[0] = System.Web.HttpUtility.UrlDecode(list[0] , System.Text.Encoding.UTF8);
             Console.WriteLine(list[0]);
             bgmusicplayer.Source = new Uri(list[0]);
@@ -250,7 +253,9 @@ namespace 萌控二次元
             bgmusicplayer.Stop();
             try
             {
-                List<string> list = redio_r.ConnectTuLing();
+                open_config();
+                List<string> list = redio_r.ConnectTuLing(music_id);
+                Console.WriteLine("下首播放操作->"+music_id+list);
                 bgmusicplayer.Source = (new Uri(list[0]));
                 bg_text.Text = "";
                 bg_source.Content = "";
@@ -590,10 +595,12 @@ namespace 萌控二次元
                
             }
       
-            
         }
-
-     
+        private void MenuItem_Click_5 (object sender , RoutedEventArgs e)
+        {
+            settings setting = new settings();
+            setting.Show();
+        }
     }
     class httpRequest
     {

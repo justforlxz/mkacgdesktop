@@ -17,17 +17,21 @@ namespace redio
     {
         HttpWebResponse Response = null;
         List<string> list = new List<string>();
-        List<string> name_msuic = new List<string>();
+        List<string> name_music = new List<string>();
         List<string> music = new List<string>();
-        public List<string> ConnectTuLing ()
+        public List<string> ConnectTuLing (String music_id)
         {
           
             string result = null;
             int count = 0;
+            list.Clear();
+            name_music.Clear();
+            music.Clear();
             music.Clear();
             try
             {
-                string getURL = "http://music.163.com/api/playlist/detail?id=23075108";
+                string getURL = "http://music.163.com/api/playlist/detail?id="+music_id;
+                Console.WriteLine("来自redio-->"+getURL);
                 HttpWebRequest MyRequest = (HttpWebRequest)HttpWebRequest.Create(getURL);
                 HttpWebResponse MyResponse = (HttpWebResponse)MyRequest.GetResponse();
                 Response = MyResponse;
@@ -60,12 +64,12 @@ namespace redio
                 }
                 foreach (var item in name)
                 {
-                    name_msuic.Add(item);
+                    name_music.Add(item);
                 }
                 Random random = new Random();
                 int n = random.Next(0 , count);
                 music.Add(list[n]);
-                music.Add(name_msuic[n]);
+                music.Add(name_music[n]);
             }
             catch (Exception)
             {
