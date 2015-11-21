@@ -132,6 +132,7 @@ namespace 萌控二次元
                             music_id = value;
                             Console.WriteLine(music_id);
                         }
+                      
 
                     }
                 }
@@ -600,6 +601,7 @@ namespace 萌控二次元
         {
             settings setting = new settings();
             setting.Show();
+            
         }
     }
     class httpRequest

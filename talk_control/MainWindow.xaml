@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:talk_control"
         mc:Ignorable="d"
-        Title="talk_control" Height="550" Width="400" Loaded="Window_Loaded" Background="#FFECECEC" AllowsTransparency="True" WindowStyle="None"  ShowInTaskbar="False" ResizeMode="NoResize" Topmost="True" Deactivated="Window_Deactivated">
+        Title="talk_control" Height="550" Width="400"  Loaded="Window_Loaded" Background="#FFECECEC" AllowsTransparency="True" WindowStyle="None"  ShowInTaskbar="False" ResizeMode="NoResize" Topmost="True" Activated="Window_Activated" Deactivated="Window_Deactivated">
     <Grid>
         <Border BorderBrush="#FF322CB4" BorderThickness="1" HorizontalAlignment="Left" Height="550" VerticalAlignment="Top" Width="400">
             <Grid HorizontalAlignment="Left" Height="550" Margin="-1,-1,0,-1" VerticalAlignment="Top" Width="48" Background="#FF191919">

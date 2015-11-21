@@ -25,9 +25,11 @@ namespace talk_control
         public MainWindow ()
         {
             InitializeComponent();
-            open_config();
-            source_text.Text = Name_+"  欢迎回来";
+           
+
         }
+
+        int i = 1;
         string Name_;
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
@@ -35,12 +37,17 @@ namespace talk_control
             double workWidth = SystemParameters.WorkArea.Width;
             this.Top = (workHeight - this.Height) / 1;
             this.Left = 1/(workWidth - this.Width);
+            open_config();
+           
         }
+      
+
         talk.Class1 _talk = new talk.Class1();
         private void textBox_KeyDown (object sender , KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
+                open_config();
                 switch (textBox.Text)
                 {
                     case "你是谁的女朋友":
@@ -135,6 +142,23 @@ namespace talk_control
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+            }
+        }
+
+        private void Window_Activated (object sender , EventArgs e)
+        {
+            if (i == 1)
+            {
+                //第一次启动
+                this.Show();
+                i += 1;
+            }
+            else
+            {
+                this.Show();
+                open_config();
+                source_text.Text = Name_ + "  欢迎回来";
+
             }
         }
     }
