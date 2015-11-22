@@ -543,60 +543,9 @@ namespace 萌控二次元
             }
         }
 
-        //语音处理
-        [DllImport("winmm.dll" , EntryPoint = "mciSendString" , CharSet = CharSet.Auto)]
-        public static extern int mciSendString (
-         string lpstrCommand ,
-         string lpstrReturnString ,
-         int uReturnLength ,
-         int hwndCallback
-        );
-        public void luyin_on ()
-        {
-           
-            mciSendString("set wave bitpersample 8" , "" , 0 , 0);
-            mciSendString("set wave samplespersec 8000" , "" , 0 , 0);
-            mciSendString("set wave channels 2" , "" , 0 , 0);
-            mciSendString("set wave format tag pcm" , "" , 0 , 0);
-            mciSendString("open new type WAVEAudio alias movie" , "" , 0 , 0);
+  
 
-            mciSendString("record movie" , "" , 0 , 0);
-        }
-        public bool luyin_save ()
-        {
-            mciSendString("stop movie" , "" , 0 , 0);
-            mciSendString("save movie 1.wav" , "" , 0 , 0);
-            mciSendString("close movie" , "" , 0 , 0);
-            return true;
-        }
-
-
-
-        private void sound_save_Click (object sender , RoutedEventArgs e)
-        {
-            
-            if (sound_save.Header.ToString()=="语音聊天")
-            {
-               
-                luyin_on();
-                sound_save.Header = "语音识别";
-            }
-            else 
-            {
-                if (luyin_save())
-                {
-                    httpRequest hR = new httpRequest();
-                    string token_Access = hR.getStrAccess(hR.API_key , hR.API_secret_key);
-                    string token_Text = hR.getStrText(hR.API_id , token_Access , "zh" , "1.wav" , "pcm" , "8000");
-                    MessageBox.Show(token_Text);
-                    sound_save.Header = "语音聊天";
-                    File.Delete("1.wav");
-                } 
-               
-               
-            }
       
-        }
         private void MenuItem_Click_5 (object sender , RoutedEventArgs e)
         {
             settings setting = new settings();

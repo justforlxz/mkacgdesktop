@@ -80,23 +80,31 @@ namespace talk_control
                     source_text.Text = "我是" + Name_ + "可爱的女朋友";
                     textBox.Text = "";
                 }
-                else if (textBox.Text == "设置开机启动") {
+                else if (textBox.Text == "设置开机启动")
+                {
                     textBox.Text = "";
                     open_autorun();
                 }
-                else if (textBox.Text == "设置关闭开机启动") {
+                else if (textBox.Text == "设置关闭开机启动")
+                {
                     textBox.Text = "";
                     delete_autorun();
                 }
-                else if (textBox.Text.IndexOf("称呼我为") > -1) {
+                else if (textBox.Text.IndexOf("称呼我为") > -1)
+                {
                     Name_ = "";
-                    Console.WriteLine(textBox.Text.Remove(0,4));
+                    Console.WriteLine(textBox.Text.Remove(0 , 4));
                     Name_ = textBox.Text.Remove(0 , 4);
-                    create_config(Name_,musicid_);
+                    create_config(Name_ , musicid_);
                     textBox.Text = "";
-                    source_text.Text = "对您的称呼已更改，"+Name_;
+                    source_text.Text = "对您的称呼已更改，" + Name_;
                 }
-
+                else if (textBox.Text == "录音测试")
+                {
+                    baidutalk.Talk_baidu baidu = new baidutalk.Talk_baidu();
+                    baidu.sound();
+                    textBox.Text = "";
+                }
                 else
                 {
                     source_text.Text = _talk.main(textBox.Text) + "\n\n我如此如此这般这般说道";

@@ -92,9 +92,37 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\baidutalk\baidutalk.csproj">
+      <Project>{eb59479e-d8f4-497c-916e-aa8d9658e157}</Project>
+      <Name>baidutalk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\hp_bar\hp_bar.csproj">
+      <Project>{e570e2e7-52d0-4ad5-8184-5f547ff068a2}</Project>
+      <Name>hp_bar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mailbox\mailbox.csproj">
+      <Project>{5e8647aa-fe19-4dd9-930b-df3bc86ffb14}</Project>
+      <Name>mailbox</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mkacg_music\mkacg_music.csproj">
+      <Project>{d5bdc274-250b-4379-8692-2d480cc8ca24}</Project>
+      <Name>mkacg_music</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mkacg_showhitokoto\mkacg_showhitokoto.csproj">
+      <Project>{9a176432-66e3-4e76-9f56-bec08a6944e3}</Project>
+      <Name>mkacg_showhitokoto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\redio\redio.csproj">
+      <Project>{b2949b35-4cac-47ea-86db-dbe310245c34}</Project>
+      <Name>redio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\talk\talk.csproj">
       <Project>{5a231d02-7064-4b65-b20d-5aa3dbfb1df6}</Project>
       <Name>talk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Update\Update.csproj">
+      <Project>{3cc2d696-2243-4214-93cd-5dba4f2c4bcd}</Project>
+      <Name>Update</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
