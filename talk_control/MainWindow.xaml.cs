@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
+using baidutalk;
 using Microsoft.Win32;
 
 namespace talk_control
@@ -102,7 +104,27 @@ namespace talk_control
                 else if (textBox.Text == "录音测试")
                 {
                     baidutalk.Talk_baidu baidu = new baidutalk.Talk_baidu();
-                    baidu.sound();
+                   // baidu.sound();
+                    textBox.Text = "";
+                }
+                else if (textBox.Text == "录音开始")
+                {
+                    baidutalk.Talk_baidu baidu = new baidutalk.Talk_baidu();
+                    baidu.luyin_on();
+                    textBox.Text = "";
+                }
+                else if (textBox.Text == "录音停止")
+                {
+                    baidutalk.Talk_baidu baidu = new baidutalk.Talk_baidu();
+                  //  baidu.luyin_save();
+                    if (baidu.luyin_save())
+                    {
+                        httpRequest hR = new httpRequest();
+                        string token_Access = hR.getStrAccess(hR.API_key , hR.API_secret_key);
+                        string token_Text = hR.getStrText(hR.API_id , token_Access , "zh" , "1.wav" , "pcm" , "8000");
+                        source_text.Text = token_Text;
+                       // File.Delete("1.wav");
+                    }
                     textBox.Text = "";
                 }
                 else
