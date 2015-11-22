@@ -25,7 +25,6 @@ namespace hp_bar
                 this.DragMove();
 
                 create_config(this.Top , this.Left);
-                Console.WriteLine(this.Top + "            " + this.Left);
             }
         }
         public void open_config ()

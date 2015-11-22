@@ -31,6 +31,7 @@ namespace talk_control
 
         int i = 1;
         string Name_;
+        string musicid_;
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
             double workHeight = SystemParameters.WorkArea.Height;
@@ -48,28 +49,58 @@ namespace talk_control
             if (e.Key == Key.Enter)
             {
                 open_config();
-                switch (textBox.Text)
+                //以后改成循环，对哈希表的字段进行匹配，然后回答值。
+                /*  switch (textBox.Text)
+                  {
+                      case "你是谁的女朋友":
+                          source_text.Text = "我是"+Name_+"可爱的女朋友";
+                          textBox.Text = "";
+                          break;
+                      case "设置开机启动":
+                          textBox.Text = "";
+                          open_autorun();
+                          break;
+                      case "设置关闭开机启动":
+                          textBox.Text = "";
+                          delete_autorun();
+                          break;
+                      case "打开设置":
+                          source_text.Text = "请在主窗体右键";
+                          textBox.Text = "";
+                          break;
+
+                      default:
+                          source_text.Text = _talk.main(textBox.Text) + "\n\n我如此如此这般这般说道";
+                          textBox.Text = "";
+                          break;
+                  }
+                  */
+                if (textBox.Text == "你是谁的女朋友")
                 {
-                    case "你是谁的女朋友":
-                        source_text.Text = "我是"+Name_+"可爱的女朋友";
-                        textBox.Text = "";
-                        break;
-                    case "设置开机启动":
-                        textBox.Text = "";
-                        open_autorun();
-                        break;
-                    case "设置关闭开机启动":
-                        textBox.Text = "";
-                        delete_autorun();
-                        break;
-                    case "打开设置":
-                        source_text.Text = "请在主窗体右键";
-                        textBox.Text = "";
-                        break;
-                    default:
-                        source_text.Text = _talk.main(textBox.Text) + "\n\n我如此如此这般这般说道";
-                        textBox.Text = "";
-                        break;
+                    source_text.Text = "我是" + Name_ + "可爱的女朋友";
+                    textBox.Text = "";
+                }
+                else if (textBox.Text == "设置开机启动") {
+                    textBox.Text = "";
+                    open_autorun();
+                }
+                else if (textBox.Text == "设置关闭开机启动") {
+                    textBox.Text = "";
+                    delete_autorun();
+                }
+                else if (textBox.Text.IndexOf("称呼我为") > -1) {
+                    Name_ = "";
+                    Console.WriteLine(textBox.Text.Remove(0,4));
+                    Name_ = textBox.Text.Remove(0 , 4);
+                    create_config(Name_,musicid_);
+                    textBox.Text = "";
+                    source_text.Text = "对您的称呼已更改，"+Name_;
+                }
+
+                else
+                {
+                    source_text.Text = _talk.main(textBox.Text) + "\n\n我如此如此这般这般说道";
+                    textBox.Text = "";
                 }
             }
         }
@@ -135,6 +166,10 @@ namespace talk_control
                         {
                             Name_ = value;
                         }
+                        else if (name =="musicid")
+                        {
+                            musicid_ = value;
+                        }
                       
                     }
                 }
@@ -143,6 +178,20 @@ namespace talk_control
             {
                 Console.WriteLine(ex.ToString());
             }
+        }
+        public void create_config (string name, string musicid)
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlDeclaration dec = doc.CreateXmlDeclaration("1.0" , "UTF-8" , null);
+            doc.AppendChild(dec);
+            XmlElement root = doc.CreateElement("result");  //一级
+            doc.AppendChild(root);
+            XmlElement element1 = doc.CreateElement("system");
+            element1.SetAttribute("name" , name);
+            element1.SetAttribute("musicid" ,musicid );
+            root.AppendChild(element1);
+            doc.AppendChild(root);
+            doc.Save("config.xml");
         }
 
         private void Window_Activated (object sender , EventArgs e)
