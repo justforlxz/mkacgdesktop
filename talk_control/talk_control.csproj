@@ -100,14 +100,6 @@
       <Project>{e570e2e7-52d0-4ad5-8184-5f547ff068a2}</Project>
       <Name>hp_bar</Name>
     </ProjectReference>
-    <ProjectReference Include="..\mailbox\mailbox.csproj">
-      <Project>{5e8647aa-fe19-4dd9-930b-df3bc86ffb14}</Project>
-      <Name>mailbox</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\mkacg_music\mkacg_music.csproj">
-      <Project>{d5bdc274-250b-4379-8692-2d480cc8ca24}</Project>
-      <Name>mkacg_music</Name>
-    </ProjectReference>
     <ProjectReference Include="..\mkacg_showhitokoto\mkacg_showhitokoto.csproj">
       <Project>{9a176432-66e3-4e76-9f56-bec08a6944e3}</Project>
       <Name>mkacg_showhitokoto</Name>

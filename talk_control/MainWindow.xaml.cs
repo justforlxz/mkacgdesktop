@@ -240,5 +240,10 @@ namespace talk_control
 
             }
         }
+
+        private void source_text_LayoutUpdated (object sender , EventArgs e)
+        {
+            source_text.Height = source_text.ActualHeight;
+        }
     }
 }

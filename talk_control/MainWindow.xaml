@@ -5,16 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:talk_control"
         mc:Ignorable="d"
-        Title="talk_control" Height="550" Width="400"  Loaded="Window_Loaded" Background="#FFECECEC" AllowsTransparency="True" WindowStyle="None"  ShowInTaskbar="False" ResizeMode="NoResize" Topmost="True" Activated="Window_Activated" Deactivated="Window_Deactivated">
+        Title="talk_control" Height="584" Width="392"  Loaded="Window_Loaded" Background="#FFECECEC" AllowsTransparency="True" WindowStyle="None"  ShowInTaskbar="False" ResizeMode="NoResize" Topmost="True" Activated="Window_Activated" Deactivated="Window_Deactivated">
     <Grid>
-        <Border BorderBrush="#FF322CB4" BorderThickness="1" HorizontalAlignment="Left" Height="550" VerticalAlignment="Top" Width="400">
-            <Grid HorizontalAlignment="Left" Height="550" Margin="-1,-1,0,-1" VerticalAlignment="Top" Width="48" Background="#FF191919">
-                <Label x:Name="label" Content="三" HorizontalAlignment="Left" Height="31" Margin="12,17,0,0" VerticalAlignment="Top" Width="25" Foreground="White"/>
+        <Border BorderBrush="#FF322CB4" BorderThickness="1" HorizontalAlignment="Left" Height="584" VerticalAlignment="Top" Width="392.5" Margin="0,0,-8,0">
+            <Grid HorizontalAlignment="Left" Height="584" Margin="-1,-1,0,-1" VerticalAlignment="Top" Width="48" Background="#FF191919">
+                <Label x:Name="label" Content="≡" HorizontalAlignment="Left" Height="46" Margin="8,10,0,0" VerticalAlignment="Top" Width="34" Foreground="White" FontSize="32"/>
             </Grid>
         </Border>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" KeyDown="textBox_KeyDown" Height="30" Margin="60,510,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="330" FontSize="21.333"/>
-        <Label x:Name="source" HorizontalAlignment="Left" Height="156" Margin="60,17,0,0" VerticalAlignment="Top" Width="306">
-            <TextBlock x:Name="source_text" Text="你好，有什么可以帮助你的吗？" TextWrapping="Wrap" FontSize="17.333" />
-        </Label>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" KeyDown="textBox_KeyDown" Height="30" Margin="52,546,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="330" FontSize="21.333"/>
+        <TextBlock x:Name="source_text"  Text="你好，有什么可以帮助你的吗？" LayoutUpdated="source_text_LayoutUpdated" HorizontalAlignment="Left"  Margin="52,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316" FontSize="18.667" TextOptions.TextFormattingMode="Display" />
+
     </Grid>
 </Window>

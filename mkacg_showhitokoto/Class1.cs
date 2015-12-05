@@ -18,7 +18,7 @@ namespace mkacg_showhitokoto
             String[] source = new String[2];
             if (InternetGetConnectedState(out i , 0))
             {
-                String url = "http://api.hitokoto.us/rand?cat=a&charset=utf-8&encode=xml";
+                String url = "http://api.hitokoto.us/rand?charset=utf-8&encode=xml";
                 XmlElement root = null;
                 XmlDocument xmldoc = new XmlDocument();
                 try

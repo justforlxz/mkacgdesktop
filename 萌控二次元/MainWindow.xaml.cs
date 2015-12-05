@@ -56,12 +56,12 @@ namespace 萌控二次元
         }
         public void showorhidetrue ()
         {
-            bg_white.Visibility = bg_label.Visibility = bg_source.Visibility = bg_text.Visibility = Visibility.Visible;
+            bg_white.Visibility =  bg_source.Visibility = bg_text.Visibility = Visibility.Visible;
           
         }
         public void showorhide (object sender , EventArgs e)
         {
-            bg_white.Visibility = bg_label.Visibility = bg_source.Visibility = bg_text.Visibility = Visibility.Hidden;
+            bg_white.Visibility = bg_source.Visibility = bg_text.Visibility = Visibility.Hidden;
           
             timer.Stop();
             timerToSendMessages.Stop();
@@ -72,9 +72,12 @@ namespace 萌控二次元
         }
         settings setting = new settings();
         public String music_id;
+        public int appfirst = 0;
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
 
+            bgmusicplayer.Play();
+            appfirst = 1;
 
             //开机启动
             //配置文件
@@ -262,7 +265,10 @@ namespace 萌控二次元
 
         private void bgmusicplayer_MediaEnded (object sender , RoutedEventArgs e)
         {
-            play();
+            if (appfirst != 1)
+            {
+                play();
+            }
         }
       
         String play_name_get;
@@ -627,6 +633,12 @@ namespace 萌控二次元
             settings setting = new settings();
             setting.Show();
             
+        }
+
+        private void bg_text_LayoutUpdated (object sender , EventArgs e)
+        {
+            bg_text.Height = bg_text.ActualHeight;
+           
         }
     }
    
