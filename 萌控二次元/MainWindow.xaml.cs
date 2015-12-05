@@ -14,6 +14,8 @@ using System.Threading;
 using System.Text;
 using System.Net;
 using Newtonsoft.Json.Linq;
+using System.Windows.Forms;
+using System.Windows.Interop;
 
 namespace 萌控二次元
 {
@@ -29,6 +31,7 @@ namespace 萌控二次元
             InitializeComponent();
 
         }
+      
 
         /// <summary>
         /// ////////////////////////
@@ -105,9 +108,82 @@ namespace 萌控二次元
             someTime_timer.Interval = new TimeSpan(0 , 0 , someTime_random.Next(1 , 1800));  //随机事件进行消息提醒
             someTime_timer.Tick += new EventHandler(someTime);
             someTime_timer.Start();
-          //  hp.Visibility = Visibility.Visible;
-           // hp_bar_show = 1;
+            //  hp.Visibility = Visibility.Visible;
+            // hp_bar_show = 1;
+
+            //  从alt tab中隐藏的代码来自  http://www.helplib.com/qa/494704
+            WindowInteropHelper wndHelper = new WindowInteropHelper(this);
+
+            int exStyle = (int)GetWindowLong(wndHelper.Handle , (int)GetWindowLongFields.GWL_EXSTYLE);
+
+            exStyle |= (int)ExtendedWindowStyles.WS_EX_TOOLWINDOW;
+            SetWindowLong(wndHelper.Handle , (int)GetWindowLongFields.GWL_EXSTYLE , (IntPtr)exStyle);
         }
+
+        //  从alt tab中隐藏的代码来自  http://www.helplib.com/qa/494704
+        #region Window styles
+        [Flags]
+        public enum ExtendedWindowStyles
+        {
+            // ...
+            WS_EX_TOOLWINDOW = 0x00000080,
+            // ...
+        }
+
+        public enum GetWindowLongFields
+        {
+            // ...
+            GWL_EXSTYLE = (-20),
+            // ...
+        }
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetWindowLong (IntPtr hWnd , int nIndex);
+
+        public static IntPtr SetWindowLong (IntPtr hWnd , int nIndex , IntPtr dwNewLong)
+        {
+            int error = 0;
+            IntPtr result = IntPtr.Zero;
+            // Win32 SetWindowLong doesn't clear error on success
+            SetLastError(0);
+
+            if (IntPtr.Size == 4)
+            {
+                // use SetWindowLong
+                Int32 tempResult = IntSetWindowLong(hWnd , nIndex , IntPtrToInt32(dwNewLong));
+                error = Marshal.GetLastWin32Error();
+                result = new IntPtr(tempResult);
+            }
+            else
+            {
+                // use SetWindowLongPtr
+                result = IntSetWindowLongPtr(hWnd , nIndex , dwNewLong);
+                error = Marshal.GetLastWin32Error();
+            }
+
+            if (result == IntPtr.Zero)
+            {
+                throw new System.ComponentModel.Win32Exception(error);
+            }
+
+            return result;
+        }
+
+        [DllImport("user32.dll" , EntryPoint = "SetWindowLongPtr" , SetLastError = true)]
+        private static extern IntPtr IntSetWindowLongPtr (IntPtr hWnd , int nIndex , IntPtr dwNewLong);
+
+        [DllImport("user32.dll" , EntryPoint = "SetWindowLong" , SetLastError = true)]
+        private static extern Int32 IntSetWindowLong (IntPtr hWnd , int nIndex , Int32 dwNewLong);
+
+        private static int IntPtrToInt32 (IntPtr intPtr)
+        {
+            return unchecked((int)intPtr.ToInt64());
+        }
+
+        [DllImport("kernel32.dll" , EntryPoint = "SetLastError")]
+        public static extern void SetLastError (int dwErrorCode);
+        #endregion
+
         public void open_config ()
         {
             try
