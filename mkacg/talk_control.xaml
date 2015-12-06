@@ -106,7 +106,6 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <local:redio_control_user x:FieldModifier="public" x:Name="redio_control_user_" HorizontalAlignment="Left" Height="138" Margin="52,102,0,0" VerticalAlignment="Top" Width="330"/>
-
+    
     </Grid>
 </Window>

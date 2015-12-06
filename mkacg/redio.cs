@@ -59,7 +59,7 @@ namespace mkacg
               select (string)p["name"];
                 foreach (var item in urlMp3)
                 {
-                    list.Add(item);
+                    list.Add(item); 
                     count += 1;
                 }
                 foreach (var item in name)
