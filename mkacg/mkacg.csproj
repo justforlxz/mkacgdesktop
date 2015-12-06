@@ -206,7 +206,6 @@
     <Resource Include="Images\2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\TextFile1.txt" />
     <EmbeddedResource Include="Music\bg.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -218,9 +217,7 @@
     </Resource>
     <Content Include="Newtonsoft.Json.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Plugln\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
