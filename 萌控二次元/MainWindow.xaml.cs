@@ -257,10 +257,7 @@ namespace 萌控二次元
             }
         }
         talk.Class1 _talk = new talk.Class1();
-        talk_control.MainWindow talk_cont = new talk_control.MainWindow();
-        hp_bar.MainWindow hp = new hp_bar.MainWindow();
        
-      
         int count = 0;
 
         private void bgmusicplayer_MediaEnded (object sender , RoutedEventArgs e)
@@ -392,7 +389,7 @@ namespace 萌控二次元
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                   
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
                     timer.Start();
                     break;
@@ -400,163 +397,186 @@ namespace 萌控二次元
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                   
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "3":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                  
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "4":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                   
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "5":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                  
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "6":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "7":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                   
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "8":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                   
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "9":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                   
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "10":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                 
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "11":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                  
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "12":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                   
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "13":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                  
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "14":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                    
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "15":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                  
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "16":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                   
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "17":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                 
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "18":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                  
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "19":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                  
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "20":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                 
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "21":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                 
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "22":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                 
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "23":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                  
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
                 case "24":
                     bg_text.Text = "";
                     timer.Stop();
                     showorhidetrue();
-                   
+                    bg_source.Content = "";
                     bg_text.Text = "现在是" + hour + "点了";
-                    timer.Start(); break;
+                    timer.Start();
+                    break;
 
                 default:
                     break;
@@ -567,6 +587,7 @@ namespace 萌控二次元
         {
             timetotalk();
         }
+
 
         private void image_MouseDown (object sender , MouseButtonEventArgs e)
         {
@@ -586,9 +607,12 @@ namespace 萌控二次元
                 showorhidetrue();
                 timerToSendMessages.Start();
                 */
+                talk_control.MainWindow talk_cont = new talk_control.MainWindow();
                 talk_cont.Show();
+                
             }
         }
+
 
 
         private void someTime (object sender , EventArgs e)
@@ -609,25 +633,7 @@ namespace 萌控二次元
             someTime_timer.Tick += new EventHandler(someTime);
             someTime_timer.Start();
         }
-        int hp_bar_show = 0;
 
-        private void MenuItem_Click_1 (object sender , RoutedEventArgs e)
-        {
-            if (hp_bar_show == 0)
-            {
-                hp.Visibility = Visibility.Visible;
-                hp_bar_show = 1;
-            }
-            else
-            {
-                hp.Visibility = Visibility.Hidden;
-                hp_bar_show = 0;
-            }
-        }
-
-  
-
-      
         private void MenuItem_Click_5 (object sender , RoutedEventArgs e)
         {
             settings setting = new settings();

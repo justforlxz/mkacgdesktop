@@ -96,10 +96,6 @@
       <Project>{eb59479e-d8f4-497c-916e-aa8d9658e157}</Project>
       <Name>baidutalk</Name>
     </ProjectReference>
-    <ProjectReference Include="..\hp_bar\hp_bar.csproj">
-      <Project>{e570e2e7-52d0-4ad5-8184-5f547ff068a2}</Project>
-      <Name>hp_bar</Name>
-    </ProjectReference>
     <ProjectReference Include="..\mkacg_showhitokoto\mkacg_showhitokoto.csproj">
       <Project>{9a176432-66e3-4e76-9f56-bec08a6944e3}</Project>
       <Name>mkacg_showhitokoto</Name>

@@ -11,6 +11,7 @@ namespace talk
 {
     public class Class1
     {
+        public static int sta = 0;
        public String main (String text)
         {
             String gettext = null;

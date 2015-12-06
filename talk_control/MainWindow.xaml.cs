@@ -30,18 +30,29 @@ namespace talk_control
            
 
         }
-
-        int i = 1;
+        
         string Name_;
         string musicid_;
+       
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
             double workHeight = SystemParameters.WorkArea.Height;
             double workWidth = SystemParameters.WorkArea.Width;
             this.Top = (workHeight - this.Height) / 1;
             this.Left = 1/(workWidth - this.Width);
-            open_config();
-           
+            
+            if (talk.Class1.sta == 0)
+            {
+                open_config();
+                talk.Class1.sta = 1;
+            }
+            else
+            {
+                open_config();
+                source_text.Text = Name_ + "  欢迎回来";
+
+            }
+
         }
       
 
@@ -51,32 +62,6 @@ namespace talk_control
             if (e.Key == Key.Enter)
             {
                 open_config();
-                //以后改成循环，对哈希表的字段进行匹配，然后回答值。
-                /*  switch (textBox.Text)
-                  {
-                      case "你是谁的女朋友":
-                          source_text.Text = "我是"+Name_+"可爱的女朋友";
-                          textBox.Text = "";
-                          break;
-                      case "设置开机启动":
-                          textBox.Text = "";
-                          open_autorun();
-                          break;
-                      case "设置关闭开机启动":
-                          textBox.Text = "";
-                          delete_autorun();
-                          break;
-                      case "打开设置":
-                          source_text.Text = "请在主窗体右键";
-                          textBox.Text = "";
-                          break;
-
-                      default:
-                          source_text.Text = _talk.main(textBox.Text) + "\n\n我如此如此这般这般说道";
-                          textBox.Text = "";
-                          break;
-                  }
-                  */
                 if (textBox.Text == "你是谁的女朋友")
                 {
                     source_text.Text = "我是" + Name_ + "可爱的女朋友";
@@ -139,9 +124,12 @@ namespace talk_control
 
         private void Window_Deactivated (object sender , EventArgs e)
         {
+            /*
             this.Hide();
             textBox.Text = "";
             source_text.Text = "";
+            */
+            this.Close();
         }
         private void open_autorun ()
         {
@@ -226,24 +214,14 @@ namespace talk_control
 
         private void Window_Activated (object sender , EventArgs e)
         {
-            if (i == 1)
-            {
-                //第一次启动
-                this.Show();
-                i += 1;
-            }
-            else
-            {
-                this.Show();
-                open_config();
-                source_text.Text = Name_ + "  欢迎回来";
-
-            }
+           
         }
 
         private void source_text_LayoutUpdated (object sender , EventArgs e)
         {
             source_text.Height = source_text.ActualHeight;
         }
+
+        
     }
 }
