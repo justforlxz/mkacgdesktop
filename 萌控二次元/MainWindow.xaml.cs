@@ -598,15 +598,6 @@ namespace 萌控二次元
             timer.IsEnabled = true;
             if (count % 2 == 0)
             {
-                /*
-                bg_text.Text = "你好啊";
-                bg_source.Content = "";
-                timer.IsEnabled = false;
-                count = 0;
-                timerToSendMessages.Stop();
-                showorhidetrue();
-                timerToSendMessages.Start();
-                */
                 talk_control.MainWindow talk_cont = new talk_control.MainWindow();
                 talk_cont.Show();
                 
