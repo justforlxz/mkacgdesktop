@@ -10,6 +10,5 @@
         <Slider x:Name="slider"  HorizontalAlignment="Left"  Height="20" Margin="203,108,0,0" VerticalAlignment="Top" Width="117"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="108" Margin="10,10,0,0" VerticalAlignment="Top" Width="108"/>
         <Button x:Name="button" Content="下一首" HorizontalAlignment="Left" Height="31" Margin="236,72,0,0" VerticalAlignment="Top" Width="84"/>
-        <MediaElement x:Name="mediaElement" HorizontalAlignment="Left" Height="10" Margin="227,41,0,0" VerticalAlignment="Top" Width="82"/>
     </Grid>
 </UserControl>

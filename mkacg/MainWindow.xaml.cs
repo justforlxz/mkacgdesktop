@@ -47,7 +47,7 @@ namespace mkacg
             //显示一句话
             timer.Stop();
             showorhidetrue();
-            mkacg_showhitokoto.Class1 mkacgclass = new mkacg_showhitokoto.Class1();
+            mkacg_showhitokoto.mkacg_showhitokoto mkacgclass = new mkacg_showhitokoto.mkacg_showhitokoto();
             String[] list = mkacgclass.hitokoto();
             bg_text.Text = "";
             bg_text.Text = list[0] + "\n";
@@ -613,7 +613,7 @@ namespace mkacg
             timer.Stop();
             showorhidetrue();
         
-            mkacg_showhitokoto.Class1 mkacgclass = new mkacg_showhitokoto.Class1();
+            mkacg_showhitokoto.mkacg_showhitokoto mkacgclass = new mkacg_showhitokoto.mkacg_showhitokoto();
             String[] list = mkacgclass.hitokoto();
             bg_text.Text = "";
             bg_text.Text = list[0] + "\n";

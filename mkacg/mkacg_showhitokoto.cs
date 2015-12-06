@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace mkacg_showhitokoto
 {
-    public class Class1
+    public class mkacg_showhitokoto
     {
         [DllImport("wininet")]
         private extern static bool InternetGetConnectedState (out int connectionDescription , int reservedValue);

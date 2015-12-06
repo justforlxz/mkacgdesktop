@@ -10,7 +10,8 @@ namespace talk_control
         public redio_control ()
         {
             InitializeComponent();
+           
         }
-      
+         
     }
 }

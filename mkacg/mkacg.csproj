@@ -125,9 +125,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="baidutalk.cs" />
     <Compile Include="Base64.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="mkacg_showhitokoto.cs" />
+    <Compile Include="redio.cs" />
+    <Compile Include="redio_control.xaml.cs">
+      <DependentUpon>redio_control.xaml</DependentUpon>
+    </Compile>
     <Compile Include="settings.xaml.cs">
       <DependentUpon>settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="talk_control.xaml.cs">
+      <DependentUpon>talk_control.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -141,9 +151,17 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="redio_control.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="talk_control.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -179,24 +197,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\mkacg_showhitokoto\mkacg_showhitokoto.csproj">
-      <Project>{9a176432-66e3-4e76-9f56-bec08a6944e3}</Project>
-      <Name>mkacg_showhitokoto</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\redio\redio.csproj">
-      <Project>{b2949b35-4cac-47ea-86db-dbe310245c34}</Project>
-      <Name>redio</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\talk_control\talk_control.csproj">
-      <Project>{5cc2b2d2-016f-4623-ac3d-132fc5b837a8}</Project>
-      <Name>talk_control</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Update\Update.csproj">
-      <Project>{3cc2d696-2243-4214-93cd-5dba4f2c4bcd}</Project>
-      <Name>Update</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\2.png" />
