@@ -2,21 +2,19 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Xml;
-using baidutalk;
 using Microsoft.Win32;
 
-namespace talk_control
+namespace mkacg
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class talk_control : Window
     {
-        public MainWindow ()
+        public talk_control ()
         {
             InitializeComponent();
            
-
         }
         
         string Name_;
@@ -29,10 +27,10 @@ namespace talk_control
             this.Top = (workHeight - this.Height) / 1;
             this.Left = 1/(workWidth - this.Width);
             
-            if (talk_control.Class1.sta == 0)
+            if (Class1.sta == 0)
             {
                 open_config();
-               talk_control.Class1.sta = 1;
+               Class1.sta = 1;
             }
             else
             {
@@ -78,19 +76,19 @@ namespace talk_control
                 }
                 else if (textBox.Text == "录音测试")
                 {
-                    baidutalk.Talk_baidu baidu = new baidutalk.Talk_baidu();
+                   Talk_baidu baidu = new Talk_baidu();
                    // baidu.sound();
                     textBox.Text = "";
                 }
                 else if (textBox.Text == "录音开始")
                 {
-                    baidutalk.Talk_baidu baidu = new baidutalk.Talk_baidu();
+                     Talk_baidu baidu = new  Talk_baidu();
                     baidu.luyin_on();
                     textBox.Text = "";
                 }
                 else if (textBox.Text == "录音停止")
                 {
-                    baidutalk.Talk_baidu baidu = new baidutalk.Talk_baidu();
+                   Talk_baidu baidu = new  Talk_baidu();
                   //  baidu.luyin_save();
                     if (baidu.luyin_save())
                     {

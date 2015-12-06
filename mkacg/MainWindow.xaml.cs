@@ -40,14 +40,14 @@ namespace mkacg
         DispatcherTimer timer = new DispatcherTimer();
         DispatcherTimer timerToSendMessages = new DispatcherTimer();
         DispatcherTimer someTime_timer = new DispatcherTimer();
-        redio.redio redio_r = new redio.redio();
+        redio redio_r = new redio();
         Random someTime_random = new Random();
         private void MenuItem_Click (object sender , RoutedEventArgs e)
         {
             //显示一句话
             timer.Stop();
             showorhidetrue();
-            mkacg_showhitokoto.mkacg_showhitokoto mkacgclass = new mkacg_showhitokoto.mkacg_showhitokoto();
+            mkacg_showhitokoto mkacgclass = new mkacg_showhitokoto();
             String[] list = mkacgclass.hitokoto();
             bg_text.Text = "";
             bg_text.Text = list[0] + "\n";
@@ -255,7 +255,7 @@ namespace mkacg
                     break;
             }
         }
-        talk_control.Class1  _talk = new talk_control.Class1();
+        talk_control  _talk = new talk_control();
        
         int count = 0;
 
@@ -597,7 +597,7 @@ namespace mkacg
             timer.IsEnabled = true;
             if (count % 2 == 0)
             {
-                talk_control.MainWindow talk_cont = new talk_control.MainWindow();
+                talk_control talk_cont = new talk_control();
                 talk_cont.Show();
                 
             }
@@ -613,7 +613,7 @@ namespace mkacg
             timer.Stop();
             showorhidetrue();
         
-            mkacg_showhitokoto.mkacg_showhitokoto mkacgclass = new mkacg_showhitokoto.mkacg_showhitokoto();
+            mkacg_showhitokoto mkacgclass = new mkacg_showhitokoto();
             String[] list = mkacgclass.hitokoto();
             bg_text.Text = "";
             bg_text.Text = list[0] + "\n";

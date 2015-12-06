@@ -130,8 +130,8 @@
     <Compile Include="Class1.cs" />
     <Compile Include="mkacg_showhitokoto.cs" />
     <Compile Include="redio.cs" />
-    <Compile Include="redio_control.xaml.cs">
-      <DependentUpon>redio_control.xaml</DependentUpon>
+    <Compile Include="redio_control_user.xaml.cs">
+      <DependentUpon>redio_control_user.xaml</DependentUpon>
     </Compile>
     <Compile Include="settings.xaml.cs">
       <DependentUpon>settings.xaml</DependentUpon>
@@ -155,9 +155,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="redio_control.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="redio_control_user.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="settings.xaml">
       <SubType>Designer</SubType>

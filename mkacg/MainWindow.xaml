@@ -24,7 +24,7 @@
         </Image>
         <TextBlock  x:Name="bg_text" HorizontalAlignment="Left" Margin="11,72,0,0" TextWrapping="Wrap" Text="欢迎来到萌控二次元" VerticalAlignment="Top" Width="183" FontSize="13.333" TextOptions.TextFormattingMode="Display"/>
         <Label x:Name="bg_source" Content=""  HorizontalAlignment="Left" Height="30" Margin="12,143,0,0" VerticalAlignment="Top" Width="182" FontSize="10.667" HorizontalContentAlignment="Right" TextOptions.TextFormattingMode="Display" />
-        <MediaElement x:Name="bgmusicplayer"  MediaEnded="bgmusicplayer_MediaEnded" HorizontalAlignment="Left" Height="61" Margin="259,47,0,0" VerticalAlignment="Top" Width="75" UnloadedBehavior="Stop" Volume="0.7" LoadedBehavior="Manual" Stretch="Fill" Source="Music/bg.mp3" />
+        <MediaElement x:Name="bgmusicplayer"  x:FieldModifier="public" MediaEnded="bgmusicplayer_MediaEnded" HorizontalAlignment="Left" Height="61" Margin="259,47,0,0" VerticalAlignment="Top" Width="75" UnloadedBehavior="Stop" Volume="0.7" LoadedBehavior="Manual" Stretch="Fill" Source="Music/bg.mp3" />
 
     </Grid>
 </Window>

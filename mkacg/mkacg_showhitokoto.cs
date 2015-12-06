@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
 
-namespace mkacg_showhitokoto
+namespace mkacg
 {
     public class mkacg_showhitokoto
     {

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace talk_control
+namespace mkacg
 {
     public class Class1
     {

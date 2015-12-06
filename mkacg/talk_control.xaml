@@ -1,9 +1,9 @@
-﻿<Window x:Name="window" x:Class="talk_control.MainWindow"
+﻿<Window x:Name="window" x:Class="mkacg.talk_control"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:talk_control"
+        xmlns:local="clr-namespace:mkacg"
         mc:Ignorable="d"
         Title="talk_control" Height="584" Width="392"  Loaded="Window_Loaded" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None"  ShowInTaskbar="False" ResizeMode="NoResize" Topmost="True" Activated="Window_Activated" Deactivated="Window_Deactivated">
     <Window.Resources>
@@ -106,7 +106,7 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <local:redio_control x:Name="redio_control"  HorizontalAlignment="Left" Height="138" Margin="52,90,0,0" VerticalAlignment="Top" Width="330" Visibility="Hidden" Background="#FFE8DCDC"/>
+        <local:redio_control_user x:FieldModifier="public" x:Name="redio_control_user_" HorizontalAlignment="Left" Height="138" Margin="52,102,0,0" VerticalAlignment="Top" Width="330"/>
 
     </Grid>
 </Window>

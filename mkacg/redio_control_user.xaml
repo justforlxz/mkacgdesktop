@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="mkacg.redio_control_user"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:mkacg"
+             mc:Ignorable="d" 
+             d:DesignHeight="138" d:DesignWidth="330" Background="#FFE6E6E6">
+    <Grid>
+        <Slider x:Name="slider"  HorizontalAlignment="Left"  Height="20" Margin="203,108,0,0" VerticalAlignment="Top" Width="117" Value="{Binding Volume, ElementName=mediaElement}"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="108" Margin="10,10,0,0" VerticalAlignment="Top" Width="108"/>
+        <Button x:Name="button" Content="下一首" Click="button_Click" HorizontalAlignment="Left" Height="31" Margin="236,72,0,0" VerticalAlignment="Top" Width="84"/>
+        <MediaElement x:Name="mediaElement"  x:FieldModifier="public" HorizontalAlignment="Left"  Height="34" Margin="187,10,0,0" VerticalAlignment="Top" Width="46"/>
+    </Grid>
+</UserControl>

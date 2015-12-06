@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using static System.Net.Mime.MediaTypeNames;
-namespace baidutalk
+namespace mkacg
 {
     public class Talk_baidu
     {
