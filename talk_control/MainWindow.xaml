@@ -94,6 +94,7 @@
             </Grid>
         </Border>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" KeyDown="textBox_KeyDown" Height="30" Margin="52,546,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="330" FontSize="21.333"/>
+
         <TextBlock x:Name="source_text"  Text="你好，有什么可以帮助你的吗？" LayoutUpdated="source_text_LayoutUpdated" HorizontalAlignment="Left"  Margin="52,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316" FontSize="18.667" TextOptions.TextFormattingMode="Display" RenderTransformOrigin="0.5,0.5" >
             <TextBlock.RenderTransform>
                 <TransformGroup>

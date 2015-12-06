@@ -146,10 +146,6 @@
       <Project>{b2949b35-4cac-47ea-86db-dbe310245c34}</Project>
       <Name>redio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\talk\talk.csproj">
-      <Project>{5a231d02-7064-4b65-b20d-5aa3dbfb1df6}</Project>
-      <Name>talk</Name>
-    </ProjectReference>
     <ProjectReference Include="..\talk_control\talk_control.csproj">
       <Project>{5cc2b2d2-016f-4623-ac3d-132fc5b837a8}</Project>
       <Name>talk_control</Name>

@@ -256,7 +256,7 @@ namespace 萌控二次元
                     break;
             }
         }
-        talk.Class1 _talk = new talk.Class1();
+        talk_control.Class1  _talk = new talk_control.Class1();
        
         int count = 0;
 

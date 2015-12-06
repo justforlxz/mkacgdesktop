@@ -29,10 +29,10 @@ namespace talk_control
             this.Top = (workHeight - this.Height) / 1;
             this.Left = 1/(workWidth - this.Width);
             
-            if (talk.Class1.sta == 0)
+            if (talk_control.Class1.sta == 0)
             {
                 open_config();
-                talk.Class1.sta = 1;
+               talk_control.Class1.sta = 1;
             }
             else
             {
@@ -42,9 +42,10 @@ namespace talk_control
             }
 
         }
-      
 
-        talk.Class1 _talk = new talk.Class1();
+
+        // talk.Class1 _talk = new talk.Class1();
+        Class1 _talk = new Class1();
         private void textBox_KeyDown (object sender , KeyEventArgs e)
         {
             if (e.Key == Key.Enter)

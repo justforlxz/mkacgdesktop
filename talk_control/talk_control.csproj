@@ -39,6 +39,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\萌控二次元\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -59,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Class1.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -103,10 +108,6 @@
     <ProjectReference Include="..\redio\redio.csproj">
       <Project>{b2949b35-4cac-47ea-86db-dbe310245c34}</Project>
       <Name>redio</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\talk\talk.csproj">
-      <Project>{5a231d02-7064-4b65-b20d-5aa3dbfb1df6}</Project>
-      <Name>talk</Name>
     </ProjectReference>
     <ProjectReference Include="..\Update\Update.csproj">
       <Project>{3cc2d696-2243-4214-93cd-5dba4f2c4bcd}</Project>
