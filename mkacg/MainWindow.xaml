@@ -1,9 +1,9 @@
-﻿<Window x:Class="萌控二次元.MainWindow"
+﻿<Window x:Class="mkacg.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:萌控二次元"
+        xmlns:local="clr-namespace:mkacg"
         mc:Ignorable="d"
         Title="萌控二次元" Loaded="Window_Loaded"  Height="347" Width="344"  Background="{x:Null}" WindowStyle="None" WindowStartupLocation="Manual" ResizeMode="NoResize" ShowInTaskbar="False" IsTabStop="False" Foreground="Black" AllowsTransparency="True">
     <Grid>

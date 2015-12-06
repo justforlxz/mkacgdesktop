@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace 萌控二次元
+namespace mkacg
 {
     class Base64
     {

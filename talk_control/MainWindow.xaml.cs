@@ -21,7 +21,7 @@ namespace talk_control
         
         string Name_;
         string musicid_;
-       
+        
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
             double workHeight = SystemParameters.WorkArea.Height;
@@ -38,6 +38,7 @@ namespace talk_control
             {
                 open_config();
                 source_text.Text = Name_ + "  欢迎回来";
+                //如果电台在播放，显示控件
 
             }
 

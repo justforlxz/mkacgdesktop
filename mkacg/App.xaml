@@ -1,7 +1,7 @@
-﻿<Application x:Class="萌控二次元.App"
+﻿<Application x:Class="mkacg.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:萌控二次元"
+             xmlns:local="clr-namespace:mkacg"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

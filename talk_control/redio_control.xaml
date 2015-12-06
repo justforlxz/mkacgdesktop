@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="talk_control.redio_control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:talk_control"
+             mc:Ignorable="d" 
+             d:DesignHeight="138" d:DesignWidth="330">
+    <Grid>
+        <Slider x:Name="slider"  HorizontalAlignment="Left"  Height="20" Margin="203,108,0,0" VerticalAlignment="Top" Width="117"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="108" Margin="10,10,0,0" VerticalAlignment="Top" Width="108"/>
+        <Button x:Name="button" Content="下一首" HorizontalAlignment="Left" Height="31" Margin="236,72,0,0" VerticalAlignment="Top" Width="84"/>
+        <MediaElement x:Name="mediaElement" HorizontalAlignment="Left" Height="10" Margin="227,41,0,0" VerticalAlignment="Top" Width="82"/>
+    </Grid>
+</UserControl>

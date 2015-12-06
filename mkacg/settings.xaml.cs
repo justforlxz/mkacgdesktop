@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
 
-namespace 萌控二次元
+namespace mkacg
 {
     /// <summary>
     /// settings.xaml 的交互逻辑

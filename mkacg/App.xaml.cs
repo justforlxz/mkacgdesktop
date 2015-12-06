@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 
-namespace 萌控二次元
+namespace mkacg
 {
     /// <summary>
     /// App.xaml 的交互逻辑

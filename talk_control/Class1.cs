@@ -12,13 +12,13 @@ namespace talk_control
     public class Class1
     {
         public static int sta = 0;
-       public String main (String text)
+        public String main (String text)
         {
             String gettext = null;
             int i = 0;
             if (InternetGetConnectedState(out i , 0))
             {
-               
+
                 if (text != "")
                 {
                     gettext = ConnectTuLing(text);

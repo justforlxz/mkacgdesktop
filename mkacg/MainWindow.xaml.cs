@@ -17,7 +17,7 @@ using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 using System.Windows.Interop;
 
-namespace 萌控二次元
+namespace mkacg
 {
 
     /// <summary>
@@ -57,7 +57,7 @@ namespace 萌控二次元
         public void showorhidetrue ()
         {
             bg_white.Visibility =  bg_source.Visibility = bg_text.Visibility = Visibility.Visible;
-          
+           
         }
         public void showorhide (object sender , EventArgs e)
         {
@@ -111,8 +111,7 @@ namespace 萌控二次元
             someTime_timer.Interval = new TimeSpan(0 , 0 , someTime_random.Next(1 , 1800));  //随机事件进行消息提醒
             someTime_timer.Tick += new EventHandler(someTime);
             someTime_timer.Start();
-            //  hp.Visibility = Visibility.Visible;
-            // hp_bar_show = 1;
+        //似乎把只能启动一个的代码弄丢了。。
 
             //  从alt tab中隐藏的代码来自  http://www.helplib.com/qa/494704
             WindowInteropHelper wndHelper = new WindowInteropHelper(this);
