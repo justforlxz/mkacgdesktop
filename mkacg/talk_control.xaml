@@ -106,7 +106,7 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <local:redio_control x:Name="redio_control" HorizontalAlignment="Left" Height="138" Margin="52,90,0,0" VerticalAlignment="Top" Width="330" Visibility="Hidden"/>
+        <local:redio_control x:Name="redio_control"  HorizontalAlignment="Left" Height="138" Margin="52,90,0,0" VerticalAlignment="Top" Width="330" Visibility="Hidden" Background="#FFE8DCDC"/>
 
     </Grid>
 </Window>
