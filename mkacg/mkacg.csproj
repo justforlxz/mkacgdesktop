@@ -208,12 +208,10 @@
     <Resource Include="Images\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\bujian1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Images\bujian2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\bujian1.png" />
     <Content Include="Newtonsoft.Json.dll" />
   </ItemGroup>
   <ItemGroup />
