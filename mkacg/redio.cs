@@ -19,7 +19,8 @@ namespace mkacg
         List<string> list = new List<string>();
         List<string> name_music = new List<string>();
         List<string> music = new List<string>();
-        public List<string> ConnectTuLing (String music_id)
+        List<string> pic = new List<string>();
+        public List<string> ConnectTuLing ()
         {
           
             string result = null;
@@ -30,7 +31,7 @@ namespace mkacg
             music.Clear();
             try
             {
-                string getURL = "http://music.163.com/api/playlist/detail?id="+music_id;
+                string getURL = "http://music.163.com/api/playlist/detail?id=71385702";
                 Console.WriteLine("来自redio-->"+getURL);
                 HttpWebRequest MyRequest = (HttpWebRequest)HttpWebRequest.Create(getURL);
                 HttpWebResponse MyResponse = (HttpWebResponse)MyRequest.GetResponse();
@@ -57,6 +58,9 @@ namespace mkacg
                 var name =
               from p in json["result"]["tracks"]
               select (string)p["name"];
+                var picUrl =
+                   from p in json["result"]["tracks"]
+                   select (string)p["picUrl"];
                 foreach (var item in urlMp3)
                 {
                     list.Add(item); 
@@ -66,10 +70,15 @@ namespace mkacg
                 {
                     name_music.Add(item);
                 }
+                foreach (var item in picUrl)
+                {
+                    pic.Add(item);
+                }
                 Random random = new Random();
                 int n = random.Next(0 , count);
                 music.Add(list[n]);
                 music.Add(name_music[n]);
+                music.Add(pic[n]);
             }
             catch (Exception)
             {
@@ -80,6 +89,7 @@ namespace mkacg
 
             //    return RandomSortList(list);
             return music;
+            
         }
         public List<T> RandomSortList<T>(List<T> ListT)
         {

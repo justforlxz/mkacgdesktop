@@ -1,37 +1,41 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using Microsoft.Win32;
 using System.IO;
 using System.Xml;
 using System.Runtime.InteropServices;
-using System.Reflection;
 using System.Collections.Generic;
-using System.Threading;
-using System.Text;
-using System.Net;
-using Newtonsoft.Json.Linq;
-using System.Windows.Forms;
 using System.Windows.Interop;
+
 
 namespace mkacg
 {
 
+
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
+
+
     public partial class MainWindow : Window
     {
 
         public MainWindow ()
         {
             InitializeComponent();
-
+            //单例模式
+            bool requestInitialOwnership = true;
+            bool mutexWasCreated;
+            mut = new System.Threading.Mutex(requestInitialOwnership , "com.Application1.Ding" , out mutexWasCreated);
+            if (!(requestInitialOwnership && mutexWasCreated))
+            {
+                // 随意什么操作啦~
+                Application.Current.Shutdown();
+            }
         }
-      
+
 
         /// <summary>
         /// ////////////////////////
@@ -56,13 +60,13 @@ namespace mkacg
         }
         public void showorhidetrue ()
         {
-            bg_white.Visibility =  bg_source.Visibility = bg_text.Visibility = Visibility.Visible;
-           
+            bg_white.Visibility = bg_source.Visibility = bg_text.Visibility = Visibility.Visible;
+
         }
         public void showorhide (object sender , EventArgs e)
         {
             bg_white.Visibility = bg_source.Visibility = bg_text.Visibility = Visibility.Hidden;
-          
+
             timer.Stop();
             timerToSendMessages.Stop();
         }
@@ -73,9 +77,12 @@ namespace mkacg
         settings setting = new settings();
         public String music_id;
         public int appfirst = 0;
+
+
+        System.Threading.Mutex mut;
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
-
+            
             bgmusicplayer.Play();
             appfirst = 1;
 
@@ -87,8 +94,8 @@ namespace mkacg
             }
             else
             {
-               
-                setting.create_config("主人", "38688170");
+
+                setting.create_config("主人" , "38688170");
             }
             /*************************************/
             this.Topmost = true;
@@ -101,7 +108,7 @@ namespace mkacg
             double workWidth = SystemParameters.WorkArea.Width;
             this.Top = (workHeight - this.Height) / 1.1;
             this.Left = (workWidth - this.Width) / 1;
-           
+            Class1.redio_sta = 0;
             timer.Interval = new TimeSpan(0 , 0 , 4);
             timer.Tick += new EventHandler(showorhide);
             timer.Start();
@@ -111,7 +118,6 @@ namespace mkacg
             someTime_timer.Interval = new TimeSpan(0 , 0 , someTime_random.Next(1 , 1800));  //随机事件进行消息提醒
             someTime_timer.Tick += new EventHandler(someTime);
             someTime_timer.Start();
-        //似乎把只能启动一个的代码弄丢了。。
 
             //  从alt tab中隐藏的代码来自  http://www.helplib.com/qa/494704
             WindowInteropHelper wndHelper = new WindowInteropHelper(this);
@@ -210,7 +216,7 @@ namespace mkacg
                             music_id = value;
                             Console.WriteLine(music_id);
                         }
-                      
+
 
                     }
                 }
@@ -234,7 +240,7 @@ namespace mkacg
         {
             // image.Source = new BitmapImage(new Uri("Images/Main1.png" , UriKind.Relative));
             Random random = new Random();
-            int i= random.Next(0,5);
+            int i = random.Next(0 , 5);
             Console.WriteLine(i);
             switch (i)
             {
@@ -255,8 +261,7 @@ namespace mkacg
                     break;
             }
         }
-        talk_control  _talk = new talk_control();
-       
+
         int count = 0;
 
         private void bgmusicplayer_MediaEnded (object sender , RoutedEventArgs e)
@@ -266,21 +271,23 @@ namespace mkacg
                 play();
             }
         }
-      
+
         String play_name_get;
         public void play ()
         {
             open_config();
-            List<string> list = redio_r.ConnectTuLing(music_id);
+            List<string> list = redio_r.ConnectTuLing();
             Console.WriteLine(music_id);
             list[0] = System.Web.HttpUtility.UrlDecode(list[0] , System.Text.Encoding.UTF8);
             Console.WriteLine(list[0]);
             bgmusicplayer.Source = new Uri(list[0]);
+            Class1.redio_img = list[2];
+            Console.WriteLine(list[2]);
             bg_text.Text = "";
             bg_source.Content = "";
             timer.Stop();
             showorhidetrue();
-         
+
             timer.Start();
             bgmusicplayer.Play();
             bg_text.Text = "正在播放:" + list[1];
@@ -298,13 +305,15 @@ namespace mkacg
                 try
                 {
                     play();
+                    Class1.redio_sta = 1;
+
                 }
                 catch (Exception)
                 {
                     timer.Stop();
                     bg_text.Text = "对不起，播放失败";
                     showorhidetrue();
-                
+
                     timer.Start();
                     bgmusicplayer.Stop();
                 }
@@ -318,7 +327,7 @@ namespace mkacg
                 redioplayer.Header = "电台模式";
                 showorhidetrue();
                 play_name_get = null;
-               
+                Class1.redio_sta = 0;
                 play_next.Visibility = Visibility.Collapsed;
                 play_name.Visibility = Visibility.Collapsed;
                 timer.Start();
@@ -333,18 +342,21 @@ namespace mkacg
             try
             {
                 open_config();
-                List<string> list = redio_r.ConnectTuLing(music_id);
-                Console.WriteLine("下首播放操作->"+music_id+list);
+                List<string> list = redio_r.ConnectTuLing();
+                Console.WriteLine("下首播放操作->" + music_id + list);
                 bgmusicplayer.Source = (new Uri(list[0]));
                 bg_text.Text = "";
                 bg_source.Content = "";
                 timer.Stop();
                 showorhidetrue();
-             
+
                 timer.Start();
                 bgmusicplayer.Play();
                 bg_text.Text = "正在播放:" + list[1];
+
                 play_name_get = list[1];
+                Class1.redio_img = list[2];
+                Console.WriteLine("img->" + list[2]);
                 play_next.Visibility = Visibility.Visible;
                 play_name.Visibility = Visibility.Visible;
                 redioplayer.Header = "关闭电台模式";
@@ -356,7 +368,7 @@ namespace mkacg
                 bg_source.Content = "";
                 bg_text.Text = "对不起，播放失败";
                 showorhidetrue();
-              
+
                 timer.Start();
                 bgmusicplayer.Stop();
             }
@@ -370,7 +382,7 @@ namespace mkacg
             bg_source.Content = "";
             timer.Stop();
             showorhidetrue();
-          
+
             timer.Start();
             bgmusicplayer.Play();
             bg_text.Text = "正在播放:" + play_name_get;
@@ -598,13 +610,17 @@ namespace mkacg
             if (count % 2 == 0)
             {
                 talk_control talk_cont = new talk_control();
+               talk_cont.play_next_click += new talk_control.play_next_Click(play_next_Click);
+                talk_cont.cv += new talk_control.change_volume(change_volume);
                 talk_cont.Show();
                 
             }
         }
 
-
-
+        void change_volume (double value)
+        {
+            bgmusicplayer.Volume = value;
+        }
         private void someTime (object sender , EventArgs e)
         {
             someTime_timer.Stop();
@@ -612,7 +628,7 @@ namespace mkacg
             //显示一句话
             timer.Stop();
             showorhidetrue();
-        
+
             mkacg_showhitokoto mkacgclass = new mkacg_showhitokoto();
             String[] list = mkacgclass.hitokoto();
             bg_text.Text = "";
@@ -628,14 +644,14 @@ namespace mkacg
         {
             settings setting = new settings();
             setting.Show();
-            
+
         }
 
         private void bg_text_LayoutUpdated (object sender , EventArgs e)
         {
             bg_text.Height = bg_text.ActualHeight;
-           
+
         }
+
     }
-   
 }

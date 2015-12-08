@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using System.Xml;
 using Microsoft.Win32;
 
 namespace mkacg
 {
+
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
@@ -14,23 +18,32 @@ namespace mkacg
         public talk_control ()
         {
             InitializeComponent();
-           
+            this.slider.ValueChanged += new RoutedPropertyChangedEventHandler<double>(slider_ValueChanged);//注册事件 
         }
-        
+
         string Name_;
         string musicid_;
-        
+
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
+            if (Class1.redio_sta == 0)
+            {
+                button.Visibility = slider.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                button.Visibility = slider.Visibility = Visibility.Visible;
+
+            }
             double workHeight = SystemParameters.WorkArea.Height;
             double workWidth = SystemParameters.WorkArea.Width;
             this.Top = (workHeight - this.Height) / 1;
-            this.Left = 1/(workWidth - this.Width);
-            
+            this.Left = 1 / (workWidth - this.Width);
+            slider.Value = 0.3;
             if (Class1.sta == 0)
             {
                 open_config();
-               Class1.sta = 1;
+                Class1.sta = 1;
             }
             else
             {
@@ -38,6 +51,15 @@ namespace mkacg
                 source_text.Text = Name_ + "  欢迎回来";
                 //如果电台在播放，显示控件
 
+            }
+            try
+            {
+             //   image.Source = new BitmapImage(new Uri(Class1.redio_img , UriKind.Relative));
+          //      Console.WriteLine(Class1.redio_img);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
 
         }
@@ -76,27 +98,27 @@ namespace mkacg
                 }
                 else if (textBox.Text == "录音测试")
                 {
-                   Talk_baidu baidu = new Talk_baidu();
-                   // baidu.sound();
+                    Talk_baidu baidu = new Talk_baidu();
+                    // baidu.sound();
                     textBox.Text = "";
                 }
                 else if (textBox.Text == "录音开始")
                 {
-                     Talk_baidu baidu = new  Talk_baidu();
+                    Talk_baidu baidu = new Talk_baidu();
                     baidu.luyin_on();
                     textBox.Text = "";
                 }
                 else if (textBox.Text == "录音停止")
                 {
-                   Talk_baidu baidu = new  Talk_baidu();
-                  //  baidu.luyin_save();
+                    Talk_baidu baidu = new Talk_baidu();
+                    //  baidu.luyin_save();
                     if (baidu.luyin_save())
                     {
                         httpRequest hR = new httpRequest();
                         string token_Access = hR.getStrAccess(hR.API_key , hR.API_secret_key);
                         string token_Text = hR.getStrText(hR.API_id , token_Access , "zh" , "1.wav" , "pcm" , "8000");
                         source_text.Text = token_Text;
-                       // File.Delete("1.wav");
+                        // File.Delete("1.wav");
                     }
                     textBox.Text = "";
                 }
@@ -153,7 +175,7 @@ namespace mkacg
         {
             try
             {
-               
+
                 XmlDocument xmldoc = new XmlDocument();
                 xmldoc.Load("config.xml");
                 XmlNode rootnode = xmldoc.SelectSingleNode("result");
@@ -172,11 +194,11 @@ namespace mkacg
                         {
                             Name_ = value;
                         }
-                        else if (name =="musicid")
+                        else if (name == "musicid")
                         {
                             musicid_ = value;
                         }
-                      
+
                     }
                 }
             }
@@ -185,7 +207,7 @@ namespace mkacg
                 Console.WriteLine(ex.ToString());
             }
         }
-        public void create_config (string name, string musicid)
+        public void create_config (string name , string musicid)
         {
             XmlDocument doc = new XmlDocument();
             XmlDeclaration dec = doc.CreateXmlDeclaration("1.0" , "UTF-8" , null);
@@ -194,7 +216,7 @@ namespace mkacg
             doc.AppendChild(root);
             XmlElement element1 = doc.CreateElement("system");
             element1.SetAttribute("name" , name);
-            element1.SetAttribute("musicid" ,musicid );
+            element1.SetAttribute("musicid" , musicid);
             root.AppendChild(element1);
             doc.AppendChild(root);
             doc.Save("config.xml");
@@ -202,14 +224,25 @@ namespace mkacg
 
         private void Window_Activated (object sender , EventArgs e)
         {
-           
+
         }
 
         private void source_text_LayoutUpdated (object sender , EventArgs e)
         {
             source_text.Height = source_text.ActualHeight;
         }
+        public delegate void play_next_Click (object sender , RoutedEventArgs e);
+        public event play_next_Click play_next_click;
+        private void button_Click (object sender , RoutedEventArgs e)
+        {
+          play_next_click(sender,e);
+          }
+        public delegate void change_volume (double value);
+        public event change_volume cv;
 
-        
+        private void slider_ValueChanged (object sender , RoutedPropertyChangedEventArgs<double> e)
+        {
+            cv(slider.Value);
+        }
     }
 }

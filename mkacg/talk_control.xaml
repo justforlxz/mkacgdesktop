@@ -106,6 +106,9 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-    
+        <Image x:Name="image" HorizontalAlignment="Left" Height="96" Margin="52,92,0,0" VerticalAlignment="Top" Width="124"/>
+        <Button x:Name="button" Content="下一曲" Click="button_Click" HorizontalAlignment="Left" Height="25" Margin="265,215,0,0" VerticalAlignment="Top" Width="103"/>
+        <Slider x:Name="slider" ValueChanged="slider_ValueChanged"  HorizontalAlignment="Left" Height="109" Margin="346,92,0,0" VerticalAlignment="Top" Width="22" IsSnapToTickEnabled="True" Maximum="1" TickFrequency="0.1" Orientation="Vertical"/>
+
     </Grid>
 </Window>

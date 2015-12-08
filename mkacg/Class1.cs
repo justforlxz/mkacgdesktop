@@ -11,7 +11,10 @@ namespace mkacg
 {
     public class Class1
     {
+
         public static int sta = 0;
+        public static string redio_img;
+        public static int redio_sta;
         public String main (String text)
         {
             String gettext = null;
