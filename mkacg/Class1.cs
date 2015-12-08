@@ -15,6 +15,7 @@ namespace mkacg
         public static int sta = 0;
         public static string redio_img;
         public static int redio_sta;
+        public static double redio_volume=0.3;
         public String main (String text)
         {
             String gettext = null;

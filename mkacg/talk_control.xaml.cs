@@ -39,7 +39,7 @@ namespace mkacg
             double workWidth = SystemParameters.WorkArea.Width;
             this.Top = (workHeight - this.Height) / 1;
             this.Left = 1 / (workWidth - this.Width);
-            slider.Value = 0.3;
+            slider.Value = Class1.redio_volume;
             if (Class1.sta == 0)
             {
                 open_config();
@@ -243,6 +243,7 @@ namespace mkacg
         private void slider_ValueChanged (object sender , RoutedPropertyChangedEventArgs<double> e)
         {
             cv(slider.Value);
+            Class1.redio_volume = slider.Value;
         }
     }
 }

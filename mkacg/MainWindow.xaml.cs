@@ -306,6 +306,7 @@ namespace mkacg
                 {
                     play();
                     Class1.redio_sta = 1;
+                    bgmusicplayer.Volume = Class1.redio_volume;
 
                 }
                 catch (Exception)
@@ -328,6 +329,7 @@ namespace mkacg
                 showorhidetrue();
                 play_name_get = null;
                 Class1.redio_sta = 0;
+                bgmusicplayer.Volume = Class1.redio_volume;
                 play_next.Visibility = Visibility.Collapsed;
                 play_name.Visibility = Visibility.Collapsed;
                 timer.Start();
