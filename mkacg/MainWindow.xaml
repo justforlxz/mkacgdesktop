@@ -6,9 +6,20 @@
         xmlns:local="clr-namespace:mkacg"
         mc:Ignorable="d"
         Title="萌控二次元" Loaded="Window_Loaded"  Height="347" Width="344"  Background="{x:Null}" WindowStyle="None" WindowStartupLocation="Manual" ResizeMode="NoResize" ShowInTaskbar="False" IsTabStop="False" Foreground="Black" AllowsTransparency="True">
+    <Window.Resources>
+        <Storyboard x:Key="Storyboard1"/>
+        <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
+            <Setter Property="FlowDirection" Value="LeftToRight"/>
+        </Style>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+        </EventTrigger>
+    </Window.Triggers>
     <Grid>
         <Label x:Name="bg_white"  HorizontalAlignment="Left"  Height="112"  Margin="5,65,0,0" VerticalAlignment="Top" Width="194" Background="#D8E2E2E2" BorderThickness="0,0,1,1"/>
-        <Image x:Name="image" MouseLeftButtonDown="image_MouseLeftButtonDown" MouseDown="image_MouseDown"  Source="Images/1.png"  HorizontalAlignment="Left" Height="175" Margin="171,152,-2,0" VerticalAlignment="Top" Width="175" Grid.RowSpan="2">
+        <Image x:Name="image" MouseLeftButtonDown="image_MouseLeftButtonDown" MouseDown="image_MouseDown"  Source="Images/bujian2.png"  HorizontalAlignment="Left" Height="175" Margin="171,152,-2,0" VerticalAlignment="Top" Width="175" Grid.RowSpan="2">
             <Image.ContextMenu>
                 <ContextMenu x:Name="right_bg_click">
                     <MenuItem Header="每日一句" Click="MenuItem_Click" />
