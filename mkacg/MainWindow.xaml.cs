@@ -8,7 +8,7 @@ using System.Xml;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Windows.Interop;
-
+using System.Net;
 
 namespace mkacg
 {
@@ -40,7 +40,7 @@ namespace mkacg
         /// <summary>
         /// ////////////////////////
         /// </summary>
-        static int themes = 0;
+  
         DispatcherTimer timer = new DispatcherTimer();
         DispatcherTimer timerToSendMessages = new DispatcherTimer();
         DispatcherTimer someTime_timer = new DispatcherTimer();
@@ -236,66 +236,79 @@ namespace mkacg
             }
         }
 
-        private void MenuItem_Click_3 (object sender , RoutedEventArgs e)
-        {
-            // image.Source = new BitmapImage(new Uri("Images/Main1.png" , UriKind.Relative));
-            Random random = new Random();
-            int i = random.Next(0 , 5);
-            Console.WriteLine(i);
-            switch (i)
-            {
-                case 1:
-                    image.Source = new BitmapImage(new Uri("Images/1.png" , UriKind.Relative));
-                    break;
-                case 2:
-                    image.Source = new BitmapImage(new Uri("Images/2.png" , UriKind.Relative));
-                    break;
-                case 3:
-                    image.Source = new BitmapImage(new Uri("Images/3.png" , UriKind.Relative));
-                    break;
-                case 4:
-                    image.Source = new BitmapImage(new Uri("Images/4.png" , UriKind.Relative));
-                    break;
-                default:
-                    image.Source = new BitmapImage(new Uri("Images/1.png" , UriKind.Relative));
-                    break;
-            }
-        }
-
+      
         int count = 0;
 
         private void bgmusicplayer_MediaEnded (object sender , RoutedEventArgs e)
         {
             if (appfirst != 1)
             {
-                play();
+                play(sender,e);
             }
         }
 
         String play_name_get;
-        public void play ()
+        public void play (object sender , RoutedEventArgs e)
         {
-            open_config();
-            List<string> list = redio_r.ConnectTuLing();
-            Console.WriteLine(music_id);
-            list[0] = System.Web.HttpUtility.UrlDecode(list[0] , System.Text.Encoding.UTF8);
-            Console.WriteLine(list[0]);
-            bgmusicplayer.Source = new Uri(list[0]);
-            Class1.redio_img = list[2];
-            Console.WriteLine(list[2]);
-            bg_text.Text = "";
-            bg_source.Content = "";
-            timer.Stop();
-            showorhidetrue();
 
-            timer.Start();
-            bgmusicplayer.Play();
-            bg_text.Text = "正在播放:" + list[1];
-            play_name_get = list[1];
-            play_next.Visibility = Visibility.Visible;
-            play_name.Visibility = Visibility.Visible;
-            redioplayer.Header = "关闭电台模式";
+            try
+            {
+                open_config();
+                List<string> list = redio_r.ConnectTuLing();
+                Console.WriteLine(music_id);
+                list[0] = System.Web.HttpUtility.UrlDecode(list[0] , System.Text.Encoding.UTF8);
+                Console.WriteLine(list[0]);
+                bgmusicplayer.Source = new Uri(list[0]);
+                Class1.redio_img = list[2];
+                Console.WriteLine(list[2]);
+                bg_text.Text = "";
+                bg_source.Content = "";
+                timer.Stop();
+                showorhidetrue();
+
+                timer.Start();
+                bgmusicplayer.Play();
+                bg_text.Text = "正在播放:" + list[1];
+                play_name_get = list[1];
+                play_next.Visibility = Visibility.Visible;
+                play_name.Visibility = Visibility.Visible;
+                redioplayer.Header = "关闭电台模式";
+            }
+            catch (Exception)
+            {
+                play_next_Click(sender,e);
+                
+            }
         }
+        //电台文件下载
+        public List<string> HttpDownloadFile (string url , String name)
+        {
+            List<String> list = new List<string>();
+            // 设置参数
+            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+
+            //发送请求并获取相应回应数据
+            HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+            //直到request.GetResponse()程序才开始向目标网页发送Post请求
+            Stream responseStream = response.GetResponseStream();
+
+            //创建本地文件写入流
+            Stream stream = new FileStream(Path.GetTempPath() + name , FileMode.Create);
+
+            byte[] bArr = new byte[1024];
+            int size = responseStream.Read(bArr , 0 , (int)bArr.Length);
+            while (size > 0)
+            {
+                stream.Write(bArr , 0 , size);
+                size = responseStream.Read(bArr , 0 , (int)bArr.Length);
+            }
+            stream.Close();
+            responseStream.Close();
+            list.Add(Path.GetTempPath());
+            list.Add(name);
+            return list;
+        }
+
         private void redioplayer_Click (object sender , RoutedEventArgs e)
         {
             bgmusicplayer.Stop();
@@ -304,7 +317,7 @@ namespace mkacg
             {
                 try
                 {
-                    play();
+                    play(sender,e);
                     Class1.redio_sta = 1;
                     bgmusicplayer.Volume = Class1.redio_volume;
 

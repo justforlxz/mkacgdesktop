@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
@@ -77,6 +80,7 @@ namespace mkacg
                     source_text.Text = "我是" + Name_ + "可爱的女朋友";
                     textBox.Text = "";
                 }
+              
                 else if (textBox.Text == "设置开机启动")
                 {
                     textBox.Text = "";
@@ -244,6 +248,12 @@ namespace mkacg
         {
             cv(slider.Value);
             Class1.redio_volume = slider.Value;
+        }
+     
+
+        private void button1_Click (object sender , RoutedEventArgs e)
+        {
+
         }
     }
 }
