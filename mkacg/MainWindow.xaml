@@ -7,35 +7,58 @@
         mc:Ignorable="d"
         Title="萌控二次元" Loaded="Window_Loaded"  Height="347" Width="344"  Background="{x:Null}" WindowStyle="None" WindowStartupLocation="Manual" ResizeMode="NoResize" ShowInTaskbar="False" IsTabStop="False" Foreground="Black" AllowsTransparency="True">
     <Window.Resources>
-        <Storyboard x:Key="Storyboard1"/>
-        <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
-            <Setter Property="FlowDirection" Value="LeftToRight"/>
-        </Style>
+        <Storyboard x:Key="Storyboard1" AutoReverse="False">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="image1" RepeatBehavior="Forever">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-16.508"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <PointAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="image1" RepeatBehavior="Forever">
+                <EasingPointKeyFrame KeyTime="0" Value="0.885,0.814"/>
+                <EasingPointKeyFrame KeyTime="0:0:0.5" Value="0.885,0.814"/>
+                <EasingPointKeyFrame KeyTime="0:0:1" Value="0.885,0.814"/>
+            </PointAnimationUsingKeyFrames>
+        </Storyboard>
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-            <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+            <ResumeStoryboard BeginStoryboardName="Storyboard1_BeginStoryboard"/>
+            <BeginStoryboard x:Name="Storyboard1_BeginStoryboard" Storyboard="{StaticResource Storyboard1}"/>
         </EventTrigger>
     </Window.Triggers>
+
     <Grid>
         <Label x:Name="bg_white"  HorizontalAlignment="Left"  Height="112"  Margin="5,65,0,0" VerticalAlignment="Top" Width="194" Background="#D8E2E2E2" BorderThickness="0,0,1,1"/>
-        <Image x:Name="image" MouseLeftButtonDown="image_MouseLeftButtonDown" MouseDown="image_MouseDown"  Source="Images/bujian2.png"  HorizontalAlignment="Left" Height="175" Margin="171,152,-2,0" VerticalAlignment="Top" Width="175" Grid.RowSpan="2">
-            <Image.ContextMenu>
-                <ContextMenu x:Name="right_bg_click">
-                    <MenuItem Header="每日一句" Click="MenuItem_Click" />
-                    <MenuItem Header="换皮肤" Click="MenuItem_Click_3" />
-                    <MenuItem Header="控制中心" Click="MenuItem_Click_5" />
-                    <MenuItem x:Name="redioplayer" Header="电台模式"  Click="redioplayer_Click" />
-                    <MenuItem x:Name="play_name" Header="歌曲信息" Click="play_name_Click" Visibility="Collapsed" />
-                    <MenuItem x:Name="play_next" Header="下一曲" Click="play_next_Click" Visibility="Collapsed" />
-                    <MenuItem Header="报时" Click="MenuItem_Click_4"/>
-                    <MenuItem Header="退出" Click="MenuItem_Click_2"/>
-                </ContextMenu>
-            </Image.ContextMenu>
-        </Image>
         <TextBlock  x:Name="bg_text" HorizontalAlignment="Left" Margin="11,72,0,0" TextWrapping="Wrap" Text="欢迎来到萌控二次元" VerticalAlignment="Top" Width="183" FontSize="13.333" TextOptions.TextFormattingMode="Display"/>
         <Label x:Name="bg_source" Content=""  HorizontalAlignment="Left" Height="30" Margin="12,143,0,0" VerticalAlignment="Top" Width="182" FontSize="10.667" HorizontalContentAlignment="Right" TextOptions.TextFormattingMode="Display" />
         <MediaElement x:Name="bgmusicplayer"  x:FieldModifier="public"  MediaEnded="bgmusicplayer_MediaEnded" HorizontalAlignment="Left" Height="61" Margin="259,47,0,0" VerticalAlignment="Top" Width="75" UnloadedBehavior="Stop" LoadedBehavior="Manual" Stretch="Fill" Source="Music/bg.mp3" Volume="0.3" />
+        <Grid Margin="148,129,-25,-3">
+            <Image x:Name="image" MouseLeftButtonDown="image_MouseLeftButtonDown" MouseDown="image_MouseDown"  Source="Images/bujian2.png"  HorizontalAlignment="Left" Height="221" VerticalAlignment="Top" Width="221">
+                <Image.ContextMenu>
+                    <ContextMenu x:Name="right_bg_click">
+                        <MenuItem Header="每日一句" Click="MenuItem_Click" />
+                        <MenuItem Header="换皮肤" Click="MenuItem_Click_3" />
+                        <MenuItem Header="控制中心" Click="MenuItem_Click_5" />
+                        <MenuItem x:Name="redioplayer" Header="电台模式"  Click="redioplayer_Click" />
+                        <MenuItem x:Name="play_name" Header="歌曲信息" Click="play_name_Click" Visibility="Collapsed" />
+                        <MenuItem x:Name="play_next" Header="下一曲" Click="play_next_Click" Visibility="Collapsed" />
+                        <MenuItem Header="报时" Click="MenuItem_Click_4"/>
+                        <MenuItem Header="退出" Click="MenuItem_Click_2"/>
+                    </ContextMenu>
+                </Image.ContextMenu>
+            </Image>
+            <Image x:Name="image1" Source="Images/bujian1.png" Margin="32,0,0,81" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Height="97" VerticalAlignment="Bottom" Width="74">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+
+        </Grid>
 
     </Grid>
 </Window>

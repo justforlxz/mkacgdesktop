@@ -99,11 +99,11 @@ namespace mkacg
             }
             /*************************************/
             this.Topmost = true;
-            if (themes == 0)
-            {
-                image.Source = new BitmapImage(new Uri("Images/1.png" , UriKind.Relative));
-                themes = 1;
-            }
+            //if (themes == 0)
+            //{
+            //    image.Source = new BitmapImage(new Uri("Images/1.png" , UriKind.Relative));
+            //    themes = 1;
+            //}
             double workHeight = SystemParameters.WorkArea.Height;
             double workWidth = SystemParameters.WorkArea.Width;
             this.Top = (workHeight - this.Height) / 1.1;
