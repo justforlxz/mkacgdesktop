@@ -46,6 +46,7 @@ namespace mkacg
         DispatcherTimer someTime_timer = new DispatcherTimer();
         redio redio_r = new redio();
         Random someTime_random = new Random();
+        Redio_window redio_window = new Redio_window();
         private void MenuItem_Click (object sender , RoutedEventArgs e)
         {
             //显示一句话
@@ -318,6 +319,10 @@ namespace mkacg
                 try
                 {
                     play(sender,e);
+                    Redio_window redio_window = new Redio_window();
+                    redio_window.play_next_click += new Redio_window.play_next_Click(play_next_Click);
+                    redio_window.cv += new Redio_window.change_volume(change_volume);
+                    redio_window.Show();
                     Class1.redio_sta = 1;
                     bgmusicplayer.Volume = Class1.redio_volume;
 
@@ -339,6 +344,7 @@ namespace mkacg
                 bg_text.Text = "已关闭电台模式";
                 bg_source.Content = "";
                 redioplayer.Header = "电台模式";
+                redio_window.Hide();
                 showorhidetrue();
                 play_name_get = null;
                 Class1.redio_sta = 0;
@@ -625,10 +631,8 @@ namespace mkacg
             if (count % 2 == 0)
             {
                 talk_control talk_cont = new talk_control();
-               talk_cont.play_next_click += new talk_control.play_next_Click(play_next_Click);
-                talk_cont.cv += new talk_control.change_volume(change_volume);
-                talk_cont.Show();
                 
+                talk_cont.Show();
             }
         }
 

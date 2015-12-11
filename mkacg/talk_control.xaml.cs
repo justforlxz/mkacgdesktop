@@ -21,7 +21,7 @@ namespace mkacg
         public talk_control ()
         {
             InitializeComponent();
-            this.slider.ValueChanged += new RoutedPropertyChangedEventHandler<double>(slider_ValueChanged);//注册事件 
+       
         }
 
         string Name_;
@@ -29,20 +29,12 @@ namespace mkacg
 
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
-            if (Class1.redio_sta == 0)
-            {
-                button.Visibility = slider.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                button.Visibility = slider.Visibility = Visibility.Visible;
-
-            }
+          
             double workHeight = SystemParameters.WorkArea.Height;
             double workWidth = SystemParameters.WorkArea.Width;
             this.Top = (workHeight - this.Height) / 1;
             this.Left = 1 / (workWidth - this.Width);
-            slider.Value = Class1.redio_volume;
+      
             if (Class1.sta == 0)
             {
                 open_config();
@@ -57,8 +49,8 @@ namespace mkacg
             }
             try
             {
-             //   image.Source = new BitmapImage(new Uri(Class1.redio_img , UriKind.Relative));
-          //      Console.WriteLine(Class1.redio_img);
+             //  image.Source = new BitmapImage(new Uri(Class1.redio_img , UriKind.Relative));
+             Console.WriteLine(Class1.redio_img);
             }
             catch (Exception ex)
             {
@@ -68,10 +60,9 @@ namespace mkacg
         }
 
 
-        // talk.Class1 _talk = new talk.Class1();
         Class1 _talk = new Class1();
         private void textBox_KeyDown (object sender , KeyEventArgs e)
-        {
+       {
             if (e.Key == Key.Enter)
             {
                 open_config();
@@ -80,7 +71,7 @@ namespace mkacg
                     source_text.Text = "我是" + Name_ + "可爱的女朋友";
                     textBox.Text = "";
                 }
-              
+
                 else if (textBox.Text == "设置开机启动")
                 {
                     textBox.Text = "";
@@ -152,7 +143,7 @@ namespace mkacg
             try
             {
                 Run.SetValue("MKACG" , AppDomain.CurrentDomain.BaseDirectory + "萌控二次元.exe");
-                source_text.Text = "已开启开机项\n你可以通过“设置关闭开机启动”命令来关闭。";
+                //source_text.Text = "已开启开机项\n你可以通过“设置关闭开机启动”命令来关闭。";
 
             }
             catch
@@ -172,7 +163,7 @@ namespace mkacg
             }
             catch
             {
-                source_text.Text = "未知的失败";
+           source_text.Text = "未知的失败";
             }
         }
         public void open_config ()
@@ -235,24 +226,19 @@ namespace mkacg
         {
             source_text.Height = source_text.ActualHeight;
         }
-        public delegate void play_next_Click (object sender , RoutedEventArgs e);
-        public event play_next_Click play_next_click;
-        private void button_Click (object sender , RoutedEventArgs e)
-        {
-          play_next_click(sender,e);
-          }
-        public delegate void change_volume (double value);
-        public event change_volume cv;
 
-        private void slider_ValueChanged (object sender , RoutedPropertyChangedEventArgs<double> e)
+
+        private void label_Copy_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
         {
-            cv(slider.Value);
-            Class1.redio_volume = slider.Value;
+            frame.Visibility = Visibility.Visible;
+            this.frame.Navigate(new Uri("talk_control_talk.xaml",UriKind.Relative));
+            body.Visibility = Visibility.Hidden;
         }
-     
 
-        private void button1_Click (object sender , RoutedEventArgs e)
+        private void label_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
         {
+            frame.Visibility = Visibility.Hidden;
+            body.Visibility = Visibility.Visible;
 
         }
     }

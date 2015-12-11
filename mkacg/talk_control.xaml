@@ -8,21 +8,6 @@
         Title="talk_control" Height="584" Width="392"  Loaded="Window_Loaded" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None"  ShowInTaskbar="False" ResizeMode="NoResize" Topmost="True" Activated="Window_Activated" Deactivated="Window_Deactivated">
     <Window.Resources>
         <Storyboard x:Key="Storyboard1">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="source_text">
-                <EasingDoubleKeyFrame KeyTime="0" Value="63"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.433" Value="52.5"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="6"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="source_text">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0.3"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.433" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="source_text">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.433" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="label1">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0.895"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.931"/>
@@ -62,6 +47,7 @@
     </Window.Triggers>
     <Grid x:Name="grid">
 
+      
         <Label x:Name="label1" HorizontalAlignment="Left" Height="584" VerticalAlignment="Top" Width="392" Background="#FFECECEC" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
@@ -91,25 +77,24 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </Grid.RenderTransform>
-                <Label x:Name="label" Content="≡" HorizontalAlignment="Left" Height="46" Margin="8,10,0,0" VerticalAlignment="Top" Width="34" Foreground="White" FontSize="32"/>
+                <Label x:Name="label" Content="≡" MouseLeftButtonDown="label_MouseLeftButtonDown" HorizontalAlignment="Left" Height="46" Margin="8,10,0,0" VerticalAlignment="Top" Width="34" Foreground="White" FontSize="32"/>
+                <Label x:Name="label_Copy" Content="≡" HorizontalAlignment="Left" MouseLeftButtonDown="label_Copy_MouseLeftButtonDown" Height="46" Margin="8,61,0,0" VerticalAlignment="Top" Width="34" Foreground="White" FontSize="32"/>
             </Grid>
         </Border>
+        <Frame x:Name="frame"  HorizontalAlignment="Left" Height="541"  VerticalAlignment="Top" Width="340" Margin="52,0,0,0" NavigationUIVisibility="Hidden"/>
+
         <TextBox x:Name="textBox" HorizontalAlignment="Left" KeyDown="textBox_KeyDown" Height="30" Margin="52,546,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="330" FontSize="21.333" BorderBrush="{x:Null}"/>
-
-        <TextBlock x:Name="source_text"  Text="你好，有什么可以帮助你的吗？" LayoutUpdated="source_text_LayoutUpdated" HorizontalAlignment="Left"  Margin="52,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316" FontSize="18.667" TextOptions.TextFormattingMode="Display" RenderTransformOrigin="0.5,0.5" >
-            <TextBlock.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBlock.RenderTransform>
-        </TextBlock>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="96" Margin="52,92,0,0" VerticalAlignment="Top" Width="124"/>
-        <Button x:Name="button" Content="下一曲" Click="button_Click" HorizontalAlignment="Left" Height="25" Margin="265,215,0,0" VerticalAlignment="Top" Width="103"/>
-        <Slider x:Name="slider" ValueChanged="slider_ValueChanged"  HorizontalAlignment="Left" Height="109" Margin="346,92,0,0" VerticalAlignment="Top" Width="22" IsSnapToTickEnabled="True" Maximum="1" TickFrequency="0.1" Orientation="Vertical"/>
-        <Button x:Name="button1" Click="button1_Click" Content="Button" HorizontalAlignment="Left" Height="39" Margin="111,240,0,0" VerticalAlignment="Top" Width="84"/>
-
+        <Grid x:Name="body" Margin="52,22,24,344">
+            <TextBlock x:Name="source_text"  Text="你好，有什么可以帮助你的吗？" LayoutUpdated="source_text_LayoutUpdated" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="316" FontSize="18.667" TextOptions.TextFormattingMode="Display" RenderTransformOrigin="0.5,0.5" >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+        </Grid>
     </Grid>
 </Window>

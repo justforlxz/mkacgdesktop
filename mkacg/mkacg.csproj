@@ -130,6 +130,12 @@
     <Compile Include="Base64.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="mkacg_showhitokoto.cs" />
+    <Compile Include="Redio_window.xaml.cs">
+      <DependentUpon>Redio_window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="talk_control_talk.xaml.cs">
+      <DependentUpon>talk_control_talk.xaml</DependentUpon>
+    </Compile>
     <Compile Include="redio.cs" />
     <Compile Include="settings.xaml.cs">
       <DependentUpon>settings.xaml</DependentUpon>
@@ -153,6 +159,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Redio_window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="talk_control_talk.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

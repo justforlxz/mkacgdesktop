@@ -1,0 +1,14 @@
+﻿<Window x:Class="mkacg.Redio_window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:mkacg"
+        mc:Ignorable="d"
+        Title="Redio_window" Height="206.538" Width="335.769" Loaded="Window_Loaded">
+    <Grid>
+        <Slider x:Name="slider" HorizontalAlignment="Left" ValueChanged="slider_ValueChanged"   Height="119" Margin="302,47,0,0" VerticalAlignment="Top" Width="26" Orientation="Vertical" Maximum="1"/>
+        <Button x:Name="button" Click="button_Click" Content="Button" HorizontalAlignment="Left" Height="38" Margin="203,128,0,0" VerticalAlignment="Top" Width="94"/>
+
+    </Grid>
+</Window>
