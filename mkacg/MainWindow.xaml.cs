@@ -40,7 +40,7 @@ namespace mkacg
         /// <summary>
         /// ////////////////////////
         /// </summary>
-  
+
         DispatcherTimer timer = new DispatcherTimer();
         DispatcherTimer timerToSendMessages = new DispatcherTimer();
         DispatcherTimer someTime_timer = new DispatcherTimer();
@@ -83,7 +83,7 @@ namespace mkacg
         System.Threading.Mutex mut;
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
-            
+
             bgmusicplayer.Play();
             appfirst = 1;
 
@@ -96,7 +96,7 @@ namespace mkacg
             else
             {
 
-                setting.create_config("主人" , "38688170");
+                setting.create_config("主人");
             }
             /*************************************/
             this.Topmost = true;
@@ -128,6 +128,40 @@ namespace mkacg
             exStyle |= (int)ExtendedWindowStyles.WS_EX_TOOLWINDOW;
             SetWindowLong(wndHelper.Handle , (int)GetWindowLongFields.GWL_EXSTYLE , (IntPtr)exStyle);
         }
+        public void open_config ()
+        {
+            try
+            {
+                music_id = null;
+                XmlDocument xmldoc = new XmlDocument();
+                xmldoc.Load("config.xml");
+                XmlNode rootnode = xmldoc.SelectSingleNode("result");
+                string innerXmlInnfo = rootnode.InnerXml.ToString();
+                string outerxmlinfo = rootnode.OuterXml.ToString();
+                XmlNodeList firstlevelnodelist = rootnode.ChildNodes;
+                foreach (XmlNode node in firstlevelnodelist)
+                {
+                    XmlAttributeCollection attributecol = node.Attributes;
+                    foreach (XmlAttribute attri in attributecol)
+                    {
+                        string name = attri.Name;
+                        string value = attri.Value;
+                        Console.WriteLine("{0}={1}" , name , value);
+                        if (name == "name")
+                        {
+                            bg_text.Text = value + ",欢迎你";
+                        }
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
 
         //  从alt tab中隐藏的代码来自  http://www.helplib.com/qa/494704
         #region Window styles
@@ -193,41 +227,6 @@ namespace mkacg
         public static extern void SetLastError (int dwErrorCode);
         #endregion
 
-        public void open_config ()
-        {
-            try
-            {
-                music_id = null;
-                XmlDocument xmldoc = new XmlDocument();
-                xmldoc.Load("config.xml");
-                XmlNode rootnode = xmldoc.SelectSingleNode("result");
-                string innerXmlInnfo = rootnode.InnerXml.ToString();
-                string outerxmlinfo = rootnode.OuterXml.ToString();
-                XmlNodeList firstlevelnodelist = rootnode.ChildNodes;
-                foreach (XmlNode node in firstlevelnodelist)
-                {
-                    XmlAttributeCollection attributecol = node.Attributes;
-                    foreach (XmlAttribute attri in attributecol)
-                    {
-                        string name = attri.Name;
-                        string value = attri.Value;
-                        Console.WriteLine("{0}={1}" , name , value);
-                        if (name == "musicid")
-                        {
-                            music_id = value;
-                            Console.WriteLine(music_id);
-                        }
-
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-
 
         private void image_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
         {
@@ -237,14 +236,14 @@ namespace mkacg
             }
         }
 
-      
+
         int count = 0;
 
         private void bgmusicplayer_MediaEnded (object sender , RoutedEventArgs e)
         {
             if (appfirst != 1)
             {
-                play(sender,e);
+                play(sender , e);
             }
         }
 
@@ -254,6 +253,7 @@ namespace mkacg
 
             try
             {
+                /*
                 open_config();
                 List<string> list = redio_r.ConnectTuLing();
                 Console.WriteLine(music_id);
@@ -267,7 +267,29 @@ namespace mkacg
                 timer.Stop();
                 showorhidetrue();
                 Class1.music_name = list[1];
-               timer.Start();
+                timer.Start();
+                bgmusicplayer.Play();
+                bg_text.Text = "正在播放:" + list[1];
+                play_name_get = list[1];
+                play_next.Visibility = Visibility.Visible;
+                play_name.Visibility = Visibility.Visible;
+                redioplayer.Header = "关闭电台模式";
+                */
+
+                open_config();
+                List<string> list = redio_r.ConnectTuLing();
+                Console.WriteLine(music_id);
+                list[0] = System.Web.HttpUtility.UrlDecode(list[0] , System.Text.Encoding.UTF8);
+                Console.WriteLine(list[0]);
+                list= HttpDownloadFile(list[0] , list[1]);
+                Console.WriteLine(list[0]);
+                bgmusicplayer.Source = new Uri(list[0]);
+                bg_text.Text = "";
+                bg_source.Content = "";
+                timer.Stop();
+                showorhidetrue();
+                Class1.music_name = list[1];
+                timer.Start();
                 bgmusicplayer.Play();
                 bg_text.Text = "正在播放:" + list[1];
                 play_name_get = list[1];
@@ -277,13 +299,15 @@ namespace mkacg
             }
             catch (Exception)
             {
-                play_next_Click(sender,e);
-                
+                play_next_Click(sender , e);
+
             }
         }
         //电台文件下载
+        public List<int> down_count = new List<int>();
         public List<string> HttpDownloadFile (string url , String name)
         {
+
             List<String> list = new List<string>();
             // 设置参数
             HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
@@ -294,7 +318,9 @@ namespace mkacg
             Stream responseStream = response.GetResponseStream();
 
             //创建本地文件写入流
-            Stream stream = new FileStream(Path.GetTempPath() + name , FileMode.Create);
+            string str = System.Environment.CurrentDirectory;
+            str = str + @"\Music\" + name + ".mp3";
+            Stream stream = new FileStream(str , FileMode.Create);
 
             byte[] bArr = new byte[1024];
             int size = responseStream.Read(bArr , 0 , (int)bArr.Length);
@@ -305,9 +331,10 @@ namespace mkacg
             }
             stream.Close();
             responseStream.Close();
-            list.Add(Path.GetTempPath());
+            list.Add(str);
             list.Add(name);
             return list;
+
         }
 
         private void redioplayer_Click (object sender , RoutedEventArgs e)
@@ -318,14 +345,14 @@ namespace mkacg
             {
                 try
                 {
-                    play(sender,e);
+                    play(sender , e);
                     Redio_window redio_window = new Redio_window();
                     redio_window.play_next_click += new Redio_window.play_next_Click(play_next_Click);
                     redio_window.cv += new Redio_window.change_volume(change_volume);
                     redio_window.redioplayer_click += new Redio_window.redioplayer_Click(redioplayer_Click);
                     redio_window.Show();
                     Class1.redio_sta = 1;
-                   
+
                     bgmusicplayer.Volume = Class1.redio_volume;
 
                 }
@@ -350,6 +377,7 @@ namespace mkacg
                 showorhidetrue();
                 play_name_get = null;
                 Class1.redio_sta = 0;
+
                 bgmusicplayer.Volume = Class1.redio_volume;
                 play_next.Visibility = Visibility.Collapsed;
                 play_name.Visibility = Visibility.Collapsed;
@@ -367,13 +395,14 @@ namespace mkacg
                 open_config();
                 List<string> list = redio_r.ConnectTuLing();
                 Console.WriteLine("下首播放操作->" + music_id + list);
+              
                 bgmusicplayer.Source = (new Uri(list[0]));
                 bg_text.Text = "";
                 bg_source.Content = "";
                 timer.Stop();
                 showorhidetrue();
                 Class1.music_name = list[1];
-               timer.Start();
+                timer.Start();
                 bgmusicplayer.Play();
                 bg_text.Text = "正在播放:" + list[1];
 
@@ -633,7 +662,7 @@ namespace mkacg
             if (count % 2 == 0)
             {
                 talk_control talk_cont = new talk_control();
-                
+
                 talk_cont.Show();
             }
         }
@@ -649,7 +678,6 @@ namespace mkacg
             //显示一句话
             timer.Stop();
             showorhidetrue();
-
             mkacg_showhitokoto mkacgclass = new mkacg_showhitokoto();
             String[] list = mkacgclass.hitokoto();
             bg_text.Text = "";
@@ -667,12 +695,9 @@ namespace mkacg
             setting.Show();
 
         }
-
         private void bg_text_LayoutUpdated (object sender , EventArgs e)
         {
             bg_text.Height = bg_text.ActualHeight;
-
         }
-
     }
 }

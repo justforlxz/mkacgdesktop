@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace mkacg
 {
@@ -36,16 +39,139 @@ namespace mkacg
             cv(slider.Value);
             Class1.redio_volume = slider.Value;
         }
+        //  从alt tab中隐藏的代码来自  http://www.helplib.com/qa/494704
+        #region Window styles
+        [Flags]
+        public enum ExtendedWindowStyles
+        {
+            // ...
+            WS_EX_TOOLWINDOW = 0x00000080,
+            // ...
+        }
 
+        public enum GetWindowLongFields
+        {
+            // ...
+            GWL_EXSTYLE = (-20),
+            // ...
+        }
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetWindowLong (IntPtr hWnd , int nIndex);
+
+        public static IntPtr SetWindowLong (IntPtr hWnd , int nIndex , IntPtr dwNewLong)
+        {
+            int error = 0;
+            IntPtr result = IntPtr.Zero;
+            // Win32 SetWindowLong doesn't clear error on success
+            SetLastError(0);
+
+            if (IntPtr.Size == 4)
+            {
+                // use SetWindowLong
+                Int32 tempResult = IntSetWindowLong(hWnd , nIndex , IntPtrToInt32(dwNewLong));
+                error = Marshal.GetLastWin32Error();
+                result = new IntPtr(tempResult);
+            }
+            else
+            {
+                // use SetWindowLongPtr
+                result = IntSetWindowLongPtr(hWnd , nIndex , dwNewLong);
+                error = Marshal.GetLastWin32Error();
+            }
+
+            if (result == IntPtr.Zero)
+            {
+                throw new System.ComponentModel.Win32Exception(error);
+            }
+
+            return result;
+        }
+
+        [DllImport("user32.dll" , EntryPoint = "SetWindowLongPtr" , SetLastError = true)]
+        private static extern IntPtr IntSetWindowLongPtr (IntPtr hWnd , int nIndex , IntPtr dwNewLong);
+
+        [DllImport("user32.dll" , EntryPoint = "SetWindowLong" , SetLastError = true)]
+        private static extern Int32 IntSetWindowLong (IntPtr hWnd , int nIndex , Int32 dwNewLong);
+
+        private static int IntPtrToInt32 (IntPtr intPtr)
+        {
+            return unchecked((int)intPtr.ToInt64());
+        }
+
+        [DllImport("kernel32.dll" , EntryPoint = "SetLastError")]
+        public static extern void SetLastError (int dwErrorCode);
+        #endregion
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
             slider.Value = Class1.redio_volume;
-            double workHeight = SystemParameters.WorkArea.Height;
-            double workWidth = SystemParameters.WorkArea.Width;
-            this.Top = (workHeight - this.Height) / 1.1;
-            this.Left = (workWidth - this.Width) / 1;
             MusicName.Content = Class1.music_name;
+            if (File.Exists(@"redio_config.xml"))
+            {
+                open_config();
+            }
+            else
+            {
+                double workHeight = SystemParameters.WorkArea.Height;
+                double workWidth = SystemParameters.WorkArea.Width;
+                this.Top = (workHeight - this.Height) / 10;
+                this.Left = (workWidth - this.Width) / 1.05;
+                create_config(Top,Left);
+            }
+           
+           
         }
+        public void open_config ()
+        {
+            try
+            {
+
+                XmlDocument xmldoc = new XmlDocument();
+                xmldoc.Load("redio_config.xml");
+                XmlNode rootnode = xmldoc.SelectSingleNode("result");
+                string innerXmlInnfo = rootnode.InnerXml.ToString();
+                string outerxmlinfo = rootnode.OuterXml.ToString();
+                XmlNodeList firstlevelnodelist = rootnode.ChildNodes;
+                foreach (XmlNode node in firstlevelnodelist)
+                {
+                    XmlAttributeCollection attributecol = node.Attributes;
+                    foreach (XmlAttribute attri in attributecol)
+                    {
+                        string name = attri.Name;
+                        string value = attri.Value;
+                        Console.WriteLine("{0}={1}" , name , value);
+                        if (name=="x")
+                        {
+                            this.Top = double.Parse(value) ;
+                        }
+                        else if (name=="y")
+                        {
+                            this.Left = double.Parse(value);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        public void create_config (double x,double y)
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlDeclaration dec = doc.CreateXmlDeclaration("1.0" , "UTF-8" , null);
+            doc.AppendChild(dec);
+            XmlElement root = doc.CreateElement("result");  //一级
+            doc.AppendChild(root);
+            XmlElement element1 = doc.CreateElement("system");
+            //  element1.SetAttribute("id" , "内容");
+            element1.SetAttribute("x" ,x.ToString());
+            element1.SetAttribute("y" , y.ToString());
+            root.AppendChild(element1);
+            doc.AppendChild(root);
+            doc.Save("redio_config.xml");
+        }
+
 
         private void next_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
         {
@@ -58,6 +184,7 @@ namespace mkacg
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.DragMove();
+                create_config(this.Top,this.Left);
             }
         }
 

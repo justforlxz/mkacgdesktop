@@ -10,8 +10,6 @@
         <Button x:Name="button" Content="ok" HorizontalAlignment="Left" Height="33" Margin="431,205,0,0" VerticalAlignment="Top" Width="51" Click="button_Click"/>
         <Label x:Name="label" Content="名字" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="37" RenderTransformOrigin="0.569,0.385"/>
         <TextBox x:Name="system_name" HorizontalAlignment="Left" Height="26" Margin="101,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" />
-        <Label x:Name="label1" Content="网易云歌单id" HorizontalAlignment="Left" Height="30" Margin="10,41,0,0" VerticalAlignment="Top" Width="86"/>
-        <TextBox x:Name="music_id" HorizontalAlignment="Left" Height="30" Margin="101,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196"/>
 
     </Grid>
 </Window>

@@ -27,9 +27,9 @@ namespace mkacg
 
         private void button_Click (object sender , RoutedEventArgs e)
         {
-            if (system_name.Text!=""||music_id.Text!="")
+            if (system_name.Text!="")
             {
-                create_config(system_name.Text,music_id.Text);
+                create_config(system_name.Text);
             }
             else
             {
@@ -60,10 +60,7 @@ namespace mkacg
                         {
                             system_name.Text = value;
                         }
-                        else if (name == "musicid")
-                        {
-                            music_id.Text = value;
-                        }
+                       
                     }
                 }
             }
@@ -72,7 +69,7 @@ namespace mkacg
                 Console.WriteLine(ex.ToString());
             }
         }
-        public void create_config (String name,String musicid)
+        public void create_config (String name)
         {
             XmlDocument doc = new XmlDocument();
             XmlDeclaration dec = doc.CreateXmlDeclaration("1.0" , "UTF-8" , null);
@@ -82,7 +79,6 @@ namespace mkacg
             XmlElement element1 = doc.CreateElement("system");
             //  element1.SetAttribute("id" , "内容");
             element1.SetAttribute("name",name);
-            element1.SetAttribute("musicid",musicid);
             root.AppendChild(element1);
             doc.AppendChild(root);
             doc.Save("config.xml");
@@ -96,7 +92,7 @@ namespace mkacg
             }
             else
             {
-                create_config("主人" , "38688170");
+                create_config("主人" );
             }
         }
     }
