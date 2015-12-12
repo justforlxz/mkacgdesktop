@@ -266,8 +266,8 @@ namespace mkacg
                 bg_source.Content = "";
                 timer.Stop();
                 showorhidetrue();
-
-                timer.Start();
+                Class1.music_name = list[1];
+               timer.Start();
                 bgmusicplayer.Play();
                 bg_text.Text = "正在播放:" + list[1];
                 play_name_get = list[1];
@@ -322,8 +322,10 @@ namespace mkacg
                     Redio_window redio_window = new Redio_window();
                     redio_window.play_next_click += new Redio_window.play_next_Click(play_next_Click);
                     redio_window.cv += new Redio_window.change_volume(change_volume);
+                    redio_window.redioplayer_click += new Redio_window.redioplayer_Click(redioplayer_Click);
                     redio_window.Show();
                     Class1.redio_sta = 1;
+                   
                     bgmusicplayer.Volume = Class1.redio_volume;
 
                 }
@@ -370,8 +372,8 @@ namespace mkacg
                 bg_source.Content = "";
                 timer.Stop();
                 showorhidetrue();
-
-                timer.Start();
+                Class1.music_name = list[1];
+               timer.Start();
                 bgmusicplayer.Play();
                 bg_text.Text = "正在播放:" + list[1];
 

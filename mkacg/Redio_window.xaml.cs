@@ -25,13 +25,12 @@ namespace mkacg
         }
         public delegate void play_next_Click (object sender , RoutedEventArgs e);
         public event play_next_Click play_next_click;
-        private void button_Click (object sender , RoutedEventArgs e)
-        {
-            play_next_click(sender , e);
-        }
+        
         public delegate void change_volume (double value);
         public event change_volume cv;
 
+        public delegate void redioplayer_Click (object sender , RoutedEventArgs e);
+        public event redioplayer_Click redioplayer_click;
         private void slider_ValueChanged (object sender , RoutedPropertyChangedEventArgs<double> e)
         {
             cv(slider.Value);
@@ -41,6 +40,31 @@ namespace mkacg
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
             slider.Value = Class1.redio_volume;
+            double workHeight = SystemParameters.WorkArea.Height;
+            double workWidth = SystemParameters.WorkArea.Width;
+            this.Top = (workHeight - this.Height) / 1.1;
+            this.Left = (workWidth - this.Width) / 1;
+            MusicName.Content = Class1.music_name;
+        }
+
+        private void next_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
+        {
+            play_next_click(sender , e);
+            MusicName.Content = Class1.music_name;
+        }
+
+        private void Grid_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
+
+        private void label_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
+        {
+            Hide();
+            redioplayer_click(sender,e);
         }
     }
 }
