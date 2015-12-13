@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mkacg"
         mc:Ignorable="d"
-        Title="Redio_window" Height="93.895" Width="285.881" Loaded="Window_Loaded" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None">
+        Title="Redio_window" Height="93.895" Width="285.881" Loaded="Window_Loaded" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" ShowInTaskbar="False" ResizeMode="NoResize">
     <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
 
         <Border BorderBrush="#FF938989" BorderThickness="1" HorizontalAlignment="Left" Height="94" VerticalAlignment="Top" Width="286" Background="#99000000" />
@@ -13,7 +13,7 @@
         <Slider x:Name="slider" HorizontalAlignment="Left" ValueChanged="slider_ValueChanged"   Height="54" Margin="264,22,0,0" VerticalAlignment="Top" Width="16" Orientation="Vertical" Maximum="1"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="94" VerticalAlignment="Top" Width="94"/>
         <Label x:Name="MusicName" Content="MusicName" HorizontalAlignment="Left" Height="29" Margin="99,0,0,0" VerticalAlignment="Top" Width="137" Foreground="White"/>
-        <ProgressBar HorizontalAlignment="Left" Height="6" Margin="104,81,0,0" VerticalAlignment="Top" Width="177"/>
+        <ProgressBar x:Name="progressbar" HorizontalAlignment="Left" Height="6" Margin="104,81,0,0"   VerticalAlignment="Top" Width="177" SmallChange="1"/>
         <Label x:Name="next" Content="Next" MouseLeftButtonDown="next_MouseLeftButtonDown" HorizontalAlignment="Left" Height="27" Margin="214,49,0,0" VerticalAlignment="Top" Width="46" Foreground="White"/>
         <Label x:Name="label" Content="X" MouseLeftButtonDown="label_MouseLeftButtonDown" HorizontalAlignment="Left" Height="22" Margin="270,0,0,0" VerticalAlignment="Top" Width="16" Foreground="White" FontSize="8"/>
 

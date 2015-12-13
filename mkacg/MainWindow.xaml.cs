@@ -241,6 +241,7 @@ namespace mkacg
 
         private void bgmusicplayer_MediaEnded (object sender , RoutedEventArgs e)
         {
+          
             if (appfirst != 1)
             {
                 play(sender , e);
@@ -248,9 +249,10 @@ namespace mkacg
         }
 
         String play_name_get;
-        public void play (object sender , RoutedEventArgs e)
+        public List<string> music_list = new List<string>();
+        // 一共存四个，每次播放0，2作为缓冲，播放完毕，移除0 1，追加 2  3
+       public void play (object sender , RoutedEventArgs e)
         {
-
             try
             {
                 /*
@@ -275,34 +277,30 @@ namespace mkacg
                 play_name.Visibility = Visibility.Visible;
                 redioplayer.Header = "关闭电台模式";
                 */
-
-                open_config();
-                List<string> list = redio_r.ConnectTuLing();
-                Console.WriteLine(music_id);
-                list[0] = System.Web.HttpUtility.UrlDecode(list[0] , System.Text.Encoding.UTF8);
-                Console.WriteLine(list[0]);
-                list= HttpDownloadFile(list[0] , list[1]);
-                Console.WriteLine(list[0]);
+                List<String> list = redio_r.ConnectTuLing();
                 bgmusicplayer.Source = new Uri(list[0]);
                 bg_text.Text = "";
                 bg_source.Content = "";
                 timer.Stop();
                 showorhidetrue();
-                Class1.music_name = list[1];
                 timer.Start();
                 bgmusicplayer.Play();
                 bg_text.Text = "正在播放:" + list[1];
                 play_name_get = list[1];
+                Class1.music_name = list[1];
                 play_next.Visibility = Visibility.Visible;
                 play_name.Visibility = Visibility.Visible;
                 redioplayer.Header = "关闭电台模式";
+                Class1.music_lenth = bgmusicplayer.NaturalDuration.TimeSpan.TotalSeconds;
+                
             }
             catch (Exception)
             {
-                play_next_Click(sender , e);
+               play_next_Click(sender , e);
 
             }
         }
+
         //电台文件下载
         public List<int> down_count = new List<int>();
         public List<string> HttpDownloadFile (string url , String name)
@@ -334,7 +332,11 @@ namespace mkacg
             list.Add(str);
             list.Add(name);
             return list;
+        }
 
+        private void add_music_list () {
+            List<String> list = redio_r.ConnectTuLing();
+            music_list.AddRange(HttpDownloadFile(list[0],list[1]));  //添加两行
         }
 
         private void redioplayer_Click (object sender , RoutedEventArgs e)
@@ -352,7 +354,6 @@ namespace mkacg
                     redio_window.redioplayer_click += new Redio_window.redioplayer_Click(redioplayer_Click);
                     redio_window.Show();
                     Class1.redio_sta = 1;
-
                     bgmusicplayer.Volume = Class1.redio_volume;
 
                 }
@@ -377,7 +378,6 @@ namespace mkacg
                 showorhidetrue();
                 play_name_get = null;
                 Class1.redio_sta = 0;
-
                 bgmusicplayer.Volume = Class1.redio_volume;
                 play_next.Visibility = Visibility.Collapsed;
                 play_name.Visibility = Visibility.Collapsed;
@@ -392,26 +392,22 @@ namespace mkacg
             bgmusicplayer.Stop();
             try
             {
-                open_config();
-                List<string> list = redio_r.ConnectTuLing();
-                Console.WriteLine("下首播放操作->" + music_id + list);
-              
+                List<String> list = redio_r.ConnectTuLing();
                 bgmusicplayer.Source = (new Uri(list[0]));
                 bg_text.Text = "";
                 bg_source.Content = "";
                 timer.Stop();
                 showorhidetrue();
-                Class1.music_name = list[1];
+                Class1.music_name =list[1];
                 timer.Start();
                 bgmusicplayer.Play();
-                bg_text.Text = "正在播放:" + list[1];
-
+                bg_text.Text = "正在播放:" +list[1];
                 play_name_get = list[1];
-                Class1.redio_img = list[2];
-                Console.WriteLine("img->" + list[2]);
+                Class1.music_name = list[1];
                 play_next.Visibility = Visibility.Visible;
                 play_name.Visibility = Visibility.Visible;
                 redioplayer.Header = "关闭电台模式";
+
             }
             catch (Exception)
             {

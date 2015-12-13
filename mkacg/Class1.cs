@@ -18,6 +18,8 @@ namespace mkacg
         public static double redio_volume=0.3;
         public static string redio_path;
         public static string music_name;
+        public static double music_lenth;
+        public static double music_now;
         public String main (String text)
         {
             String gettext = null;

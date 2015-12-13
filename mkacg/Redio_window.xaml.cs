@@ -106,6 +106,7 @@ namespace mkacg
         {
             slider.Value = Class1.redio_volume;
             MusicName.Content = Class1.music_name;
+            progressbar.Maximum = Class1.music_lenth;
             if (File.Exists(@"redio_config.xml"))
             {
                 open_config();
@@ -177,6 +178,7 @@ namespace mkacg
         {
             play_next_click(sender , e);
             MusicName.Content = Class1.music_name;
+            
         }
 
         private void Grid_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
@@ -193,5 +195,6 @@ namespace mkacg
             Hide();
             redioplayer_click(sender,e);
         }
+
     }
 }
