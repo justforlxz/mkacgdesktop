@@ -253,6 +253,7 @@ namespace mkacg
         {
             try
             {
+                bgmusicplayer.Stop();
                 List<String> list = redio_r.ConnectTuLing();
                 bgmusicplayer.Source = new Uri(list[0]);
                 bg_text.Text = "";

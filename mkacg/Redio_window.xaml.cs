@@ -107,7 +107,6 @@ namespace mkacg
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
             slider.Value = Class1.redio_volume;
-            MusicName.Content = Class1.music_name;
             if (File.Exists(@"redio_config.xml"))
             {
                 open_config();
@@ -187,7 +186,6 @@ namespace mkacg
         private void next_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
         {
             play_next_click(sender , e);
-            MusicName.Content = Class1.music_name;
             
         }
 
