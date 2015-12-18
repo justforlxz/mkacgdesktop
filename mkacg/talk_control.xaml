@@ -48,7 +48,7 @@
     <Grid x:Name="grid">
 
       
-        <Label x:Name="label1" HorizontalAlignment="Left" Height="584" VerticalAlignment="Top" Width="392" Background="#FFECECEC" RenderTransformOrigin="0.5,0.5">
+        <Label x:Name="label1" HorizontalAlignment="Left" Height="584" VerticalAlignment="Top" Width="392" Background="#CCECECEC" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

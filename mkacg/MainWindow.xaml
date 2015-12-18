@@ -31,7 +31,7 @@
         <Label x:Name="bg_white"  HorizontalAlignment="Left"  Height="112"  Margin="5,65,0,0" VerticalAlignment="Top" Width="194" Background="#D8E2E2E2" BorderThickness="0,0,1,1"/>
         <TextBlock  x:Name="bg_text" HorizontalAlignment="Left" Margin="11,72,0,0" TextWrapping="Wrap" Text="欢迎来到萌控二次元" VerticalAlignment="Top" Width="183" FontSize="13.333" TextOptions.TextFormattingMode="Display"/>
         <Label x:Name="bg_source" Content=""  HorizontalAlignment="Left" Height="30" Margin="12,143,0,0" VerticalAlignment="Top" Width="182" FontSize="10.667" HorizontalContentAlignment="Right" TextOptions.TextFormattingMode="Display" />
-        <MediaElement x:Name="bgmusicplayer"  x:FieldModifier="public"  MediaEnded="bgmusicplayer_MediaEnded" HorizontalAlignment="Left" Height="61" Margin="259,47,0,0" VerticalAlignment="Top" Width="75" UnloadedBehavior="Stop" LoadedBehavior="Manual" Stretch="Fill" Source="Music/bg.mp3" Volume="0.3" />
+        <MediaElement x:Name="bgmusicplayer"  x:FieldModifier="public"  MediaEnded="bgmusicplayer_MediaEnded" HorizontalAlignment="Left" Height="61" Margin="259,47,0,0" VerticalAlignment="Top" Width="75" UnloadedBehavior="Stop" LoadedBehavior="Manual" Stretch="Fill"  Volume="0.3" />
         <Grid Margin="148,129,-25,-3">
             <Image x:Name="image" MouseLeftButtonDown="image_MouseLeftButtonDown" MouseDown="image_MouseDown"  Source="Images/bujian2.png"  HorizontalAlignment="Left" Height="221" VerticalAlignment="Top" Width="221">
                 <Image.ContextMenu>
