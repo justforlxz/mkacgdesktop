@@ -20,6 +20,7 @@ namespace mkacg
         public static string music_name;
         public static double music_lenth;
         public static double music_now;
+        public static double music_now_fen;
         public String main (String text)
         {
             String gettext = null;

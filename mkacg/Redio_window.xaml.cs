@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using System.Xml;
 
 namespace mkacg
@@ -102,11 +103,11 @@ namespace mkacg
         [DllImport("kernel32.dll" , EntryPoint = "SetLastError")]
         public static extern void SetLastError (int dwErrorCode);
         #endregion
+        DispatcherTimer redio_update = new DispatcherTimer();
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
             slider.Value = Class1.redio_volume;
             MusicName.Content = Class1.music_name;
-            progressbar.Maximum = Class1.music_lenth;
             if (File.Exists(@"redio_config.xml"))
             {
                 open_config();
@@ -119,8 +120,17 @@ namespace mkacg
                 this.Left = (workWidth - this.Width) / 1.05;
                 create_config(Top,Left);
             }
-           
-           
+            redio_update.Interval = new TimeSpan(0 , 0 , 1);
+            redio_update.Tick += new EventHandler(redio_update_function);
+            redio_update.Start();
+
+        }
+        public void redio_update_function (object sender , EventArgs e)
+        {
+            //设置媒体的分秒
+            progressbar.Maximum = Class1.music_lenth;
+            progressbar.Value = Class1.music_now;
+            MusicName.Content = Class1.music_name;
         }
         public void open_config ()
         {

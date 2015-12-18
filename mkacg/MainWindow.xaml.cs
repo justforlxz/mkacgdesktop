@@ -261,13 +261,14 @@ namespace mkacg
                 showorhidetrue();
                 timer.Start();
                 bgmusicplayer.Play();
+                
                 bg_text.Text = "正在播放:" + list[1];
                 play_name_get = list[1];
                 Class1.music_name = list[1];
                 play_next.Visibility = Visibility.Visible;
                 play_name.Visibility = Visibility.Visible;
                 redioplayer.Header = "关闭电台模式";
-               
+             
                 Class1.redio_sta = 1;
                 bgmusicplayer.Volume = Class1.redio_volume;
                 redio_update.Interval = new TimeSpan(0,0,1);
@@ -279,12 +280,18 @@ namespace mkacg
                play_next_Click(sender , e);
             }
         }
-     
+        
         public void redio_update_function (object sender , EventArgs e)
         {
-            Class1.music_lenth = bgmusicplayer.NaturalDuration.TimeSpan.TotalSeconds;
-            Class1.music_now = bgmusicplayer.Position.Seconds;
-            Console.WriteLine(Class1.music_now);
+            //设置媒体的分秒
+            if (bgmusicplayer.NaturalDuration.HasTimeSpan)
+            {
+                //Class1.music_lenth = double.Parse(bgmusicplayer.NaturalDuration.TimeSpan.ToString());
+                //Console.WriteLine(Class1.music_lenth);
+               Class1.music_lenth = bgmusicplayer.NaturalDuration.TimeSpan.Ticks;
+              Class1.music_now = bgmusicplayer.Position.Ticks;
+
+            }
         }
         //电台文件下载
         public List<int> down_count = new List<int>();
@@ -338,6 +345,7 @@ namespace mkacg
                     redio_window.play_next_click += new Redio_window.play_next_Click(play_next_Click);
                     redio_window.cv += new Redio_window.change_volume(change_volume);
                     redio_window.redioplayer_click += new Redio_window.redioplayer_Click(redioplayer_Click);
+                   
                     redio_window.Show();
                    
                 }
