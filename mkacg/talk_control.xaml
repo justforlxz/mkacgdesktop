@@ -78,7 +78,6 @@
                     </TransformGroup>
                 </Grid.RenderTransform>
                 <Label x:Name="label" Content="≡" MouseLeftButtonDown="label_MouseLeftButtonDown" HorizontalAlignment="Left" Height="46" Margin="8,10,0,0" VerticalAlignment="Top" Width="34" Foreground="White" FontSize="32"/>
-                <Label x:Name="label_Copy" Content="≡" HorizontalAlignment="Left" MouseLeftButtonDown="label_Copy_MouseLeftButtonDown" Height="46" Margin="8,61,0,0" VerticalAlignment="Top" Width="34" Foreground="White" FontSize="32"/>
             </Grid>
         </Border>
         <Frame x:Name="frame"  HorizontalAlignment="Left" Height="541"  VerticalAlignment="Top" Width="340" Margin="52,0,0,0" NavigationUIVisibility="Hidden"/>

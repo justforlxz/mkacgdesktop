@@ -26,6 +26,7 @@ namespace mkacg
         {
             InitializeComponent();
             this.slider.ValueChanged += new RoutedPropertyChangedEventHandler<double>(slider_ValueChanged);//注册事件 
+         
         }
         public delegate void play_next_Click (object sender , EventArgs e);
         public event play_next_Click play_next_click;
@@ -33,12 +34,12 @@ namespace mkacg
         public delegate void change_volume (double value);
         public event change_volume cv;
 
-        public delegate void redioplayer_Click (object sender , EventArgs e);
-        public event redioplayer_Click redioplayer_click;
+      //  public delegate void redioplayer_Click (object sender , EventArgs e);
+      //  public event redioplayer_Click redioplayer_click;
         private void slider_ValueChanged (object sender , RoutedPropertyChangedEventArgs<double> e)
         {
-            cv(slider.Value);
             Class1.redio_volume = slider.Value;
+            bgmusicplayer.Volume = slider.Value;
         }
         //  从alt tab中隐藏的代码来自  http://www.helplib.com/qa/494704
         #region Window styles
@@ -106,7 +107,8 @@ namespace mkacg
         DispatcherTimer redio_update = new DispatcherTimer();
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
-            slider.Value = Class1.redio_volume;
+           slider.Value = Class1.redio_volume;
+            progressbar.Value = 0;
             if (File.Exists(@"redio_config.xml"))
             {
                 open_config();
@@ -117,11 +119,12 @@ namespace mkacg
                 double workWidth = SystemParameters.WorkArea.Width;
                 this.Top = (workHeight - this.Height) / 10;
                 this.Left = (workWidth - this.Width) / 1.05;
-                create_config(Top,Left);
+                create_config(Top , Left);
             }
-            redio_update.Interval = new TimeSpan(0 , 0 , 1);
-            redio_update.Tick += new EventHandler(redio_update_function);
-            redio_update.Start();
+             play(sender , e);
+              redio_update.Interval = new TimeSpan(0 , 0 , 1);
+              redio_update.Tick += new EventHandler(redio_update_function);
+              redio_update.Start();
 
         }
         public void redio_update_function (object sender , EventArgs e)
@@ -183,11 +186,6 @@ namespace mkacg
         }
 
 
-        private void next_MouseLeftButtonDown (object sender , EventArgs e)
-        {
-            play_next_click(sender , e);
-            
-        }
 
         private void Grid_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
         {
@@ -200,9 +198,74 @@ namespace mkacg
 
         private void label_MouseLeftButtonDown (object sender , EventArgs e)
         {
-            Hide();
-            redioplayer_click(sender,e);
+            this.Close();
+            //bgmusicplayer.Stop();
+          //  redioplayer_click(sender,e);
+        }
+        //////////////////
+        redio redio = new redio();
+
+        private void bgmusicplayer_MediaEnded (object sender , EventArgs e)
+        {
+            progressbar.Value = 0;
+            play(sender , e);
+        }
+        private void next_MouseLeftButtonDown (object sender , EventArgs e)
+        {
+        
+            bgmusicplayer.Stop();
+            try
+            {
+                play(sender , e);
+            }
+            catch (Exception)
+            {
+                bgmusicplayer.Stop();
+            }
+
         }
 
+
+        String play_name_get;
+        public List<string> music_list = new List<string>();
+        // 一共存四个，每次播放0，2作为缓冲，播放完毕，移除0 1，追加 2  3
+        public void play (object sender , EventArgs e)
+        {
+            try
+            {
+                bgmusicplayer.Stop();
+                List<String> list = redio.ConnectTuLing();
+                bgmusicplayer.Source = new Uri(list[0]);
+           
+                bgmusicplayer.Play();
+
+                Console.WriteLine(list[0]);
+                Console.WriteLine(list[2]);
+                play_name_get = list[1];
+                Class1.music_name = list[1];
+
+                Class1.redio_sta = 1;
+                bgmusicplayer.Volume = Class1.redio_volume;
+                redio_update.Interval = new TimeSpan(0 , 0 , 1);
+                redio_update.Tick += new EventHandler(this.redio_update_进度);
+                redio_update.Start();
+            }
+            catch (Exception)
+            {
+                next_MouseLeftButtonDown(sender,e);
+            }
+        }
+        public void redio_update_进度 (object sender , EventArgs e)
+        {
+            //设置媒体的分秒
+            if (bgmusicplayer.NaturalDuration.HasTimeSpan)
+            {
+                //Class1.music_lenth = double.Parse(bgmusicplayer.NaturalDuration.TimeSpan.ToString());
+                //Console.WriteLine(Class1.music_lenth);
+                Class1.music_lenth = bgmusicplayer.NaturalDuration.TimeSpan.Ticks;
+                Class1.music_now = bgmusicplayer.Position.Ticks;
+
+            }
+        }
     }
 }

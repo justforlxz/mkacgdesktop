@@ -65,8 +65,8 @@ namespace mkacg
             //MenuItem about = new MenuItem("about");
 
             //退出菜单项  
-            // MenuItem exit = new MenuItem("exit");
-            //exit.Click += new EventHandler(exit_Click);
+             MenuItem exit = new MenuItem("exit");
+            exit.Click += new EventHandler(exit_Click);
 
             //关联托盘控件  
             //MenuItem[] childen = new MenuItem[] { setting , help , about , exit };
@@ -74,11 +74,11 @@ namespace mkacg
 
             //电台
             MenuItem redio = new MenuItem("开启电台");
-            redio.Click += new EventHandler(this.redioplayer_Click);
+            redio.Click += new EventHandler(redioplay);
 
 
             //关联托盘控件  
-            MenuItem[] childen = new MenuItem[] {redio};
+            MenuItem[] childen = new MenuItem[] {redio,exit};
             notifyIcon.ContextMenu = new ContextMenu(childen);
 
             //窗体状态改变时候触发  
@@ -95,15 +95,18 @@ namespace mkacg
             //如果鼠标左键单击  
             if (e.Button == MouseButtons.Left)
             {
-                if (this.Visibility == Visibility.Visible)
-                {
-                    this.Visibility = Visibility.Hidden;
-                }
-                else
-                {
-                    this.Visibility = Visibility.Visible;
-                    this.Activate();
-                }
+                talk_control talk_cont = new talk_control();
+                talk_cont.Show();
+
+                //if (this.Visibility == Visibility.Visible)
+                //{
+                //    this.Visibility = Visibility.Hidden;
+                //}
+                //else
+                //{
+                //    this.Visibility = Visibility.Visible;
+                //    this.Activate();
+                //}
             }
         }
 
@@ -149,7 +152,7 @@ namespace mkacg
         DispatcherTimer redio_update = new DispatcherTimer();
         redio redio_r = new redio();
         Random someTime_random = new Random();
-        Redio_window redio_window = new Redio_window();
+       
 
         private void MenuItem_Click (object sender , RoutedEventArgs e)
         {
@@ -188,7 +191,7 @@ namespace mkacg
         private void Window_Loaded (object sender , RoutedEventArgs e)
         {
 
-         
+            Class1.redio_volume = 0.3;
             //开机启动
             //配置文件
             if (File.Exists(@"config.xml"))
@@ -430,51 +433,57 @@ namespace mkacg
             List<String> list = redio_r.ConnectTuLing();
             music_list.AddRange(HttpDownloadFile(list[0],list[1]));  //添加两行
         }
-      
-       
+
+        public void redioplay (object sender , EventArgs e)
+        {
+            Redio_window redio_window = new Redio_window();
+            redio_window.Show();
+            redio_window.play_next_click += new Redio_window.play_next_Click(play_next_Click);
+        }
         private void redioplayer_Click (object sender , EventArgs e)
         {
-            bgmusicplayer.Stop();
 
-            if (redioplayer.Header.ToString() == "电台模式")
-            {
-                try
-                {
-                    play(sender ,e);
-                   
-                    redio_window.play_next_click += new Redio_window.play_next_Click(play_next_Click);
-                    redio_window.cv += new Redio_window.change_volume(change_volume);
-                    redio_window.redioplayer_click += new Redio_window.redioplayer_Click(redioplayer_Click);
-                    redio_window.Show();
-                   }
-                catch (Exception)
-                {
-                    timer.Stop();
-                    bg_text.Text = "对不起，播放失败";
-                    showorhidetrue();
+            //bgmusicplayer.Stop();
 
-                    timer.Start();
-                    bgmusicplayer.Stop();
-                }
-            }
-            else if (redioplayer.Header.ToString() == "关闭电台模式")
-            {
-                timer.Stop();
-                bg_text.Text = "";
-                bg_text.Text = "已关闭电台模式";
-                bg_source.Content = "";
-                redioplayer.Header = "电台模式";
-                redio_window.Hide();
-                showorhidetrue();
-                play_name_get = null;
-                Class1.redio_sta = 0;
-                bgmusicplayer.Volume = Class1.redio_volume;
-                play_next.Visibility = Visibility.Collapsed;
-                play_name.Visibility = Visibility.Collapsed;
-                timer.Start();
-                bgmusicplayer.Stop();
-                appfirst = 1;
-            }
+            //if (redioplayer.Header.ToString() == "电台模式")
+            //{
+            //    try
+            //    {
+            //        play(sender ,e);
+
+            //        redio_window.play_next_click += new Redio_window.play_next_Click(play_next_Click);
+            //        redio_window.cv += new Redio_window.change_volume(change_volume);
+            //        redio_window.redioplayer_click += new Redio_window.redioplayer_Click(redioplayer_Click);
+            //        redio_window.Show();
+            //       }
+            //    catch (Exception)
+            //    {
+            //        timer.Stop();
+            //        bg_text.Text = "对不起，播放失败";
+            //        showorhidetrue();
+
+            //        timer.Start();
+            //        bgmusicplayer.Stop();
+            //    }
+            //}
+            //else if (redioplayer.Header.ToString() == "关闭电台模式")
+            //{
+            //    timer.Stop();
+            //    bg_text.Text = "";
+            //    bg_text.Text = "已关闭电台模式";
+            //    bg_source.Content = "";
+            //    redioplayer.Header = "电台模式";
+            //    redio_window.Hide();
+            //    showorhidetrue();
+            //    play_name_get = null;
+            //    Class1.redio_sta = 0;
+            //    bgmusicplayer.Volume = Class1.redio_volume;
+            //    play_next.Visibility = Visibility.Collapsed;
+            //    play_name.Visibility = Visibility.Collapsed;
+            //    timer.Start();
+            //    bgmusicplayer.Stop();
+            //    appfirst = 1;
+            //}
 
 
         }

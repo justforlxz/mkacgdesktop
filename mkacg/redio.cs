@@ -18,7 +18,21 @@ namespace mkacg
         List<string> pic = new List<string>();
         public List<string> ConnectTuLing ()
         {
-          
+            // R_SO_4_ get id
+
+
+        //    {
+        //        "result": 
+        //"tracks": [
+        //    {
+        //        "mp3Url": "http://m2.music.126.net/HJRJgKLhpZUtbzg0YpZTGA==/3374401185921961.mp3",
+        //        "album": {
+        //            "picUrl": "http://p4.music.126.net/O37oHF0aEiWtgL7kXwElYw==/7818627186251244.jpg",
+        //            "blurPicUrl": "http://p3.music.126.net/O37oHF0aEiWtgL7kXwElYw==/7818627186251244.jpg",
+        //        },
+        //        "commentThreadId": "R_SO_4_33887932",
+        //        "id": 33887932
+        //    },
             string result = null;
             int count = 0;
             list.Clear();
@@ -28,6 +42,7 @@ namespace mkacg
             try
             {
                 string getURL = "http://music.163.com/api/playlist/detail?id=23075108";
+                
                 Console.WriteLine("来自redio-->"+getURL);
                 HttpWebRequest MyRequest = (HttpWebRequest)HttpWebRequest.Create(getURL);
                 HttpWebResponse MyResponse = (HttpWebResponse)MyRequest.GetResponse();
@@ -54,9 +69,16 @@ namespace mkacg
                 var name =
               from p in json["result"]["tracks"]
               select (string)p["name"];
-                var picUrl =
-                   from p in json["result"]["tracks"]
-                   select (string)p["picUrl"];
+                var id =
+                  from p in json["result"]["tracks"]
+                   select (string)p["id"];
+                var album =
+                    from p in json["result"]["tracks"]
+                    select (string)p["album"];
+           //     var picUrl = from p in album
+               //              select (string)p["picUrl"];
+             //   string idUrl = "http://music.163.com/api/song/detail/?id=" + item + "+&ids=[" + item + "]";
+             //  Console.WriteLine(idUrl);
                 foreach (var item in urlMp3)
                 {
                     list.Add(item); 
@@ -66,9 +88,10 @@ namespace mkacg
                 {
                     name_music.Add(item);
                 }
-                foreach (var item in picUrl)
+                foreach (var item in id)
                 {
-                    pic.Add(item);
+                     pic.Add(item);
+               
                 }
                 Random random = new Random();
                 int n = random.Next(0 , count);

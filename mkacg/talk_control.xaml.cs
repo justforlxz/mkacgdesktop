@@ -321,13 +321,6 @@ namespace mkacg
         }
 
 
-        private void label_Copy_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
-        {
-            frame.Visibility = Visibility.Visible;
-            this.frame.Navigate(new Uri("talk_control_talk.xaml",UriKind.Relative));
-            body.Visibility = Visibility.Hidden;
-        }
-
         private void label_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
         {
             frame.Visibility = Visibility.Hidden;

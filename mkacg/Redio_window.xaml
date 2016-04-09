@@ -9,6 +9,7 @@
     <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
 
         <Border BorderBrush="#FF938989" BorderThickness="1" HorizontalAlignment="Left" Height="94" VerticalAlignment="Top" Width="286" Background="#99000000" />
+        <MediaElement x:Name="bgmusicplayer"  x:FieldModifier="public"  MediaEnded="bgmusicplayer_MediaEnded" HorizontalAlignment="Left" Height="20" Margin="214,22,0,0" VerticalAlignment="Top" Width="45" UnloadedBehavior="Stop" LoadedBehavior="Manual" Stretch="Fill"  Volume="0.3" />
 
         <Slider x:Name="slider" HorizontalAlignment="Left" ValueChanged="slider_ValueChanged"   Height="54" Margin="264,22,0,0" VerticalAlignment="Top" Width="16" Orientation="Vertical" Maximum="1"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="94" VerticalAlignment="Top" Width="94"/>
