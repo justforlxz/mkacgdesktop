@@ -27,13 +27,13 @@ namespace mkacg
             InitializeComponent();
             this.slider.ValueChanged += new RoutedPropertyChangedEventHandler<double>(slider_ValueChanged);//注册事件 
         }
-        public delegate void play_next_Click (object sender , RoutedEventArgs e);
+        public delegate void play_next_Click (object sender , EventArgs e);
         public event play_next_Click play_next_click;
         
         public delegate void change_volume (double value);
         public event change_volume cv;
 
-        public delegate void redioplayer_Click (object sender , RoutedEventArgs e);
+        public delegate void redioplayer_Click (object sender , EventArgs e);
         public event redioplayer_Click redioplayer_click;
         private void slider_ValueChanged (object sender , RoutedPropertyChangedEventArgs<double> e)
         {
@@ -183,7 +183,7 @@ namespace mkacg
         }
 
 
-        private void next_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
+        private void next_MouseLeftButtonDown (object sender , EventArgs e)
         {
             play_next_click(sender , e);
             
@@ -198,7 +198,7 @@ namespace mkacg
             }
         }
 
-        private void label_MouseLeftButtonDown (object sender , MouseButtonEventArgs e)
+        private void label_MouseLeftButtonDown (object sender , EventArgs e)
         {
             Hide();
             redioplayer_click(sender,e);

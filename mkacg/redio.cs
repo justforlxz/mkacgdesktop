@@ -27,7 +27,7 @@ namespace mkacg
             music.Clear();
             try
             {
-                string getURL = "http://music.163.com/api/playlist/detail?id=71385702";
+                string getURL = "http://music.163.com/api/playlist/detail?id=23075108";
                 Console.WriteLine("来自redio-->"+getURL);
                 HttpWebRequest MyRequest = (HttpWebRequest)HttpWebRequest.Create(getURL);
                 HttpWebResponse MyResponse = (HttpWebResponse)MyRequest.GetResponse();
@@ -84,7 +84,7 @@ namespace mkacg
             }
 
             //    return RandomSortList(list);
-
+            Console.WriteLine(music[0]+music[1]+music[2]);
             return music;
             
         }

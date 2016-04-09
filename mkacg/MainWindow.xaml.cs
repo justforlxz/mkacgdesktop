@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.IO;
 using System.Xml;
@@ -9,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Windows.Interop;
 using System.Net;
+using System.Windows.Forms;
 
 namespace mkacg
 {
@@ -21,10 +21,13 @@ namespace mkacg
 
     public partial class MainWindow : Window
     {
-
+        private NotifyIcon notifyIcon = null;
         public MainWindow ()
         {
             InitializeComponent();
+            InitialTray();
+
+
             //单例模式
             bool requestInitialOwnership = true;
             bool mutexWasCreated;
@@ -32,10 +35,109 @@ namespace mkacg
             if (!(requestInitialOwnership && mutexWasCreated))
             {
                 // 随意什么操作啦~
-                Application.Current.Shutdown();
+                System.Windows.Application.Current.Shutdown();
+            }
+           
+        }
+        private void InitialTray ()
+        {
+            //隐藏主窗体  
+            this.Visibility = Visibility.Hidden;
+
+            //设置托盘的各个属性  
+            notifyIcon = new NotifyIcon();
+            notifyIcon.BalloonTipText = "systray runnning...";
+            notifyIcon.Text = "systray";
+            notifyIcon.Icon = new System.Drawing.Icon(@"C:\Users\zhuzi\Source\Repos\mkacgdesktop\mkacg\tray.ico");
+            notifyIcon.Visible = true;
+            notifyIcon.ShowBalloonTip(2000);
+            notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(notifyIcon_MouseClick);
+
+            //设置菜单项  
+            //MenuItem setting1 = new MenuItem("setting1");
+            //MenuItem setting2 = new MenuItem("setting2");
+            //MenuItem setting = new MenuItem("setting" , new MenuItem[] { setting1 , setting2 });
+
+            //帮助选项  
+            // MenuItem help = new MenuItem("help");
+
+            //关于选项  
+            //MenuItem about = new MenuItem("about");
+
+            //退出菜单项  
+            // MenuItem exit = new MenuItem("exit");
+            //exit.Click += new EventHandler(exit_Click);
+
+            //关联托盘控件  
+            //MenuItem[] childen = new MenuItem[] { setting , help , about , exit };
+            // notifyIcon.ContextMenu = new ContextMenu(childen);
+
+            //电台
+            MenuItem redio = new MenuItem("开启电台");
+            redio.Click += new EventHandler(this.redioplayer_Click);
+
+
+            //关联托盘控件  
+            MenuItem[] childen = new MenuItem[] {redio};
+            notifyIcon.ContextMenu = new ContextMenu(childen);
+
+            //窗体状态改变时候触发  
+            this.StateChanged += new EventHandler(SysTray_StateChanged);
+        }
+     
+        /// <summary>  
+        /// 鼠标单击  
+        /// </summary>  
+        /// <param name="sender"></param>  
+        /// <param name="e"></param>  
+        private void notifyIcon_MouseClick (object sender , System.Windows.Forms.MouseEventArgs e)
+        {
+            //如果鼠标左键单击  
+            if (e.Button == MouseButtons.Left)
+            {
+                if (this.Visibility == Visibility.Visible)
+                {
+                    this.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    this.Visibility = Visibility.Visible;
+                    this.Activate();
+                }
             }
         }
 
+        /// <summary>  
+        /// 窗体状态改变时候触发  
+        /// </summary>  
+        /// <param name="sender"></param>  
+        /// <param name="e"></param>  
+        private void SysTray_StateChanged (object sender , EventArgs e)
+        {
+            if (this.WindowState == WindowState.Minimized)
+            {
+                this.Visibility = Visibility.Visible;
+            }
+           
+        }
+
+
+        /// <summary>  
+        /// 退出选项  
+        /// </summary>  
+        /// <param name="sender"></param>  
+        /// <param name="e"></param>  
+        private void exit_Click (object sender , EventArgs e)
+        {
+            if (System.Windows.MessageBox.Show("sure to exit?" ,
+                                               "application" ,
+                                                MessageBoxButton.YesNo ,
+                                                MessageBoxImage.Question ,
+                                                MessageBoxResult.No) == MessageBoxResult.Yes)
+            {
+                System.Windows.Application.Current.Shutdown();
+            }
+        }
 
         /// <summary>
         /// ////////////////////////
@@ -235,21 +337,16 @@ namespace mkacg
                 this.DragMove();
             }
         }
-
-
         int count = 0;
-
-        private void bgmusicplayer_MediaEnded (object sender , RoutedEventArgs e)
+        private void bgmusicplayer_MediaEnded (object sender , EventArgs e)
         {
-
             play(sender,e);
-           
-        }
+         }
 
         String play_name_get;
         public List<string> music_list = new List<string>();
         // 一共存四个，每次播放0，2作为缓冲，播放完毕，移除0 1，追加 2  3
-       public void play (object sender , RoutedEventArgs e)
+       public void play (object sender , EventArgs e)
         {
             try
             {
@@ -264,6 +361,8 @@ namespace mkacg
                 bgmusicplayer.Play();
                 
                 bg_text.Text = "正在播放:" + list[1];
+                Console.WriteLine(list[0]);
+                Console.WriteLine(list[2]);
                 play_name_get = list[1];
                 Class1.music_name = list[1];
                 play_next.Visibility = Visibility.Visible;
@@ -331,8 +430,9 @@ namespace mkacg
             List<String> list = redio_r.ConnectTuLing();
             music_list.AddRange(HttpDownloadFile(list[0],list[1]));  //添加两行
         }
-
-        private void redioplayer_Click (object sender , RoutedEventArgs e)
+      
+       
+        private void redioplayer_Click (object sender , EventArgs e)
         {
             bgmusicplayer.Stop();
 
@@ -340,16 +440,13 @@ namespace mkacg
             {
                 try
                 {
-                    play(sender , e);
+                    play(sender ,e);
                    
-                    Redio_window redio_window = new Redio_window();
                     redio_window.play_next_click += new Redio_window.play_next_Click(play_next_Click);
                     redio_window.cv += new Redio_window.change_volume(change_volume);
                     redio_window.redioplayer_click += new Redio_window.redioplayer_Click(redioplayer_Click);
-                   
                     redio_window.Show();
-                   
-                }
+                   }
                 catch (Exception)
                 {
                     timer.Stop();
@@ -381,7 +478,7 @@ namespace mkacg
 
 
         }
-        private void play_next_Click (object sender , RoutedEventArgs e)
+        private void play_next_Click (object sender , EventArgs e)
         {
             bgmusicplayer.Stop();
             try
@@ -418,7 +515,7 @@ namespace mkacg
 
         }
 
-        private void play_name_Click (object sender , RoutedEventArgs e)
+        private void play_name_Click (object sender , EventArgs e)
         {
 
             bg_text.Text = "";
